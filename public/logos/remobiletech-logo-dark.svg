@@ -1,4 +1,20 @@
-<svg viewBox="0 0 200 40" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Remobile Tech GmbH">
-  <text x="0" y="26" font-family="DM Sans, system-ui, sans-serif" font-size="20" font-weight="500" fill="#F5A623" letter-spacing="-0.3">Remobile Tech</text>
-  <text x="148" y="39" font-family="DM Sans, system-ui, sans-serif" font-size="10" font-weight="400" fill="#888888">GmbH</text>
+<svg width="680" height="180" viewBox="0 0 680 180" xmlns="http://www.w3.org/2000/svg">
+  <title>Remobile Tech GmbH — dark version</title>
+  <desc>Official wordmark for Remobile Tech GmbH — Bloomberg orange on near-black</desc>
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500&amp;display=swap');
+      .main { font-family: 'DM Sans', 'Helvetica Neue', Arial, sans-serif; font-size: 58px; font-weight: 500; fill: #F5A623; }
+      .sub  { font-family: 'DM Sans', 'Helvetica Neue', Arial, sans-serif; font-size: 19px; font-weight: 400; fill: #C07A10; letter-spacing: 2px; }
+    </style>
+  </defs>
+
+  <rect width="680" height="180" fill="none"/>
+
+  <text y="108" class="main">
+    <tspan x="60">Remobile </tspan><tspan>Tech</tspan>
+  </text>
+
+  <text x="430" y="140" class="sub" text-anchor="end">GmbH</text>
+
 </svg>
