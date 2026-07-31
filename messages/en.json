@@ -12,8 +12,7 @@
       "menu": "Menu",
       "switchDark": "Switch to dark theme",
       "switchLight": "Switch to light theme",
-      "portfolioMarkets": "Portfolio and markets",
-      "mapLabel": "Route diagram: Remobile Tech GmbH connects to Remobile.eu and HandySwap.com, which together serve Germany, Austria, the Netherlands and Belgium."
+      "heroStory": "Remobile Tech in three parts"
     },
     "nav": {
       "home": "Home",
@@ -32,11 +31,20 @@
     },
     "portfolio": {
       "eyebrow": "Our portfolio",
+      "title": "Two brands.",
       "remobileDescription": "Refurbished devices e-commerce.",
       "handySwapDescription": "New devices e-commerce, with trade-in / phone swap."
     },
     "markets": {
-      "eyebrow": "Markets"
+      "eyebrow": "Markets",
+      "title": "Four markets.",
+      "support": "Focus markets — supplying wholesale partners across all of Europe.",
+      "countries": {
+        "germany": "Germany",
+        "austria": "Austria",
+        "netherlands": "Netherlands",
+        "belgium": "Belgium"
+      }
     },
     "about": {
       "eyebrow": "About Remobile Tech GmbH",

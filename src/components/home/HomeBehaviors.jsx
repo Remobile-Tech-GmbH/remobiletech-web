@@ -86,17 +86,15 @@ export function HomeBehaviors({ messages }) {
       else if (darkQuery.addListener) { listenMedia(darkQuery, onSchemeChange); }
       */
     
-      /* ==== HERO DEVICE MOTIF — start ====
-         The featured form advances on a slow timer, nothing more. No observer is
-         involved anywhere: the stage is already complete from the markup, and the
-         timer simply skips a beat while the tab is hidden or the hero has left the
-         viewport — which also covers the widths where the stage is display:none.
+      /* ==== ABOUT DEVICE MOTIF ==========================================
+         The original hero device vitrine now lives in About. Its calm timed
+         sequence is unchanged and pauses when hidden or outside the viewport.
          ===================================================================== */
-      var devStage = document.getElementById('hero-devices');
+      var devStage = document.getElementById('about-devices');
       var devForms = devStage ? Array.prototype.slice.call(devStage.querySelectorAll('.device-form')) : [];
       var devAt = 0, devTimer = null;
       var DEV_HOLD = 3500;
-    
+
       function devShow(next) {
         for (var i = 0; i < devForms.length; i++) {
           devForms[i].classList.toggle('is-on', i === next);
@@ -104,20 +102,23 @@ export function HomeBehaviors({ messages }) {
         }
         devAt = next;
       }
-    
+
       function devTick() {
-        if (document.hidden) { return; }
+        if (document.hidden || !devStage) { return; }
         var box = devStage.getBoundingClientRect();
         if (box.bottom < 40 || box.top > (window.innerHeight || 0)) { return; }
         devShow((devAt + 1) % devForms.length);
       }
-    
-      function devStop() { if (devTimer) { clearInterval(devTimer); devTimer = null; } }
+
+      function devStop() {
+        if (devTimer) { clearInterval(devTimer); devTimer = null; }
+      }
+
       function devStart() {
         devStop();
         if (devForms.length > 1 && !reduce.matches) { devTimer = setInterval(devTick, DEV_HOLD); }
       }
-    
+
       if (devForms.length) {
         devStart();
         listen(document, 'visibilitychange', function () {
@@ -126,219 +127,197 @@ export function HomeBehaviors({ messages }) {
         if (reduce.addEventListener) { listen(reduce, 'change', devStart); }
         else if (reduce.addListener) { listenMedia(reduce, devStart); }
       }
-      /* ==== HERO DEVICE MOTIF — end ==== */
-    
+
       /* =====================================================================
-         THE RUNWAY
-         Two scenes on one pinned stage. `.is-live` is only added where the
-         choreography can be good; otherwise the scenes are two plain stacked
-         blocks and the map draws itself off its own position in the viewport.
+         HERO STORY
+         Three stages share one pinned atrium viewport on capable desktop
+         screens. Narrow, short, no-JS, and reduced-motion layouts remain
+         ordinary stacked content in DOM order.
          ===================================================================== */
-      var runway = document.getElementById('runway');
-      var sticky = runway.querySelector('.runway__sticky');
-      var glow   = runway.querySelector('.runway__glow');
-      var rail   = document.getElementById('runway-rail');
-      var ticks  = Array.prototype.slice.call(runway.querySelectorAll('[data-tick]'));
-    
-      /* Scene windows, in track progress. The track is 190vh, so the portfolio
-         gets a short hold and hands over at 0.16–0.32; everything after that
-         belongs to the map. The hand-over windows are identical on purpose —
-         one scene's fade-out is exactly the other's fade-in, so the two opacities
-         always sum to 1 and the stage is never dim at rest. */
-      var SCENES = Array.prototype.slice.call(runway.querySelectorAll('.scene')).map(function (el, i) {
-        var win = [
-          { inA: [-0.10, -0.02], out: [0.16, 0.32] },
-          { inA: [ 0.16,  0.32], out: [1.40, 1.50] }
+      var story = hero;
+      var sticky = story.querySelector('.hero-story__sticky');
+      var glow = story.querySelector('.hero-story__glow');
+      var railTicks = Array.prototype.slice.call(story.querySelectorAll('[data-hero-tick]'));
+      var cue = document.getElementById('hero-scroll-cue');
+      var orbit = document.getElementById('hero-orbit');
+      var orbitRotor = document.getElementById('hero-orbit-rotor');
+      var orbitCore = document.getElementById('hero-orbit-core');
+      var orbitArcA = document.getElementById('hero-orbit-arc-a');
+      var orbitArcB = document.getElementById('hero-orbit-arc-b');
+      var orbitNodesA = Array.prototype.slice.call(orbit.querySelectorAll('.orbit-node-a'));
+      var orbitNodesB = Array.prototype.slice.call(orbit.querySelectorAll('.orbit-node-b'));
+      var orbitSpokesA = Array.prototype.slice.call(orbit.querySelectorAll('#hero-orbit-group-a .orbit-spoke'));
+      var orbitSpokesB = Array.prototype.slice.call(orbit.querySelectorAll('#hero-orbit-group-b .orbit-spoke'));
+      var CIRC_A = 2 * Math.PI * 96;
+      var CIRC_B = 2 * Math.PI * 158;
+
+      var STAGES = Array.prototype.slice.call(story.querySelectorAll('.hero-stage')).map(function (el, i) {
+        var windows = [
+          { inA: [-0.10, -0.02], out: [0.26, 0.38] },
+          { inA: [ 0.30,  0.42], out: [0.60, 0.72] },
+          { inA: [ 0.64,  0.76], out: [1.40, 1.50] }
         ][i];
         return {
           el: el,
-          items: Array.prototype.slice.call(el.querySelectorAll('[data-anim]')),
-          inA: win.inA,
-          out: win.out
+          items: Array.prototype.slice.call(el.querySelectorAll('[data-hero-anim]')),
+          inA: windows.inA,
+          out: windows.out
         };
       });
-    
-      /* ---------- the self-drawing route map ---------------------------- */
-      var map    = document.getElementById('rmap');
-      var mapFig = map.parentNode;
-      var routes = Array.prototype.slice.call(map.querySelectorAll('.rt')).map(function (p) {
-        var len = 0;
-        try { len = p.getTotalLength(); } catch (e) { len = 0; }
-        return { el: p, len: len, a: parseFloat(p.getAttribute('data-a')), b: parseFloat(p.getAttribute('data-b')) };
-      });
-      var mapNodes = Array.prototype.slice.call(map.querySelectorAll('.node[data-at]'));
-      var packetsOn = false;
-    
-      function startPackets() {
-        ['rmap-pm1', 'rmap-pm2'].forEach(function (id) {
-          var m = document.getElementById(id);
-          if (m && m.beginElement) { try { m.beginElement(); } catch (e) {} }
-        });
-      }
-    
-      /* mp: 0 → 1, the map's own drawing progress */
-      function drawMap(mp) {
-        for (var i = 0; i < routes.length; i++) {
-          var r = routes[i];
-          if (!r.len) { continue; }
-          var local = clamp((mp - r.a) / (r.b - r.a), 0, 1);
-          r.el.style.strokeDasharray  = r.len + ' ' + r.len;
-          r.el.style.strokeDashoffset = (r.len * (1 - local)).toFixed(2);
-        }
-        for (var j = 0; j < mapNodes.length; j++) {
-          mapNodes[j].classList.toggle('on', mp >= parseFloat(mapNodes[j].getAttribute('data-at')));
-        }
-        map.classList.toggle('is-open', mp > 0.94);
-        if (mp > 0.94 && !packetsOn) { packetsOn = true; startPackets(); }
-      }
-    
-      function staticMap() {
-        map.classList.add('is-static', 'is-open');
-        routes.forEach(function (r) {
-          r.el.style.strokeDasharray = '';
-          r.el.style.strokeDashoffset = '';
-        });
-        mapNodes.forEach(function (n) { n.classList.add('on'); });
-        if (!packetsOn && !reduce.matches) { packetsOn = true; startPackets(); }
-      }
-    
-      /* stacked mode: the figure draws itself as it travels up the viewport */
-      function mapProgressInFlow() {
-        var r = mapFig.getBoundingClientRect();
-        var vh = window.innerHeight || 1;
-        var start = vh * 0.94;
-        var end   = vh * 0.24;
-        return clamp((start - r.top) / Math.max(1, start - end), 0, 1);
-      }
-    
-      /* ---------- live-mode gate ---------------------------------------- */
-      var mqSize   = window.matchMedia('(min-width: 1000px) and (min-height: 640px)');
+
+      var mqSize = window.matchMedia('(min-width: 1000px) and (min-height: 640px)');
       var live = false;
-    
+
       function shouldBeLive() { return mqSize.matches && !reduce.matches; }
-    
-      function clearRunwayStyles() {
-        SCENES.forEach(function (s) {
-          s.el.style.opacity = '';
-          s.el.style.visibility = '';
-          s.el.classList.remove('is-front');
-          s.items.forEach(function (it) { it.style.transform = ''; it.style.opacity = ''; });
+
+      function clearStoryStyles() {
+        STAGES.forEach(function (stage) {
+          stage.el.style.opacity = '';
+          stage.el.style.visibility = '';
+          stage.el.classList.remove('is-front');
+          stage.items.forEach(function (item) {
+            item.style.transform = '';
+            item.style.opacity = '';
+          });
         });
         if (glow) { glow.style.transform = ''; }
-        if (rail) { rail.style.setProperty('--rp', 0); }
-        ticks.forEach(function (t) { t.classList.remove('on'); });
+        if (cue) { cue.style.opacity = ''; }
+        if (orbitRotor) { orbitRotor.removeAttribute('transform'); }
+        if (orbitCore) { orbitCore.setAttribute('r', '19'); }
+        [orbitArcA, orbitArcB].forEach(function (arc) {
+          if (!arc) { return; }
+          arc.style.strokeDasharray = '';
+          arc.style.strokeDashoffset = '';
+          arc.style.strokeOpacity = '';
+        });
+        orbitNodesA.forEach(function (node) {
+          node.setAttribute('r', '10');
+          node.style.opacity = '';
+        });
+        orbitNodesB.forEach(function (node) {
+          node.setAttribute('r', '7');
+          node.style.opacity = '';
+        });
+        orbitSpokesA.concat(orbitSpokesB).forEach(function (line) { line.style.opacity = ''; });
+        railTicks.forEach(function (tick) { tick.classList.remove('on'); });
       }
-    
-      /* the map is either scroll-drawn or simply complete; keep the two in step
-         when the motion preference itself changes mid-session */
-      function syncMotion() {
-        if (reduce.matches) { staticMap(); }
-        else { map.classList.remove('is-static'); }
-      }
-    
+
       function setMode() {
         var next = shouldBeLive();
         if (next === live) { return; }
         live = next;
-        runway.classList.toggle('is-live', live);
-        if (live) { onScroll(); renderRunway(); }
-        else { clearRunwayStyles(); }
+        story.classList.toggle('is-live', live);
+        if (live) { onScroll(); renderStory(); }
+        else { clearStoryStyles(); }
       }
-    
-      /* ---------- scroll progress → eased value → render ---------------- */
+
       var target = 0, current = 0, running = false;
-    
-      function runwayProgress() {
-        var span = runway.offsetHeight - sticky.offsetHeight;
+      var ticking = false;
+      var lastActive = '';
+
+      function storyProgress() {
+        var span = story.offsetHeight - sticky.offsetHeight;
         if (span <= 0) { return 0; }
-        var navH = header ? header.offsetHeight : 78;
-        return clamp((navH - runway.getBoundingClientRect().top) / span, 0, 1);
+        return clamp((0 - story.getBoundingClientRect().top) / span, 0, 1);
       }
-    
-      function renderRunway() {
+
+      function renderStory() {
         var p = current;
-    
-        for (var i = 0; i < SCENES.length; i++) {
-          var s = SCENES[i];
-          var enter = sstep(s.inA[0], s.inA[1], p);
-          var leave = sstep(s.out[0], s.out[1], p);
-          var op = enter * (1 - leave);
-          var y  = (1 - enter) * 54 - leave * 54;
-    
-          s.el.style.opacity = op.toFixed(3);
-          s.el.style.visibility = op < 0.008 ? 'hidden' : 'visible';
-          s.el.classList.toggle('is-front', op > 0.55);
-    
-          for (var j = 0; j < s.items.length; j++) {
-            var f = 1 + j * 0.24;
-            s.items[j].style.transform = 'translate3d(0,' + (y * f).toFixed(2) + 'px,0)';
-            s.items[j].style.opacity = clamp(op * 1.4 - j * 0.05, 0, 1).toFixed(3);
+
+        for (var i = 0; i < STAGES.length; i++) {
+          var stage = STAGES[i];
+          var enter = sstep(stage.inA[0], stage.inA[1], p);
+          var leave = sstep(stage.out[0], stage.out[1], p);
+          var opacity = enter * (1 - leave);
+          var y = (1 - enter) * 58 - leave * 58;
+
+          stage.el.style.opacity = opacity.toFixed(3);
+          stage.el.style.visibility = opacity < 0.008 ? 'hidden' : 'visible';
+          stage.el.classList.toggle('is-front', opacity > 0.55);
+
+          for (var j = 0; j < stage.items.length; j++) {
+            var factor = 1 + j * 0.26;
+            stage.items[j].style.transform = 'translate3d(0,' + (y * factor).toFixed(2) + 'px,0)';
+            stage.items[j].style.opacity = clamp(opacity * 1.35 - j * 0.06, 0, 1).toFixed(3);
           }
         }
-    
-        /* rail: fill follows the whole runway, ticks mark the two scenes */
-        if (rail) { rail.style.setProperty('--rp', p.toFixed(4)); }
-        var activeScene = p < 0.24 ? 0 : 1;   /* the mid-point of the hand-over */
-        for (var t = 0; t < ticks.length; t++) { ticks[t].classList.toggle('on', t <= activeScene); }
-    
-        /* ambient daylight drifts with the story */
+
+        var active = p < 0.34 ? 0 : (p < 0.68 ? 1 : 2);
+        railTicks.forEach(function (tick, i) { tick.classList.toggle('on', i === active); });
+
+        if (cue) { cue.style.opacity = (1 - sstep(0.005, 0.06, p)).toFixed(3); }
         if (glow) {
           glow.style.transform =
-            'translate3d(' + ((p - 0.5) * -8).toFixed(2) + '%,' + ((p - 0.5) * 6).toFixed(2) + '%,0) scale(' + (1 + p * 0.14).toFixed(3) + ')';
+            'translate3d(' + ((p - 0.5) * -9).toFixed(2) + '%,' +
+            ((p - 0.5) * 7).toFixed(2) + '%,0) scale(' + (1 + p * 0.18).toFixed(3) + ')';
         }
-    
-        /* the map draws across everything after the hand-over — the largest share
-           of the track — and its last route lands well before the pin releases */
-        drawMap(sstep(0.30, 0.88, p));
+
+        var brands = sstep(0.24, 0.48, p);
+        var markets = sstep(0.58, 0.84, p);
+
+        orbitRotor.setAttribute('transform', 'rotate(' + (-12 + p * 30).toFixed(2) + ' 200 200)');
+        orbitCore.setAttribute('r', (14 + 5 * (1 - brands)).toFixed(2));
+
+        orbitArcA.style.strokeDasharray = CIRC_A;
+        orbitArcA.style.strokeDashoffset = (CIRC_A * (1 - brands)).toFixed(2);
+        orbitArcA.style.strokeOpacity = (.88 * brands).toFixed(3);
+        orbitArcB.style.strokeDasharray = CIRC_B;
+        orbitArcB.style.strokeDashoffset = (CIRC_B * (1 - markets)).toFixed(2);
+        orbitArcB.style.strokeOpacity = (.76 * markets).toFixed(3);
+
+        for (var a = 0; a < orbitNodesA.length; a++) {
+          var pa = sstep(0.28 + a * 0.06, 0.50 + a * 0.06, p);
+          orbitNodesA[a].setAttribute('r', (10 * (pa + 0.26 * Math.sin(pa * Math.PI))).toFixed(2));
+          orbitNodesA[a].style.opacity = pa.toFixed(3);
+          if (orbitSpokesA[a]) { orbitSpokesA[a].style.opacity = (pa * .9).toFixed(3); }
+        }
+        for (var b = 0; b < orbitNodesB.length; b++) {
+          var pb = sstep(0.62 + b * 0.045, 0.84 + b * 0.045, p);
+          orbitNodesB[b].setAttribute('r', (7 * (pb + 0.26 * Math.sin(pb * Math.PI))).toFixed(2));
+          orbitNodesB[b].style.opacity = pb.toFixed(3);
+          if (orbitSpokesB[b]) { orbitSpokesB[b].style.opacity = (pb * .8).toFixed(3); }
+        }
+
+        story.style.setProperty('--p', p.toFixed(4));
       }
-    
+
       function tickLoop() {
-        var d = target - current;
-        if (Math.abs(d) < 0.00035) {
+        var delta = target - current;
+        if (Math.abs(delta) < 0.00035) {
           current = target;
-          renderRunway();
+          renderStory();
           running = false;
           return;
         }
-        current += d * 0.13;            /* eased follow — the motion never snaps */
-        renderRunway();
+        current += delta * 0.13;
+        renderStory();
         requestAnimationFrame(tickLoop);
       }
-    
-      /* ---------- page-level scroll: hero parallax, header, progress ----- */
-      var ticking = false;
-      var lastActive = '';
-    
+
       function sections() {
-        return links.map(function (a) {
-          var el = document.getElementById(a.getAttribute('data-nav'));
-          return { id: a.getAttribute('data-nav'), el: el };
-        }).filter(function (s) { return !!s.el; });
+        return links.map(function (link) {
+          var el = document.getElementById(link.getAttribute('data-nav'));
+          return { id: link.getAttribute('data-nav'), el: el };
+        }).filter(function (section) { return !!section.el; });
       }
       var secs = sections();
-    
+
       function update() {
         ticking = false;
-    
         var y = window.pageYOffset || document.documentElement.scrollTop || 0;
-        var heroH = hero ? hero.offsetHeight : 1;
-    
-        /* hero progress 0 -> 1 across its own height */
-        if (hero && !reduce.matches) {
-          hero.style.setProperty('--p', clamp(y / Math.max(1, heroH), 0, 1).toFixed(4));
-        }
-    
-        /* header becomes solid just before the hero leaves the viewport top */
         var navH = header ? header.offsetHeight : 78;
-        var solid = y > Math.max(64, heroH - navH - 120);
+
+        if (!live && hero && !reduce.matches) {
+          hero.style.setProperty('--p', clamp(y / Math.max(1, hero.offsetHeight), 0, 1).toFixed(4));
+        }
+
+        var solid = hero ? hero.getBoundingClientRect().bottom <= navH + 120 : y > 64;
         header.classList.toggle('is-solid', solid || nav.classList.contains('is-open'));
-    
-        /* reading progress */
+
         var max = document.documentElement.scrollHeight - window.innerHeight;
-        var sp = max > 0 ? clamp(y / max, 0, 1) : 0;
-        if (bar) { bar.style.setProperty('--sp', sp.toFixed(4)); }
-    
-        /* active nav item */
+        var page = max > 0 ? clamp(y / max, 0, 1) : 0;
+        if (bar) { bar.style.setProperty('--sp', page.toFixed(4)); }
+
         var lineY = y + navH + 40;
         var active = secs.length ? secs[0].id : '';
         for (var i = 0; i < secs.length; i++) {
@@ -346,56 +325,41 @@ export function HomeBehaviors({ messages }) {
         }
         if (active !== lastActive) {
           lastActive = active;
-          links.forEach(function (a) {
-            if (a.getAttribute('data-nav') === active) { a.setAttribute('aria-current', 'true'); }
-            else { a.removeAttribute('aria-current'); }
+          links.forEach(function (link) {
+            if (link.getAttribute('data-nav') === active) { link.setAttribute('aria-current', 'true'); }
+            else { link.removeAttribute('aria-current'); }
           });
         }
-    
-        /* the map, when the runway is not pinned */
-        if (!live && !reduce.matches) { drawMap(mapProgressInFlow()); }
       }
-    
+
       function onScroll() {
         if (!ticking) { ticking = true; requestAnimationFrame(update); }
         if (!live) { return; }
-        target = runwayProgress();
+        target = storyProgress();
         if (!running) { running = true; requestAnimationFrame(tickLoop); }
       }
-    
-      /* =====================================================================
-         Runway anchors. On the pinned stage a scene is a position on the
-         scroll track rather than a box in the flow, so a link to one scrolls
-         to the point where that scene is on screen. Stacked, the plain
-         anchor is already right.
-    
-         Both values are positions on the shortened track: 0.02 is inside the
-         portfolio's hold, 0.60 is far enough into the map for the figure to have
-         something on it and early enough that the rest still draws as you go.
-         ===================================================================== */
-      var SCENE_FOCUS = [0.02, 0.60];
-    
-      function sceneScrollTop(idx) {
-        var span = runway.offsetHeight - sticky.offsetHeight;
-        var top  = window.pageYOffset + runway.getBoundingClientRect().top;
-        return Math.max(0, Math.round(top - (header ? header.offsetHeight : 78) + (SCENE_FOCUS[idx] || 0) * span));
+
+      var STAGE_FOCUS = [0, 0.36, 0.70];
+
+      function stageScrollTop(idx) {
+        var span = story.offsetHeight - sticky.offsetHeight;
+        var top = window.pageYOffset + story.getBoundingClientRect().top;
+        return Math.max(0, Math.round(top + (STAGE_FOCUS[idx] || 0) * span));
       }
-    
-      listen(document, 'click', function (ev) {
-        if (!live || !ev.target || !ev.target.closest) { return; }
-        var a = ev.target.closest('a[href^="#"]');
-        if (!a) { return; }
-        var id = a.getAttribute('href').slice(1);
+
+      listen(document, 'click', function (event) {
+        if (!live || !event.target || !event.target.closest) { return; }
+        var anchor = event.target.closest('a[href^="#"]');
+        if (!anchor) { return; }
+        var id = anchor.getAttribute('href').slice(1);
         if (!id) { return; }
-        var el = document.getElementById(id);
-        if (!el || !el.hasAttribute('data-scene')) { return; }
-        ev.preventDefault();
-        /* no explicit behavior: follow the document's own scroll-behavior,
-           smooth by CSS and auto under prefers-reduced-motion */
-        window.scrollTo({ top: sceneScrollTop(+el.getAttribute('data-scene')) });
+        var stage = document.getElementById(id);
+        if (!stage || !stage.hasAttribute('data-hero-stage')) { return; }
+        event.preventDefault();
+        window.scrollTo({ top: stageScrollTop(+stage.getAttribute('data-hero-stage')) });
         try { history.replaceState(null, '', '#' + id); } catch (e) {}
       });
-    
+
       /* ==== WHOLESALE MODAL — start ====
          The two "Wholesale inquiry" buttons are found by where they sit rather
          than by a hook in the markup, so the CTAs themselves are untouched and
@@ -512,7 +476,7 @@ export function HomeBehaviors({ messages }) {
           root.classList.remove('wm-locked');
           if (wmOpener) { wmOpener.focus({ preventScroll: true }); wmOpener = null; }
           if (Math.abs((window.pageYOffset || 0) - wmScrollY) > 1) { window.scrollTo(0, wmScrollY); }
-          /* the runway's rAF guards may have been idled behind the top layer */
+          /* the story's rAF guards may have been idled behind the top layer */
           resync();
         });
       }
@@ -578,9 +542,8 @@ export function HomeBehaviors({ messages }) {
       function onResize() {
         secs = sections();
         if (window.innerWidth > 900 && nav.classList.contains('is-open')) { setMenu(false); }
-        syncMotion();
         setMode();
-        if (live) { target = current = runwayProgress(); renderRunway(); }
+        if (live) { target = current = storyProgress(); renderStory(); }
         onScroll();
       }
     
@@ -613,9 +576,8 @@ export function HomeBehaviors({ messages }) {
         listenMedia(reduce, onResize);
       }
     
-      syncMotion();
       setMode();
-      if (live) { target = current = runwayProgress(); renderRunway(); }
+      if (live) { target = current = storyProgress(); renderStory(); }
       update();
       onScroll();
 
@@ -628,12 +590,11 @@ export function HomeBehaviors({ messages }) {
       if (typeof io !== 'undefined' && io) { io.disconnect(); }
       if (wmDlg && wmDlg.open) { wmDlg.close(); }
       root.classList.remove('wm-locked');
-      clearRunwayStyles();
-      runway.classList.remove('is-live');
+      clearStoryStyles();
+      story.classList.remove('is-live');
       if (hero) { hero.style.removeProperty('--p'); }
     };
   }, [messages]);
 
   return null;
 }
-

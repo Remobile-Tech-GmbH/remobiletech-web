@@ -12,8 +12,7 @@
       "menu": "Menü",
       "switchDark": "Zum dunklen Design wechseln",
       "switchLight": "Zum hellen Design wechseln",
-      "portfolioMarkets": "Portfolio und Märkte",
-      "mapLabel": "Routendiagramm: Die Remobile Tech GmbH verbindet Remobile.eu und HandySwap.com, die gemeinsam Deutschland, Österreich, die Niederlande und Belgien bedienen."
+      "heroStory": "Remobile Tech in drei Teilen"
     },
     "nav": {
       "home": "Startseite",
@@ -32,11 +31,20 @@
     },
     "portfolio": {
       "eyebrow": "Unser Portfolio",
+      "title": "Zwei Marken.",
       "remobileDescription": "E-Commerce für generalüberholte Geräte.",
       "handySwapDescription": "E-Commerce für Neugeräte mit Inzahlungnahme und Handytausch."
     },
     "markets": {
-      "eyebrow": "Märkte"
+      "eyebrow": "Märkte",
+      "title": "Vier Märkte.",
+      "support": "Fokusmärkte — wir beliefern Großhandelspartner in ganz Europa.",
+      "countries": {
+        "germany": "Deutschland",
+        "austria": "Österreich",
+        "netherlands": "Niederlande",
+        "belgium": "Belgien"
+      }
     },
     "about": {
       "eyebrow": "Über die Remobile Tech GmbH",

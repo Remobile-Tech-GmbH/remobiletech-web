@@ -1,8 +1,8 @@
 /* ============================================================
    Remobile Tech GmbH — homepage concept 10-A "Atrium Story"
    Option 05's palette, glass hero and classical register, with
-   06's sticky scroll runway and 03's self-drawing route map
-   restyled into that same visual language.
+   06's three-beat sticky hero story and orbit system restyled
+   into that same visual language.
    Self-contained: system fonts, CSS/SVG visuals, vanilla JS.
    ============================================================ */
 
@@ -33,12 +33,6 @@
   --on-dark:#EDF3F8;
   --on-dark-muted:#A3BACD;
 
-  /* route-map label sizes, expressed in viewBox units so the rendered result
-     never drops under ~13px however narrow the figure gets (round-3 floor).
-     The origin label carries the company name on two lines, so it keeps its
-     own step: the widest single-line bump would run it off the plate. */
-  --map-lbl:24px;
-  --map-lbl-origin:24px;
 }
 
 /* ---- light palette — the native theme ---------------------- */
@@ -89,34 +83,12 @@
   --shadow-md:0 1px 2px rgba(2,47,80,.05), 0 14px 30px -10px rgba(2,47,80,.14);
   --shadow-lg:0 2px 4px rgba(2,47,80,.05), 0 32px 60px -22px rgba(2,47,80,.28);
 
-  /* the runway's ambient light — a breath of daylight, not a glow */
-  --runway-glow:radial-gradient(46% 52% at 62% 44%,rgba(28,106,158,.10),rgba(28,106,158,0) 72%);
-
-  /* route map — engraving on a light ground */
-  --map-bg:#FFFFFF;
-  --map-line:#DEE6ED;
-  --map-grat:rgba(2,47,80,.11);
-  --map-route:#12557F;
-  --map-route-op:.62;
-  --map-branch:#1C6A9E;
-  --map-branch-op:.5;
-  --map-dot:#022F50;
-  --map-halo:rgba(2,47,80,.24);
-  --map-ring:rgba(28,106,158,.4);
-  --map-pulse:rgba(28,106,158,.55);
-  --map-lbl-ink:#022F50;
-  --map-lbl-sub:#33495C;
-  --map-pkt:#1C6A9E;
-  --map-sheen:rgba(2,47,80,.035);
-  --rail-track:#D5E1EA;
-  --rail-fill:#12557F;
 }
 
 /* ---- dark palette -------------------------------------------
    The hero keeps its curtain-wall gradient; everything below it moves to
    layered navy surfaces (page → tinted band → card), with hairline borders
-   carrying the depth that drop shadows can no longer carry. The route map
-   is redrawn — not inverted: a deep plate with luminous ice-blue routes.
+   carrying the depth that drop shadows can no longer carry.
    ------------------------------------------------------------- */
 :root[data-theme="dark"]{
   color-scheme:dark;
@@ -161,32 +133,13 @@
   --shadow-md:0 1px 2px rgba(0,0,0,.4),0 16px 34px -16px rgba(0,0,0,.7);
   --shadow-lg:0 2px 6px rgba(0,0,0,.45),0 34px 64px -26px rgba(0,0,0,.85);
 
-  --runway-glow:radial-gradient(48% 54% at 62% 44%,rgba(96,168,224,.16),rgba(96,168,224,0) 72%);
-
-  --map-bg:#0A2437;
-  --map-line:#25506F;
-  --map-grat:rgba(140,198,240,.14);
-  --map-route:#8CC6F0;
-  --map-route-op:.72;
-  --map-branch:#6FB4E4;
-  --map-branch-op:.58;
-  --map-dot:#CFE7F9;
-  --map-halo:rgba(140,198,240,.34);
-  --map-ring:rgba(140,198,240,.45);
-  --map-pulse:rgba(140,198,240,.6);
-  --map-lbl-ink:#EAF3FA;
-  --map-lbl-sub:#B3C8D9;
-  --map-pkt:#BFE0F7;
-  --map-sheen:rgba(180,220,255,.06);
-  --rail-track:#20486A;
-  --rail-fill:#8CC6F0;
 }
 
 /* ---- reset ------------------------------------------------- */
 *,*::before,*::after{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
 /* clip, never hidden: `overflow:hidden` here would turn the document into a
-   scroll container and quietly break position:sticky on the runway */
+   scroll container and quietly break position:sticky on the hero story */
 html,body{overflow-x:clip}
 body{
   margin:0;
@@ -217,7 +170,7 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0}
 .site-hero ::selection,.wholesale-panel ::selection{background:rgba(169,198,220,.34)}
 
 /* surfaces cross-fade when the theme flips (reduced-motion neutralises this) */
-.section--tint,.brand-plate,.site-footer,.rmap-plate{
+.section--tint,.brand-plate,.site-footer{
   transition:background-color .32s var(--ease),border-color .32s var(--ease);
 }
 
@@ -316,6 +269,11 @@ h3{font-size:1.3125rem;letter-spacing:-.012em;line-height:1.25}
 /* the logo is a single currentColor symbol: white over the hero, --ink once the
    header goes solid, which is dark blue on light and near-white on dark */
 .brand .logo{width:122px;height:auto;color:currentColor;transition:color .35s var(--ease)}
+.rmt-logo-gmbh{
+  transform-box:fill-box;transform-origin:center;
+  transform:translate(-18px,-13px) scale(1.15);
+  stroke:currentColor;stroke-width:.45px;paint-order:stroke fill;
+}
 
 .header-controls{display:flex;align-items:center;gap:26px;flex:none}
 .nav{display:flex;align-items:center;gap:34px}
@@ -398,20 +356,19 @@ h3{font-size:1.3125rem;letter-spacing:-.012em;line-height:1.25}
 }
 .site-header.is-solid .progress{opacity:1}
 
-/* ---- hero — unchanged from 05 ------------------------------ */
+/* ---- hero story ------------------------------------------- */
 .site-hero{
   --p:0;
-  position:relative;overflow:hidden;isolation:isolate;
-  min-height:clamp(600px,94vh,940px);
-  display:flex;flex-direction:column;justify-content:flex-end;
-  padding-top:calc(var(--nav-h) + 56px);
+  position:relative;overflow:clip;isolation:isolate;
   background:
     radial-gradient(118% 76% at 76% -14%,rgba(154,198,232,.30),rgba(154,198,232,0) 58%),
     radial-gradient(86% 58% at 18% 116%,rgba(11,72,120,.55),rgba(11,72,120,0) 72%),
     linear-gradient(164deg,#04395F 0%,#022F50 44%,#011E34 100%);
   color:var(--on-dark);
 }
-
+.hero-story__sticky{
+  position:relative;min-height:100vh;min-height:100svh;overflow:clip;
+}
 /* CSS-only "glass architecture": layered translucent planes */
 .atrium{position:absolute;inset:-12% -14% -14%;z-index:-2;pointer-events:none}
 .plane{
@@ -480,28 +437,37 @@ h3{font-size:1.3125rem;letter-spacing:-.012em;line-height:1.25}
   opacity:var(--p);
 }
 
-.hero-body{
-  position:relative;
-  flex:1;display:flex;align-items:center;
-  padding-block:clamp(40px,6vw,84px) clamp(96px,11vw,158px);
-  transform:translate3d(0,calc(var(--p) * 52px),0);
-  opacity:calc(1 - var(--p) * .92);
-  will-change:transform,opacity;
+
+.hero-story__glow{display:none}
+.hero-body{position:relative;z-index:2;padding:calc(var(--nav-h) + 46px) 0 76px}
+.hero-story__inner{display:flex;flex-direction:column}
+.hero-stages{display:flex;flex-direction:column}
+.hero-stage{position:relative;padding:58px 0}
+.hero-stage + .hero-stage{border-top:1px solid rgba(255,255,255,.16)}
+.hero-stage:first-child{
+  min-height:calc(100vh - var(--nav-h) - 80px);
+  min-height:calc(100svh - var(--nav-h) - 80px);
+  display:flex;align-items:center;
 }
-.hero-copy{max-width:880px}
+.hero-stage__body{position:relative;z-index:2;width:100%;max-width:880px}
 .hero-eyebrow{
   display:inline-flex;align-items:center;gap:12px;
   font-size:.8125rem;font-weight:600;letter-spacing:.17em;text-transform:uppercase;
   color:var(--blue-200);
 }
 .hero-eyebrow::before{content:"";width:34px;height:1px;background:rgba(169,198,220,.55)}
-h1{
+.hero-stage h1{
   margin-top:26px;
   font-size:clamp(2.15rem,1.28rem + 3.62vw,4.05rem);
   line-height:1.06;letter-spacing:-.026em;font-weight:600;color:#fff;
   text-wrap:balance;
 }
-h1 .soft{color:var(--blue-200);font-weight:500}
+.hero-stage h1 .soft{color:var(--blue-200);font-weight:500}
+.hero-stage h2{
+  margin-top:22px;color:#fff;
+  font-size:clamp(2.25rem,1.48rem + 3.2vw,4rem);
+  line-height:1.03;letter-spacing:-.032em;text-wrap:balance;
+}
 .hero-lede{
   margin-top:26px;max-width:57ch;
   font-size:clamp(1.02rem,.95rem + .42vw,1.22rem);
@@ -509,118 +475,6 @@ h1 .soft{color:var(--blue-200);font-weight:500}
 }
 .hero-actions{margin-top:38px;display:flex;flex-wrap:wrap;gap:14px}
 
-/* the hairline that closes the hero */
-.hero-foot{
-  position:relative;border-top:1px solid rgba(255,255,255,.16);
-  height:1px;opacity:calc(1 - var(--p) * 1.5);
-}
-
-.scroll-cue{
-  position:absolute;right:var(--gutter);bottom:64px;
-  display:flex;align-items:center;gap:12px;
-  font-size:.8125rem;letter-spacing:.16em;text-transform:uppercase;color:var(--on-dark-muted);
-  opacity:calc(1 - var(--p) * 2.2);
-}
-.scroll-cue .track{position:relative;width:1px;height:46px;background:rgba(255,255,255,.2);overflow:hidden}
-.scroll-cue .track::after{
-  content:"";position:absolute;left:0;width:1px;height:16px;background:var(--blue-200);
-  animation:cue 2.6s var(--ease) infinite;
-}
-@keyframes cue{0%{transform:translateY(-18px);opacity:0}30%{opacity:1}100%{transform:translateY(46px);opacity:0}}
-
-/* ==== HERO DEVICE MOTIF — start ====
-   A wordless companion to the hero copy: phone, tablet, laptop and a fanned
-   stack, drawn in the atrium's own hairline-glass language and stood inside a
-   raked vitrine of their own. One form is featured at a time and the slot
-   advances on a slow slide-and-fade; each form also breathes on its own phase.
-   The whole region is decoration — aria-hidden, no text, no focus stops — and
-   it rides the hero's --p parallax so the band still reads as one composition.
-   ========================================================================= */
-.devices{
-  display:none;                 /* a desktop-only companion; see the query below */
-  position:absolute;top:50%;right:calc(var(--gutter) * -1);
-  width:clamp(268px,26vw,372px);
-  pointer-events:none;
-  transform:translate3d(0,calc(-50% + var(--p) * -34px),0);
-  will-change:transform;
-}
-@media (min-width:1080px){
-  .site-hero .hero-body > .container{position:relative}   /* device motif: the stage's anchor */
-  .site-hero .hero-copy{max-width:680px}                  /* device motif: keeps the copy clear of the stage
-                                                             — and wide enough to hold the headline at 3 lines */
-  .devices{display:block}
-}
-.device-stage{display:block;width:100%;height:auto}
-
-/* every stroke is a true hairline however large the stage is drawn */
-.device-body{fill:url(#dev-glass);stroke:rgba(255,255,255,.46)}
-.device-screen{fill:url(#dev-screen);stroke:rgba(255,255,255,.20)}
-.device-sheen{fill:url(#dev-sheen);stroke:none}
-.device-hair{fill:none;stroke:rgba(169,198,220,.55);stroke-linecap:round}
-.device-plane rect{fill:url(#dev-plane);stroke:rgba(255,255,255,.085)}
-.device-floor{fill:none;stroke:url(#dev-floor)}
-.device-body,.device-screen,.device-hair,.device-plane rect,.device-floor{
-  stroke-width:1;vector-effect:non-scaling-stroke;
-}
-/* the vitrine sits a touch deeper than the devices standing in it */
-.device-plane{transform:translateY(calc(var(--p) * -22px))}
-
-/* the featured slot: in from below, out through the top, never a carousel snap */
-.device-form{
-  opacity:0;transform:translate(0,20px);
-  transform-box:fill-box;transform-origin:50% 50%;
-  transition:opacity .9s var(--ease),transform .9s var(--ease);
-}
-.device-form.is-on{opacity:1;transform:none}
-.device-form.is-past{opacity:0;transform:translate(0,-20px)}
-
-/* and a private breath under that, so no two forms ever move together */
-.device-drift{
-  transform-box:fill-box;transform-origin:50% 50%;
-  animation:dev-float var(--dev-dur,11s) var(--dev-delay,0s) ease-in-out infinite;
-}
-@keyframes dev-float{
-  0%,100%{transform:translate(0,0)}
-  50%{transform:translate(var(--dev-x,0px),var(--dev-y,-7px))}
-}
-.device-form--1{--dev-y:-7px;--dev-x:1px;--dev-dur:11s;--dev-delay:-2.4s}
-.device-form--2{--dev-y:-5px;--dev-x:-1.5px;--dev-dur:13.5s;--dev-delay:-6.1s}
-.device-form--3{--dev-y:-4px;--dev-x:2px;--dev-dur:9.5s;--dev-delay:-1.2s}
-.device-form--4{--dev-y:-6px;--dev-x:-1px;--dev-dur:15s;--dev-delay:-8.3s}
-
-@media (prefers-reduced-motion:reduce){
-  /* one calm, complete composition: no rotation, no float, no drift */
-  .devices{transform:translate3d(0,-50%,0) !important}
-  .device-plane{transform:none !important}
-  .device-drift{animation:none !important}
-  .device-form{transition:none !important}
-}
-/* ==== HERO DEVICE MOTIF — end ==== */
-
-/* =========================================================================
-   THE RUNWAY — two scenes on one sticky stage.
-   Default (no JS, narrow, short, or reduced motion) = two plain stacked
-   sections in DOM order. `.is-live` is added by JS only where the sticky
-   choreography can be good.
-
-   STICKY CONTRACT: .runway__sticky is position:sticky, so none of its
-   ancestors — html, body, main, .runway — may ever carry transform,
-   filter, perspective or contain. All motion is applied to DESCENDANTS.
-   ========================================================================= */
-.runway{position:relative;background:var(--ground);border-block:1px solid var(--line-soft)}
-.runway__sticky{position:relative}
-.runway__inner{
-  position:relative;z-index:2;
-  width:100%;max-width:var(--container);margin-inline:auto;padding-inline:var(--gutter);
-}
-.runway__glow{display:none}
-.runway__rail{display:none}
-
-.scene{position:relative;padding-block:clamp(66px,8vw,104px)}
-.scene + .scene{border-top:1px solid var(--line-soft)}
-.scene__head{margin-bottom:clamp(30px,3.4vw,44px)}
-
-/* ---- scene 01: the portfolio ------------------------------- */
 .brand-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(20px,2.4vw,30px)}
 .brand-card{
   position:relative;background:var(--surface);border:1px solid var(--line);
@@ -632,7 +486,7 @@ h1 .soft{color:var(--blue-200);font-weight:500}
 }
 /* Hover confirms the target, it does not perform: the hairline brightens and
    the card lifts by 2px. Nothing draws, sweeps or grows.
-   The lift is `translate`, not `transform`: on the pinned stage the runway
+   The lift is `translate`, not `transform`: on the pinned story the stage
    owns the card's inline transform, and an independent property composes
    with it instead of being overwritten by the next frame. */
 .brand-card:hover,.brand-card:focus-within{
@@ -660,152 +514,139 @@ h1 .soft{color:var(--blue-200);font-weight:500}
 
 .brand-card h3{margin-top:10px;font-size:clamp(1.3rem,1.1rem + .6vw,1.6rem)}
 .brand-card p{margin-top:12px;color:var(--slate-500);font-size:1rem;max-width:42ch}
+.hero-story .brand-grid{margin-top:30px}
+.hero-story .brand-card{
+  background:rgba(237,243,248,.075);border-color:rgba(214,236,255,.20);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 18px 42px -30px rgba(0,0,0,.72);
+}
+.hero-story .brand-card:hover,.hero-story .brand-card:focus-within{
+  border-color:rgba(214,236,255,.42);box-shadow:inset 0 1px 0 rgba(255,255,255,.09),0 22px 48px -28px rgba(0,0,0,.78);
+}
+.hero-story .brand-plate{
+  background:rgba(169,198,220,.10);border-color:rgba(214,236,255,.17);
+}
+.hero-story .bmark--remobile,.hero-story .brand-card h3{color:#fff}
+.hero-story .brand-card p{color:var(--on-dark-muted)}
 
-/* ---- scene 02: the route map ------------------------------- */
-.rmap-plate{
-  position:relative;overflow:hidden;
-  border-radius:var(--r-md);
-  border:1px solid var(--map-line);
-  background:var(--map-bg);
-  box-shadow:var(--shadow-sm);
-  padding:clamp(16px,2vw,26px);
-  width:100%;max-width:640px;margin-inline:auto;
+.hero-markets{
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:10px;margin-top:30px;max-width:840px;
 }
-/* the atrium sweep, carried into the figure */
-.rmap-plate::after{
-  content:"";position:absolute;right:-10%;top:-56%;width:30%;height:212%;
-  transform:rotate(17deg);pointer-events:none;
-  background:linear-gradient(178deg,var(--map-sheen),transparent 76%);
+.hero-market{
+  padding:17px 15px 18px;border:1px solid rgba(214,236,255,.18);
+  border-top-color:rgba(214,236,255,.34);border-radius:var(--r-sm);
+  background:rgba(237,243,248,.07);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.05),0 18px 40px -30px rgba(0,0,0,.7);
 }
-.rmap{display:block;width:100%;height:auto;position:relative;z-index:1}
+.hero-market b{
+  display:block;color:#fff;font-size:clamp(1.65rem,4.8vw,2.15rem);
+  line-height:1;font-weight:600;letter-spacing:-.025em;
+}
+.hero-market span{
+  display:block;margin-top:10px;color:var(--on-dark-muted);
+  font-family:var(--mono);font-size:.8125rem;font-weight:600;letter-spacing:.045em;text-transform:uppercase;
+}
+.hero-market-support{margin-top:24px;color:var(--blue-200);font-size:1rem;max-width:56ch}
 
-.rmap .grat path{fill:none;stroke:var(--map-grat);stroke-width:1;vector-effect:non-scaling-stroke}
-.rmap .rt{
-  fill:none;stroke:var(--map-route);stroke-width:1.7;stroke-linecap:round;
-  opacity:var(--map-route-op);
+.hero-orbit{width:min(100%,330px);margin:34px auto 0;position:relative;z-index:2}
+.orbit-viz{width:100%;height:auto;overflow:visible}
+.orbit-ring{fill:none;stroke:rgba(214,236,255,.22);stroke-width:1}
+.orbit-ring--outer{stroke:rgba(214,236,255,.16);stroke-dasharray:2 7}
+.orbit-arc{fill:none;stroke:rgba(169,198,220,.88);stroke-width:1.5}
+.orbit-spoke{stroke:rgba(214,236,255,.28);stroke-width:1}
+.orbit-node{fill:#D6ECFF;stroke:rgba(255,255,255,.76);stroke-width:1;filter:drop-shadow(0 0 8px rgba(169,198,220,.72))}
+.orbit-node-b{fill:#A9C6DC}
+.orbit-halo{
+  fill:none;stroke:rgba(169,198,220,.62);stroke-width:1.5;
+  transform-box:fill-box;transform-origin:center;animation:orbit-halo 5.5s ease-in-out infinite;
 }
-.rmap .rt.br{stroke:var(--map-branch);stroke-width:1.4;opacity:var(--map-branch-op)}
-.rmap .halo{fill:none;stroke:var(--map-halo);stroke-width:1.2}
-.rmap .dot{fill:var(--map-dot)}
-.rmap .ring{fill:none;stroke:var(--map-ring);stroke-width:1;stroke-dasharray:2 9}
-.rmap .pulse{
-  fill:none;stroke:var(--map-pulse);stroke-width:1.2;
-  transform-box:fill-box;transform-origin:center;
-}
-.rmap .pkt{fill:var(--map-pkt);opacity:0;transition:opacity .7s var(--ease)}
-.rmap.is-open .pkt{opacity:.85}
+.orbit-core{fill:#EDF3F8;stroke:#A9C6DC;stroke-width:2;filter:url(#hero-orbit-core-glow)}
+@keyframes orbit-halo{0%,100%{opacity:.22;transform:scale(1)}50%{opacity:.56;transform:scale(1.08)}}
 
-/* Two label roles, both well above small-label territory. Sizes step up as
-   the figure narrows so the rendered result never drops under ~13px. */
-.rmap text{font-family:var(--sans);font-weight:600}
-.rmap .lbl{font-size:var(--map-lbl);letter-spacing:.05em;fill:var(--map-lbl-ink)}
-.rmap .geo{font-size:var(--map-lbl);letter-spacing:.02em;fill:var(--map-lbl-sub)}
-/* the origin is the only label set on two lines, so it reads as a block:
-   one notch tighter than the single-word labels, and hung low enough that
-   the trunk leaving the node clears its top-right corner */
-.rmap .origin{font-size:var(--map-lbl-origin);letter-spacing:.04em;font-weight:700;fill:var(--map-lbl-ink)}
+.hero-rail{display:none}
+.scroll-cue{display:none}
+.hero-foot{position:absolute;z-index:3;inset:auto 0 0;height:1px;border-top:1px solid rgba(255,255,255,.16)}
 
-@keyframes rmap-spin{to{transform:rotate(360deg)}}
-@keyframes rmap-pulse{
-  0%{transform:scale(1);opacity:.55}
-  75%,100%{transform:scale(2.15);opacity:0}
+@media (min-width:620px){
+  .hero-markets{grid-template-columns:repeat(4,minmax(0,1fr))}
 }
-.rmap .ring{transform-box:fill-box;transform-origin:center;animation:rmap-spin 90s linear infinite}
-.rmap .pulse{animation:rmap-pulse 3.6s ease-out infinite}
+@media (min-width:1000px) and (min-height:640px){
+  .hero-story.is-live{height:340vh}
+  .hero-story.is-live .hero-story__sticky{
+    position:sticky;top:0;height:100vh;height:100svh;min-height:0;
+    display:flex;align-items:center;overflow:clip;
+  }
+  .hero-story.is-live .hero-body{width:100%;height:100%;padding:0;display:flex;align-items:center}
+  .hero-story.is-live .hero-story__inner{
+    display:grid;grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr);
+    align-items:center;gap:clamp(30px,4.6vw,78px);
+    padding-top:var(--nav-h);padding-right:calc(var(--gutter) + 46px);
+  }
+  .hero-story.is-live .hero-stages{display:grid;align-items:center;min-height:0}
+  .hero-story.is-live .hero-stage{
+    grid-column:1;grid-row:1;padding:0;border:0;min-height:0;
+    display:block;opacity:0;pointer-events:none;
+  }
+  .hero-story.is-live .hero-stage.is-front{pointer-events:auto}
+  .hero-story.is-live .hero-stage__body{max-width:none}
+  .hero-story.is-live .hero-stage h1{
+    font-size:clamp(2.15rem,min(3.7vw,5.5vh),4.05rem);max-width:18ch;
+  }
+  .hero-story.is-live .hero-stage h2{
+    font-size:clamp(2.4rem,min(4.5vw,6.8vh),4rem);max-width:14ch;
+  }
+  .hero-story.is-live .hero-lede{max-width:48ch;font-size:clamp(.97rem,1.45vh,1.08rem)}
+  .hero-story.is-live .hero-actions{margin-top:clamp(24px,3.2vh,38px)}
+  .hero-story.is-live .brand-grid{margin-top:clamp(18px,2.8vh,28px);gap:12px}
+  .hero-story.is-live .brand-card{padding:clamp(16px,2vw,26px)}
+  .hero-story.is-live .brand-plate{min-height:clamp(82px,12vh,116px);margin-bottom:18px}
+  .hero-story.is-live .brand-card h3{margin-top:5px;font-size:clamp(1.16rem,1.7vw,1.45rem)}
+  .hero-story.is-live .brand-card p{margin-top:8px;font-size:.9rem;line-height:1.45}
+  .hero-story.is-live .hero-markets{
+    grid-template-columns:repeat(4,minmax(0,1fr));margin-top:clamp(18px,3vh,28px);gap:8px;
+  }
+  .hero-story.is-live .hero-market{padding:13px 11px 15px}
+  .hero-story.is-live .hero-market b{font-size:clamp(1.5rem,2.7vw,2rem)}
+  .hero-story.is-live .hero-market span{letter-spacing:.01em;margin-top:8px}
+  .hero-story.is-live .hero-market-support{margin-top:20px;font-size:.94rem}
+  .hero-story.is-live [data-hero-anim]{will-change:transform,opacity}
+  .hero-story.is-live .hero-orbit{width:100%;max-width:min(100%,54vh);margin:0 0 0 auto}
+  .hero-story.is-live .hero-story__glow{
+    display:block;position:absolute;inset:-25%;z-index:0;pointer-events:none;
+    background:radial-gradient(46% 52% at 68% 46%,rgba(169,198,220,.13),rgba(169,198,220,0) 72%);
+    will-change:transform;
+  }
+  .hero-story.is-live .hero-rail{
+    display:flex;position:absolute;z-index:4;right:max(16px,calc((100vw - var(--container))/2 + 16px));
+    top:50%;translate:0 -50%;
+  }
+  .hero-rail ol{display:flex;flex-direction:column;gap:26px}
+  .hero-rail li{
+    display:flex;align-items:center;gap:10px;color:rgba(169,198,220,.58);
+    font-family:var(--mono);font-size:.8125rem;font-weight:600;letter-spacing:.1em;
+    transition:color .4s var(--ease);
+  }
+  .hero-rail li i{
+    display:block;width:22px;height:1px;background:rgba(169,198,220,.28);
+    transition:background-color .4s var(--ease),width .4s var(--ease);
+  }
+  .hero-rail li.on{color:#D6ECFF}
+  .hero-rail li.on i{width:34px;background:#A9C6DC}
+  .hero-story.is-live .scroll-cue{
+    display:flex;align-items:center;gap:12px;position:absolute;z-index:4;
+    left:calc(max(0px,(100vw - var(--container))/2) + var(--gutter));bottom:clamp(18px,4vh,40px);
+    font-family:var(--mono);font-size:.8125rem;font-weight:600;letter-spacing:.16em;
+    text-transform:uppercase;color:var(--on-dark-muted);will-change:opacity;
+  }
+  .scroll-cue .track{position:relative;width:34px;height:1px;background:rgba(255,255,255,.18);overflow:hidden}
+  .scroll-cue .track::after{
+    content:"";position:absolute;top:0;width:14px;height:1px;background:var(--blue-200);
+    animation:cue 2.6s var(--ease) infinite;
+  }
+}
+@keyframes cue{0%{transform:translateX(-16px);opacity:0}30%{opacity:1}100%{transform:translateX(36px);opacity:0}}
 
-/* nodes surface as their route completes — only ever hidden where JS runs,
-   so the figure is complete and legible with scripting off */
-.has-js .rmap .node[data-at]{
-  opacity:0;transform:scale(.9);
-  transform-box:fill-box;transform-origin:center;
-  transition:opacity .5s var(--ease),transform .5s var(--ease);
-}
-.has-js .rmap .node[data-at].on{opacity:1;transform:none}
-.has-js .rmap.is-static .node[data-at]{opacity:1;transform:none}
-
-@media (max-width:520px){
-  :root{--map-lbl:30px;--map-lbl-origin:30px}
-  /* the two-line label needs its width back down here: tracking goes to
-     nothing and the block drops with it, so the trunk still passes clear */
-  .rmap .origin{letter-spacing:0;translate:0 8px}
-}
-/* the single-line labels take the last step up on their own — 34px cannot be
-   set on two lines inside the plate, and 30px still renders above the floor */
-@media (max-width:400px){ :root{--map-lbl:34px} }
-/* with room to spare, the labels open up and the figure fills its plate */
-@media (min-width:820px){
-  .rmap .geo{letter-spacing:.10em}
-  .rmap .lbl{letter-spacing:.09em}
-  .rmap .origin{letter-spacing:.10em}
-}
-
-/* ---- runway: LIVE (sticky) mode. JS-gated, wide screens only ----------
-   The track is the story's whole duration. Almost all of it belongs to the
-   map, which has something to draw; the brand cards only need to be read.
-   Any change here has to be answered in the scene windows, the map-draw
-   window, the rail threshold and SCENE_FOCUS — see the runway JS. */
-.runway.is-live{height:190vh}
-.runway.is-live .runway__sticky{
-  position:sticky;
-  top:var(--nav-h);
-  height:calc(100vh - var(--nav-h));
-  height:calc(100svh - var(--nav-h));
-  display:flex;align-items:center;
-  overflow:clip;
-  /* no transform / filter / will-change here or above — sticky contract */
-}
-.runway.is-live .runway__inner{
-  padding-right:calc(var(--gutter) + 46px);   /* the right gutter reserves the rail */
-}
-.runway.is-live .scenes{display:grid;align-items:center}
-.runway.is-live .scene{
-  grid-column:1;grid-row:1;
-  padding-block:0;border:0;
-  opacity:0;pointer-events:none;
-}
-.runway.is-live .scene.is-front{pointer-events:auto}
-.runway.is-live .scene__head{margin-bottom:clamp(22px,2.4vh,34px)}
-.runway.is-live [data-anim]{will-change:transform,opacity}
-
-.runway.is-live .brand-plate{min-height:clamp(104px,15vh,146px);margin-bottom:24px}
-.runway.is-live .brand-card{padding:clamp(22px,2.2vw,32px)}
-
-/* the figure is sized off the available height, so the whole map is always
-   on screen inside the pinned pane */
-.runway.is-live .rmap-plate{
-  max-width:min(100%,860px,calc((100svh - var(--nav-h) - 190px) * 1.58));
-}
-
-.runway.is-live .runway__glow{
-  display:block;position:absolute;inset:-30%;z-index:0;pointer-events:none;
-  background:var(--runway-glow);
-  will-change:transform;
-}
-
-/* scene rail — an engraved scrub track, no words */
-.runway.is-live .runway__rail{
-  display:block;position:absolute;z-index:3;
-  right:max(16px,calc((100vw - var(--container)) / 2 + 20px));
-  top:50%;transform:translateY(-50%);
-  width:14px;height:min(46vh,320px);
-}
-.runway__rail .track{
-  position:absolute;left:6px;top:0;bottom:0;width:1px;background:var(--rail-track);
-}
-.runway__rail .fill{
-  position:absolute;left:6px;top:0;width:1px;height:100%;background:var(--rail-fill);
-  transform:scaleY(var(--rp,0));transform-origin:top;
-}
-.runway__rail .tick{
-  position:absolute;left:0;width:14px;height:1px;background:var(--rail-track);
-  transition:background-color .4s var(--ease),width .4s var(--ease),left .4s var(--ease);
-}
-.runway__rail .tick.on{background:var(--rail-fill);width:14px}
-.runway__rail .tick--1{top:0}
-.runway__rail .tick--2{top:calc(50% - 1px)}
-.runway__rail .tick--3{bottom:0;top:auto}
-
-/* ---- about ------------------------------------------------- */
+/* ---- About device motif ----------------------------------- */
 .about-grid{
   display:grid;grid-template-columns:minmax(0,1.04fr) minmax(0,.96fr);
   gap:clamp(38px,5vw,76px);align-items:center;
@@ -813,50 +654,48 @@ h1 .soft{color:var(--blue-200);font-weight:500}
 .about-actions{margin-top:34px;font-size:1.0625rem}
 .about-actions .arw{display:inline-block;vertical-align:-1px;margin-left:8px;transition:transform .25s var(--ease)}
 .about-actions a:hover .arw{transform:translateX(4px)}
-
-/* A quiet glass plate drawn in the hero's own language — three planes, a
-   skylight sheen, the company mark. Its own `.gp` classes rather than the
-   hero's `.plane`, because those transforms depend on the hero's --p. */
-.atrium-card{
+.about-device-card{
   position:relative;overflow:hidden;isolation:isolate;
-  border-radius:var(--r-lg);
-  min-height:clamp(272px,29vw,372px);
+  min-height:clamp(300px,36vw,440px);border-radius:var(--r-lg);
   display:flex;align-items:center;justify-content:center;
-  padding:clamp(30px,4vw,54px);
+  padding:clamp(16px,2vw,28px);
   background:
     radial-gradient(112% 84% at 76% -14%,rgba(154,198,232,.28),rgba(154,198,232,0) 60%),
     linear-gradient(158deg,#04395F 0%,#022F50 46%,#011E34 100%);
   box-shadow:var(--shadow-lg);
 }
-[data-theme="dark"] .atrium-card{
+[data-theme="dark"] .about-device-card{
   background:
     radial-gradient(112% 84% at 76% -14%,rgba(154,198,232,.22),rgba(154,198,232,0) 60%),
     linear-gradient(158deg,#0B4571,#073C61 50%,#05304F);
   border:1px solid #1E4A70;
 }
-.atrium-card .gp{
-  position:absolute;border:1px solid rgba(255,255,255,.10);border-radius:2px;pointer-events:none;
+.devices.about-devices{display:block;position:relative;width:min(100%,340px);pointer-events:none}
+.device-stage{display:block;width:100%;height:auto}
+.device-body{fill:url(#dev-glass);stroke:rgba(255,255,255,.46)}
+.device-screen{fill:url(#dev-screen);stroke:rgba(255,255,255,.20)}
+.device-sheen{fill:url(#dev-sheen);stroke:none}
+.device-hair{fill:none;stroke:rgba(169,198,220,.55);stroke-linecap:round}
+.device-plane rect{fill:url(#dev-plane);stroke:rgba(255,255,255,.085)}
+.device-floor{fill:none;stroke:url(#dev-floor)}
+.device-body,.device-screen,.device-hair,.device-plane rect,.device-floor{
+  stroke-width:1;vector-effect:non-scaling-stroke;
 }
-.atrium-card .gp-1{
-  right:-7%;top:-26%;width:56%;height:152%;transform:rotate(17deg);
-  background:linear-gradient(178deg,rgba(255,255,255,.075),rgba(255,255,255,.006) 62%,rgba(255,255,255,0));
+.device-form{
+  opacity:0;transform:translate(0,20px);transform-box:fill-box;transform-origin:50% 50%;
+  transition:opacity .9s var(--ease),transform .9s var(--ease);
 }
-.atrium-card .gp-2{
-  right:15%;top:-36%;width:24%;height:158%;transform:rotate(17deg);
-  border-color:rgba(255,255,255,.19);
-  background:linear-gradient(176deg,rgba(214,236,255,.18),rgba(214,236,255,.02) 58%,rgba(214,236,255,0));
+.device-form.is-on{opacity:1;transform:none}
+.device-form.is-past{opacity:0;transform:translate(0,-20px)}
+.device-drift{
+  transform-box:fill-box;transform-origin:50% 50%;
+  animation:dev-float var(--dev-dur,11s) var(--dev-delay,0s) ease-in-out infinite;
 }
-.atrium-card .gp-3{
-  left:-16%;bottom:-28%;width:64%;height:76%;transform:rotate(-9deg);
-  border-color:rgba(255,255,255,.07);
-  background:linear-gradient(8deg,rgba(255,255,255,.06),rgba(255,255,255,0) 72%);
-}
-.atrium-card .sheen{
-  position:absolute;top:-32%;right:19%;width:40%;height:132%;pointer-events:none;
-  background:linear-gradient(183deg,rgba(197,226,250,.24),rgba(197,226,250,.05) 36%,rgba(197,226,250,0) 70%);
-  transform:rotate(17deg);filter:blur(22px);
-}
-.atrium-card .mark{position:relative;z-index:1;width:min(70%,268px);height:auto;color:#fff}
+@keyframes dev-float{0%,100%{transform:translate(0,0)}50%{transform:translate(var(--dev-x,0px),var(--dev-y,-7px))}}
+.device-form--1{--dev-y:-7px;--dev-x:1px;--dev-dur:11s;--dev-delay:-2.4s}
+.device-form--2{--dev-y:-5px;--dev-x:-1.5px;--dev-dur:13.5s;--dev-delay:-6.1s}
+.device-form--3{--dev-y:-4px;--dev-x:2px;--dev-dur:9.5s;--dev-delay:-1.2s}
+.device-form--4{--dev-y:-6px;--dev-x:-1px;--dev-dur:15s;--dev-delay:-8.3s}
 
 /* ---- wholesale --------------------------------------------- */
 .wholesale-panel{
@@ -1046,7 +885,6 @@ html.wm-locked{overflow-y:hidden;scrollbar-gutter:stable}
   border:1px solid #1E4A70;
 }
 [data-theme="dark"] .brand-plate{box-shadow:inset 0 1px 0 rgba(160,205,240,.10)}
-[data-theme="dark"] .rmap-plate{box-shadow:inset 0 1px 0 rgba(160,205,240,.08),var(--shadow-sm)}
 [data-theme="dark"] .site-header.is-solid .lang{opacity:.9}
 [data-theme="dark"] .nav-links a{opacity:.9}
 
@@ -1061,7 +899,7 @@ html.wm-locked{overflow-y:hidden;scrollbar-gutter:stable}
 /* ---- responsive -------------------------------------------- */
 @media (max-width:1080px){
   .about-grid{grid-template-columns:1fr;gap:46px;align-items:start}
-  .atrium-card{min-height:250px}
+  .about-device-card{min-height:340px}
   .wholesale-panel{grid-template-columns:minmax(0,1fr)}
   .wholesale-actions{justify-content:flex-start}
 }
@@ -1087,30 +925,33 @@ html.wm-locked{overflow-y:hidden;scrollbar-gutter:stable}
   .nav-links a::after{display:none}
   .nav-links a[aria-current="true"]{color:var(--blue-600)}
   .lang{margin-top:20px;align-self:flex-start;color:var(--ink)}
-  /* the theme toggle stays in the bar next to the burger, never inside the drawer */
   .header-controls{gap:10px}
   .theme-toggle{width:36px;height:36px}
   .brand .logo{width:104px}
-  .site-hero{min-height:auto;padding-top:calc(var(--nav-h) + 46px)}
-  /* gentler parallax on touch screens — the hero is taller than the viewport there */
-  .hero-body{
-    padding-block:56px 78px;
-    transform:translate3d(0,calc(var(--p) * 24px),0);
-    opacity:calc(1 - var(--p) * .55);
-  }
-  .hero-foot{opacity:calc(1 - var(--p) * 1.05)}
-  .scroll-cue{display:none}
-  .brand-grid{grid-template-columns:1fr}
   .wholesale-panel{grid-template-columns:1fr;gap:28px}
   .footer-grid{gap:22px 30px}
 }
+@media (max-width:700px){
+  .brand-grid{grid-template-columns:1fr}
+}
 @media (max-width:560px){
-  body{font-size:16px}
   .section{padding-block:64px}
-  .scene{padding-block:58px}
+  .hero-story__sticky{min-height:0}
+  .hero-body{padding-top:calc(var(--nav-h) + 30px);padding-bottom:64px}
+  .hero-stage{padding:52px 0}
+  .hero-stage:first-child{
+    min-height:calc(100vh - var(--nav-h) - 50px);
+    min-height:calc(100svh - var(--nav-h) - 50px);
+  }
   .hero-eyebrow{letter-spacing:.13em}
   .hero-eyebrow::before{display:none}
+  .hero-stage h1{font-size:clamp(2rem,10vw,2.75rem)}
+  .hero-stage h2{font-size:clamp(2.15rem,11vw,3rem)}
   .hero-actions .btn{flex:1 1 100%;justify-content:center}
+  .hero-story .brand-card{padding:22px}
+  .hero-story .brand-plate{min-height:104px;margin-bottom:20px;padding-inline:18px}
+  .hero-markets{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .hero-orbit{width:min(82vw,290px);margin-top:18px}
   .footer-grid{gap:22px}
   .footer-brand .logo{width:152px}
   .wholesale-panel{padding:30px 22px;border-radius:var(--r-md)}
@@ -1119,9 +960,8 @@ html.wm-locked{overflow-y:hidden;scrollbar-gutter:stable}
   .wholesale-markets{gap:6px 20px;padding-top:22px}
   .wmodal__panel{padding:26px 22px;border-radius:var(--r-md)}
   .wmodal__foot .btn{flex:1 1 100%;justify-content:center}
-  .brand-plate{min-height:110px;padding:0 20px}
-  .rmap-plate{padding:14px}
-  .atrium-card{min-height:210px;padding:30px 24px}
+  .about-device-card{min-height:280px;padding:12px}
+  .devices.about-devices{width:min(100%,290px)}
 }
 
 @media (prefers-reduced-motion:reduce){
@@ -1131,9 +971,10 @@ html.wm-locked{overflow-y:hidden;scrollbar-gutter:stable}
     transition-duration:.001ms !important;
   }
   .reveal{opacity:1;transform:none}
-  .plane,.mullions,.shaft,.hero-body{transform:none !important;opacity:1 !important}
+  .plane,.mullions,.shaft{transform:none !important;opacity:1 !important}
   .veil{opacity:0 !important}
   .hero-foot,.scroll-cue{opacity:1 !important}
-  .rmap .node[data-at]{opacity:1 !important;transform:none !important}
-  .rmap .pkt{opacity:0 !important}
+  .orbit-halo{animation:none !important;opacity:.35}
+  .device-drift{animation:none !important}
+  .device-form{transition:none !important}
 }
