@@ -1,7 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
-import { setRequestLocale } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
+import { ConsentBanner } from "@/components/consent/ConsentBanner";
 import { routing } from "@/i18n/routing";
 import "../globals.css";
 import "@/styles/home.css";
@@ -68,6 +69,7 @@ export default async function LocaleLayout({
   }
 
   setRequestLocale(locale);
+  const consent = await getTranslations({ locale, namespace: "Consent" });
 
   return (
     <html lang={locale} data-theme="light" suppressHydrationWarning>
@@ -81,6 +83,14 @@ export default async function LocaleLayout({
       <body>
         <NextIntlClientProvider messages={null}>
           {children}
+          <ConsentBanner
+            locale={locale}
+            ariaLabel={consent("ariaLabel")}
+            copy={consent("copy")}
+            privacyLink={consent("privacyLink")}
+            acceptAll={consent("acceptAll")}
+            essentialOnly={consent("essentialOnly")}
+          />
         </NextIntlClientProvider>
       </body>
     </html>

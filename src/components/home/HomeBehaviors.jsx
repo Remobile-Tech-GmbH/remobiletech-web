@@ -60,9 +60,12 @@ export function HomeBehaviors({ messages }) {
         if (chromeMeta) { chromeMeta.setAttribute('content', CHROME[theme]); }
         if (themeBtn) {
           var label = theme === 'dark' ? messages.switchLight : messages.switchDark;
+          var visibleLabel = theme === 'dark' ? messages.themeLight : messages.themeDark;
           themeBtn.setAttribute('aria-label', label);
           themeBtn.setAttribute('aria-pressed', theme === 'dark' ? 'true' : 'false');
           themeBtn.setAttribute('title', label);
+          var labelNode = themeBtn.querySelector('[data-theme-label]');
+          if (labelNode) { labelNode.textContent = visibleLabel; }
         }
         if (persist) {
           try { window.localStorage.setItem(THEME_KEY, theme); } catch (e) {}

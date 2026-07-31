@@ -79,7 +79,10 @@
     "footer": {
       "copyright": "© Remobile Tech GmbH, Vienna",
       "imprint": "Imprint",
-      "privacy": "Privacy"
+      "privacy": "Privacy",
+      "cookieSettings": "Cookie settings",
+      "themeDark": "Dark mode",
+      "themeLight": "Light mode"
     }
   },
   "About": {
@@ -90,7 +93,12 @@
     "eyebrow": "About Remobile Tech GmbH",
     "title": "Headquartered in Vienna. Operating globally.",
     "intro": "Incorporated in Austria, our holding company connects European demand with global supply. Sustainability, traceability, and institutional-grade documentation are built into every transaction.",
-    "body": "Remobile Tech GmbH owns and operates Remobile.eu and HandySwap.com. Through the group, we supply refurbished and new mobile phones wholesale to distributors across Europe."
+    "body": "Remobile Tech GmbH owns and operates Remobile.eu and HandySwap.com. Through the group, we supply refurbished and new mobile phones wholesale to distributors across Europe.",
+    "mediaEyebrow": "Behind the operation",
+    "mediaTitle": "Built for dependable European supply.",
+    "mediaCaption1": "Warehouse operations — photography coming soon",
+    "mediaCaption2": "Device grading — photography coming soon",
+    "mediaCaption3": "European logistics — photography coming soon"
   },
   "Wholesale": {
     "meta": {
@@ -182,10 +190,17 @@
     "s6Heading": "6. Retention",
     "s6Body": "Inquiry data is retained for a maximum of three years from receipt. Data is deleted sooner if no business relationship materialises, or upon a valid erasure request.",
     "s7Heading": "7. Cookies",
-    "s7Body": "This website uses only technically necessary session cookies required for the site to function. We do not use analytics, advertising, or third-party tracking cookies. No cookie consent banner is displayed because no consent-requiring cookies are set.",
+    "s7Body": "This website uses technically necessary cookies. Optional analytics services, if introduced, will be activated only after you consent. Your selection is stored locally in your browser and can be changed at any time through Cookie settings in the footer.",
     "s8Heading": "8. Changes to this policy",
     "s8Body": "We may update this policy from time to time to reflect changes in our practices or applicable law. The current version is always available at remobiletech.com/privacy. Material changes will be indicated by updating the ‘last updated’ date above.",
     "s9Heading": "9. Contact",
     "s9Body": "For data protection enquiries, write to hallo@remobiletech.com."
+  },
+  "Consent": {
+    "ariaLabel": "Cookie consent",
+    "copy": "We use essential cookies; optional analytics are activated only with your consent.",
+    "privacyLink": "Privacy policy",
+    "acceptAll": "Accept all",
+    "essentialOnly": "Essential only"
   }
 }

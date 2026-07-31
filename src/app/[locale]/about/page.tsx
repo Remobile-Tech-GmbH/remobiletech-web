@@ -38,6 +38,21 @@ export default async function AboutPage({ params }: Props) {
           <AboutDeviceVisual />
         </div>
       </section>
+
+      <section className="subpage-section media-section">
+        <div className="container">
+          <p className="eyebrow">{t("mediaEyebrow")}</p>
+          <h2>{t("mediaTitle")}</h2>
+          <div className="media-strip">
+            {(["mediaCaption1", "mediaCaption2", "mediaCaption3"] as const).map((key, index) => (
+              <figure className="media-placeholder" key={key}>
+                <div aria-hidden="true"><span>{String(index + 1).padStart(2, "0")}</span></div>
+                <figcaption>{t(key)}</figcaption>
+              </figure>
+            ))}
+          </div>
+        </div>
+      </section>
     </StaticPageShell>
   );
 }

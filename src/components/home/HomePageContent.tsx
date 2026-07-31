@@ -227,7 +227,7 @@ export async function HomePageContent({ locale }: { locale: string }) {
       <section className="section" id="about">
         <div className="container about-grid">
           <div className="about-copy reveal">
-            <p className="eyebrow"><span className="num">01</span> {t("about.eyebrow")}</p>
+            <p className="eyebrow">{t("about.eyebrow")}</p>
             <h2 style={{ marginTop: 20 }}>{t("about.title")}</h2>
             <p className="lede-serif" style={{ marginTop: 26 }}>
               {t("about.lede")}
@@ -245,7 +245,7 @@ export async function HomePageContent({ locale }: { locale: string }) {
         <div className="container">
           <div className="wholesale-panel reveal">
             <div className="wholesale-copy">
-              <p className="eyebrow"><span className="num">02</span> {t("wholesale.eyebrow")}</p>
+              <p className="eyebrow">{t("wholesale.eyebrow")}</p>
               <h2>{t("wholesale.title")}</h2>
               <p>
                 {t("wholesale.body")}
@@ -333,6 +333,8 @@ export async function HomePageContent({ locale }: { locale: string }) {
         messages={{
           switchDark: t("a11y.switchDark"),
           switchLight: t("a11y.switchLight"),
+          themeDark: t("footer.themeDark"),
+          themeLight: t("footer.themeLight"),
           requiredEmail: t("modal.errors.requiredEmail"),
           requiredName: t("modal.errors.requiredName"),
           invalidEmail: t("modal.errors.invalidEmail"),

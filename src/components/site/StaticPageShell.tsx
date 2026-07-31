@@ -14,7 +14,12 @@ export async function StaticPageShell({ locale, page, children }: { locale: stri
       <SiteHeader locale={locale} page={page} />
       <main className="subpage" id="main">{children}</main>
       <SiteFooter locale={locale} />
-      <StaticPageBehaviors switchDark={t("a11y.switchDark")} switchLight={t("a11y.switchLight")} />
+      <StaticPageBehaviors
+        switchDark={t("a11y.switchDark")}
+        switchLight={t("a11y.switchLight")}
+        themeDark={t("footer.themeDark")}
+        themeLight={t("footer.themeLight")}
+      />
     </>
   );
 }

@@ -2,7 +2,14 @@
 
 import { useEffect } from "react";
 
-export function StaticPageBehaviors({ switchDark, switchLight }: { switchDark: string; switchLight: string }) {
+type StaticPageBehaviorsProps = {
+  switchDark: string;
+  switchLight: string;
+  themeDark: string;
+  themeLight: string;
+};
+
+export function StaticPageBehaviors({ switchDark, switchLight, themeDark, themeLight }: StaticPageBehaviorsProps) {
   useEffect(() => {
     const root = document.documentElement;
     const header = document.getElementById("site-header");
@@ -31,9 +38,12 @@ export function StaticPageBehaviors({ switchDark, switchLight }: { switchDark: s
       document.querySelector('meta[name="theme-color"]')?.setAttribute("content", theme === "dark" ? "#05192A" : "#022F50");
       if (themeButton) {
         const label = theme === "dark" ? switchLight : switchDark;
+        const visibleLabel = theme === "dark" ? themeLight : themeDark;
         themeButton.setAttribute("aria-label", label);
         themeButton.setAttribute("aria-pressed", theme === "dark" ? "true" : "false");
         themeButton.setAttribute("title", label);
+        const labelNode = themeButton.querySelector<HTMLElement>("[data-theme-label]");
+        if (labelNode) labelNode.textContent = visibleLabel;
       }
       if (persist) {
         try { window.localStorage.setItem("rmt-theme", theme); } catch {}
@@ -65,7 +75,7 @@ export function StaticPageBehaviors({ switchDark, switchLight }: { switchDark: s
     applyTheme(root.getAttribute("data-theme") === "dark" ? "dark" : "light", false);
     updateProgress();
     return () => cleanups.forEach((cleanup) => cleanup());
-  }, [switchDark, switchLight]);
+  }, [switchDark, switchLight, themeDark, themeLight]);
 
   return null;
 }

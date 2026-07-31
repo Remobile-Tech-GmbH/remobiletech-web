@@ -79,7 +79,10 @@
     "footer": {
       "copyright": "© Remobile Tech GmbH, Wien",
       "imprint": "Impressum",
-      "privacy": "Datenschutz"
+      "privacy": "Datenschutz",
+      "cookieSettings": "Cookie-Einstellungen",
+      "themeDark": "Dunkler Modus",
+      "themeLight": "Heller Modus"
     }
   },
   "About": {
@@ -90,7 +93,12 @@
     "eyebrow": "Über die Remobile Tech GmbH",
     "title": "Hauptsitz in Wien. Weltweit tätig.",
     "intro": "Als österreichische Holding verbindet Remobile Tech GmbH europäische Nachfrage mit einem globalen Angebot. Nachhaltigkeit, Rückverfolgbarkeit und lückenlose Dokumentation sind feste Bestandteile jeder Transaktion.",
-    "body": "Remobile Tech GmbH betreibt Remobile.eu und HandySwap.com. Darüber hinaus beliefern wir Distributoren in ganz Europa im Großhandel mit Refurbished- und neuen Mobiltelefonen."
+    "body": "Remobile Tech GmbH betreibt Remobile.eu und HandySwap.com. Darüber hinaus beliefern wir Distributoren in ganz Europa im Großhandel mit Refurbished- und neuen Mobiltelefonen.",
+    "mediaEyebrow": "Einblicke in unser Unternehmen",
+    "mediaTitle": "Verlässliche Lieferprozesse für den europäischen Markt.",
+    "mediaCaption1": "Lager und Warenfluss — Fotos folgen in Kürze",
+    "mediaCaption2": "Geräteprüfung und Grading — Fotos folgen in Kürze",
+    "mediaCaption3": "Europaweite Logistik — Fotos folgen in Kürze"
   },
   "Wholesale": {
     "meta": {
@@ -182,10 +190,17 @@
     "s6Heading": "6. Speicherdauer",
     "s6Body": "Wir speichern Anfragedaten höchstens drei Jahre ab ihrem Eingang. Sie werden früher gelöscht, wenn kein Geschäftsverhältnis zustande kommt oder ein berechtigter Löschantrag vorliegt.",
     "s7Heading": "7. Cookies",
-    "s7Body": "Diese Website verwendet ausschließlich technisch notwendige Session-Cookies. Wir setzen keine Analyse-, Werbe- oder Tracking-Cookies von Drittanbietern ein. Da keine einwilligungspflichtigen Cookies verwendet werden, zeigen wir kein Cookie-Banner an.",
+    "s7Body": "Diese Website verwendet technisch erforderliche Cookies. Optionale Analysedienste werden, sofern sie künftig eingesetzt werden, erst nach Ihrer Einwilligung aktiviert. Ihre Auswahl wird lokal in Ihrem Browser gespeichert und kann jederzeit über die Cookie-Einstellungen im Footer geändert werden.",
     "s8Heading": "8. Änderungen dieser Erklärung",
     "s8Body": "Wir können diese Erklärung an geänderte Abläufe oder Rechtsvorschriften anpassen. Die aktuelle Fassung ist jederzeit unter remobiletech.com/privacy abrufbar. Wesentliche Änderungen machen wir durch die Aktualisierung des oben genannten Datums kenntlich.",
     "s9Heading": "9. Kontakt",
     "s9Body": "Für Datenschutzanfragen schreiben Sie bitte an hallo@remobiletech.com."
+  },
+  "Consent": {
+    "ariaLabel": "Cookie-Einwilligung",
+    "copy": "Wir verwenden erforderliche Cookies; optionale Analysen aktivieren wir nur mit Ihrer Einwilligung.",
+    "privacyLink": "Datenschutzerklärung",
+    "acceptAll": "Alle akzeptieren",
+    "essentialOnly": "Nur erforderliche"
   }
 }
