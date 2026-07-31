@@ -9,8 +9,10 @@
       "primaryNav": "Hauptnavigation",
       "language": "Sprache",
       "menu": "Menü",
-      "switchDark": "Zum dunklen Design wechseln",
-      "switchLight": "Zum hellen Design wechseln",
+      "themeGroup": "Farbschema",
+      "themeLight": "Helles Design",
+      "themeDark": "Dunkles Design",
+      "themeSystem": "Geräteeinstellung",
       "heroStory": "Remobile Tech in drei Teilen"
     },
     "nav": {
@@ -80,9 +82,7 @@
       "copyright": "© Remobile Tech GmbH, Wien",
       "imprint": "Impressum",
       "privacy": "Datenschutz",
-      "cookieSettings": "Cookie-Einstellungen",
-      "themeDark": "Dunkler Modus",
-      "themeLight": "Heller Modus"
+      "cookieSettings": "Cookie-Einstellungen"
     }
   },
   "About": {

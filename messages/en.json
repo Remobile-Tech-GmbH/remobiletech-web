@@ -9,8 +9,10 @@
       "primaryNav": "Primary",
       "language": "Language",
       "menu": "Menu",
-      "switchDark": "Switch to dark theme",
-      "switchLight": "Switch to light theme",
+      "themeGroup": "Color theme",
+      "themeLight": "Light theme",
+      "themeDark": "Dark theme",
+      "themeSystem": "Device theme",
       "heroStory": "Remobile Tech in three parts"
     },
     "nav": {
@@ -80,9 +82,7 @@
       "copyright": "© Remobile Tech GmbH, Vienna",
       "imprint": "Imprint",
       "privacy": "Privacy",
-      "cookieSettings": "Cookie settings",
-      "themeDark": "Dark mode",
-      "themeLight": "Light mode"
+      "cookieSettings": "Cookie settings"
     }
   },
   "About": {

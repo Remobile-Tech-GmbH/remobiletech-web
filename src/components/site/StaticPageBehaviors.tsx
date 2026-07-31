@@ -2,14 +2,9 @@
 
 import { useEffect } from "react";
 
-type StaticPageBehaviorsProps = {
-  switchDark: string;
-  switchLight: string;
-  themeDark: string;
-  themeLight: string;
-};
+type ThemePreference = "light" | "dark" | "system";
 
-export function StaticPageBehaviors({ switchDark, switchLight, themeDark, themeLight }: StaticPageBehaviorsProps) {
+export function StaticPageBehaviors() {
   useEffect(() => {
     const root = document.documentElement;
     const header = document.getElementById("site-header");
@@ -17,6 +12,7 @@ export function StaticPageBehaviors({ switchDark, switchLight, themeDark, themeL
     const toggle = document.getElementById("nav-toggle");
     const themeButton = document.getElementById("theme-toggle");
     const progress = document.getElementById("progress");
+    const darkQuery = window.matchMedia("(prefers-color-scheme: dark)");
     if (!header || !nav || !toggle) return;
 
     const cleanups: Array<() => void> = [];
@@ -33,20 +29,29 @@ export function StaticPageBehaviors({ switchDark, switchLight, themeDark, themeL
       const value = max > 0 ? Math.min(1, Math.max(0, window.scrollY / max)) : 0;
       progress?.style.setProperty("--sp", value.toFixed(4));
     };
-    const applyTheme = (theme: "light" | "dark", persist: boolean) => {
-      root.setAttribute("data-theme", theme);
-      document.querySelector('meta[name="theme-color"]')?.setAttribute("content", theme === "dark" ? "#05192A" : "#022F50");
+    let themePreference: ThemePreference = "light";
+    const storedTheme = (): ThemePreference => {
+      try {
+        const value = window.localStorage.getItem("rmt-theme");
+        if (value === "light" || value === "dark" || value === "system") return value;
+      } catch {}
+      return "light";
+    };
+    const applyTheme = (preference: ThemePreference, persist: boolean) => {
+      themePreference = preference;
+      const resolved = preference === "system" ? (darkQuery.matches ? "dark" : "light") : preference;
+      root.setAttribute("data-theme", resolved);
+      root.setAttribute("data-theme-preference", preference);
+      document.querySelector('meta[name="theme-color"]')?.setAttribute("content", resolved === "dark" ? "#05192A" : "#022F50");
       if (themeButton) {
-        const label = theme === "dark" ? switchLight : switchDark;
-        const visibleLabel = theme === "dark" ? themeLight : themeDark;
-        themeButton.setAttribute("aria-label", label);
-        themeButton.setAttribute("aria-pressed", theme === "dark" ? "true" : "false");
-        themeButton.setAttribute("title", label);
-        const labelNode = themeButton.querySelector<HTMLElement>("[data-theme-label]");
-        if (labelNode) labelNode.textContent = visibleLabel;
+        themeButton.querySelectorAll<HTMLElement>("[data-theme-option]").forEach((option) => {
+          const selected = option.dataset.themeOption === preference;
+          option.setAttribute("aria-checked", selected ? "true" : "false");
+          option.tabIndex = selected ? 0 : -1;
+        });
       }
       if (persist) {
-        try { window.localStorage.setItem("rmt-theme", theme); } catch {}
+        try { window.localStorage.setItem("rmt-theme", preference); } catch {}
       }
     };
 
@@ -66,16 +71,35 @@ export function StaticPageBehaviors({ switchDark, switchLight, themeDark, themeL
     listen(window, "scroll", updateProgress);
 
     if (themeButton) {
-      listen(themeButton, "click", () => {
-        const theme = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
-        applyTheme(theme, true);
+      listen(themeButton, "click", (event) => {
+        const option = (event.target as Element | null)?.closest<HTMLElement>("[data-theme-option]");
+        const preference = option?.dataset.themeOption;
+        if (preference === "light" || preference === "dark" || preference === "system") applyTheme(preference, true);
+      });
+      listen(themeButton, "keydown", (event) => {
+        const keyboardEvent = event as KeyboardEvent;
+        if (!["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"].includes(keyboardEvent.key)) return;
+        const options = Array.from(themeButton.querySelectorAll<HTMLElement>("[data-theme-option]"));
+        const current = options.indexOf(document.activeElement as HTMLElement);
+        if (current < 0) return;
+        keyboardEvent.preventDefault();
+        const direction = keyboardEvent.key === "ArrowLeft" || keyboardEvent.key === "ArrowUp" ? -1 : 1;
+        const next = options[(current + direction + options.length) % options.length];
+        const preference = next.dataset.themeOption as ThemePreference;
+        applyTheme(preference, true);
+        next.focus();
       });
     }
 
-    applyTheme(root.getAttribute("data-theme") === "dark" ? "dark" : "light", false);
+    const onSchemeChange = () => {
+      if (themePreference === "system") applyTheme("system", false);
+    };
+    listen(darkQuery, "change", onSchemeChange);
+
+    applyTheme(storedTheme(), false);
     updateProgress();
     return () => cleanups.forEach((cleanup) => cleanup());
-  }, [switchDark, switchLight, themeDark, themeLight]);
+  }, []);
 
   return null;
 }

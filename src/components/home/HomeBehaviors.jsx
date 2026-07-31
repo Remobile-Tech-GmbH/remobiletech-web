@@ -48,47 +48,58 @@ export function HomeBehaviors({ messages }) {
       var CHROME    = { light: '#022F50', dark: '#05192A' };
       var chromeMeta = document.querySelector('meta[name="theme-color"]');
       var darkQuery = window.matchMedia('(prefers-color-scheme: dark)');
+      var themePreference = 'light';
     
       function storedTheme() {
         var v = null;
         try { v = window.localStorage.getItem(THEME_KEY); } catch (e) {}
-        return (v === 'light' || v === 'dark') ? v : null;
+        return (v === 'light' || v === 'dark' || v === 'system') ? v : 'light';
       }
     
-      function applyTheme(theme, persist) {
-        root.setAttribute('data-theme', theme);
-        if (chromeMeta) { chromeMeta.setAttribute('content', CHROME[theme]); }
+      function applyTheme(preference, persist) {
+        themePreference = preference;
+        var resolved = preference === 'system' ? (darkQuery.matches ? 'dark' : 'light') : preference;
+        root.setAttribute('data-theme', resolved);
+        root.setAttribute('data-theme-preference', preference);
+        if (chromeMeta) { chromeMeta.setAttribute('content', CHROME[resolved]); }
         if (themeBtn) {
-          var label = theme === 'dark' ? messages.switchLight : messages.switchDark;
-          var visibleLabel = theme === 'dark' ? messages.themeLight : messages.themeDark;
-          themeBtn.setAttribute('aria-label', label);
-          themeBtn.setAttribute('aria-pressed', theme === 'dark' ? 'true' : 'false');
-          themeBtn.setAttribute('title', label);
-          var labelNode = themeBtn.querySelector('[data-theme-label]');
-          if (labelNode) { labelNode.textContent = visibleLabel; }
+          var options = themeBtn.querySelectorAll('[data-theme-option]');
+          for (var i = 0; i < options.length; i++) {
+            var selected = options[i].getAttribute('data-theme-option') === preference;
+            options[i].setAttribute('aria-checked', selected ? 'true' : 'false');
+            options[i].tabIndex = selected ? 0 : -1;
+          }
         }
         if (persist) {
-          try { window.localStorage.setItem(THEME_KEY, theme); } catch (e) {}
+          try { window.localStorage.setItem(THEME_KEY, preference); } catch (e) {}
         }
       }
     
-      applyTheme(root.getAttribute('data-theme') === 'dark' ? 'dark' : 'light', false);
+      applyTheme(storedTheme(), false);
     
       if (themeBtn) {
-        listen(themeBtn, 'click', function () {
-          applyTheme(root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark', true);
+        listen(themeBtn, 'click', function (event) {
+          var option = event.target.closest ? event.target.closest('[data-theme-option]') : null;
+          if (option) { applyTheme(option.getAttribute('data-theme-option'), true); }
+        });
+        listen(themeBtn, 'keydown', function (event) {
+          if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight' && event.key !== 'ArrowUp' && event.key !== 'ArrowDown') { return; }
+          var options = Array.prototype.slice.call(themeBtn.querySelectorAll('[data-theme-option]'));
+          var current = options.indexOf(document.activeElement);
+          if (current < 0) { return; }
+          event.preventDefault();
+          var direction = event.key === 'ArrowLeft' || event.key === 'ArrowUp' ? -1 : 1;
+          var next = options[(current + direction + options.length) % options.length];
+          applyTheme(next.getAttribute('data-theme-option'), true);
+          next.focus();
         });
       }
     
-      /* Following the OS remains deliberately parked — an appearance change at
-         dusk must not repaint the page under the visitor. Uncomment to restore it. */
-      /*
-      function onSchemeChange(e) {
-        if (!storedTheme()) { applyTheme(e.matches ? 'dark' : 'light', false); }
+      function onSchemeChange() {
+        if (themePreference === 'system') { applyTheme('system', false); }
       }
       if (darkQuery.addEventListener) { listen(darkQuery, 'change', onSchemeChange); }
       else if (darkQuery.addListener) { listenMedia(darkQuery, onSchemeChange); }
-      */
     
       /* ==== ABOUT DEVICE MOTIF ==========================================
          The original hero device vitrine now lives in About. Its calm timed

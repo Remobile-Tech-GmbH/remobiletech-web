@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { clearConsentChoice, getConsentChoice, saveConsentChoice } from "@/lib/consent";
 
 type ConsentBannerProps = {
@@ -22,6 +22,9 @@ export function ConsentBanner({
   essentialOnly,
 }: ConsentBannerProps) {
   const [visible, setVisible] = useState(false);
+  const cardRef = useRef<HTMLElement>(null);
+  const acceptRef = useRef<HTMLButtonElement>(null);
+  const returnFocusRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
     const openBanner = () => {
@@ -42,8 +45,35 @@ export function ConsentBanner({
   }, []);
 
   useEffect(() => {
-    document.documentElement.classList.toggle("has-consent-banner", visible);
-    return () => document.documentElement.classList.remove("has-consent-banner");
+    if (!visible) return;
+
+    returnFocusRef.current = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+    document.documentElement.classList.add("consent-locked");
+    acceptRef.current?.focus({ preventScroll: true });
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key !== "Tab" || !cardRef.current) return;
+      const focusable = Array.from(cardRef.current.querySelectorAll<HTMLElement>('a[href], button:not([disabled])'));
+      if (!focusable.length) return;
+
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+      document.documentElement.classList.remove("consent-locked");
+      returnFocusRef.current?.focus({ preventScroll: true });
+      returnFocusRef.current = null;
+    };
   }, [visible]);
 
   if (!visible) return null;
@@ -55,15 +85,25 @@ export function ConsentBanner({
   };
 
   return (
-    <section className="consent-banner" id="consent-banner" role="region" aria-label={ariaLabel}>
-      <p>
-        {copy}{" "}
-        <Link href={`/${locale}/privacy`}>{privacyLink}</Link>
-      </p>
-      <div className="consent-banner__actions">
-        <button type="button" onClick={() => choose(true)}>{acceptAll}</button>
-        <button type="button" onClick={() => choose(false)}>{essentialOnly}</button>
-      </div>
-    </section>
+    <div className="consent-layer">
+      <div className="consent-layer__backdrop" aria-hidden="true" />
+      <section
+        className="consent-banner"
+        id="consent-banner"
+        ref={cardRef}
+        role="dialog"
+        aria-modal="true"
+        aria-label={ariaLabel}
+      >
+        <p>
+          {copy}{" "}
+          <Link href={`/${locale}/privacy`}>{privacyLink}</Link>
+        </p>
+        <div className="consent-banner__actions">
+          <button ref={acceptRef} type="button" onClick={() => choose(true)}>{acceptAll}</button>
+          <button type="button" onClick={() => choose(false)}>{essentialOnly}</button>
+        </div>
+      </section>
+    </div>
   );
 }

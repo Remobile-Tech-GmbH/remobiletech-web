@@ -331,10 +331,6 @@ export async function HomePageContent({ locale }: { locale: string }) {
       
       <HomeBehaviors
         messages={{
-          switchDark: t("a11y.switchDark"),
-          switchLight: t("a11y.switchLight"),
-          themeDark: t("footer.themeDark"),
-          themeLight: t("footer.themeLight"),
           requiredEmail: t("modal.errors.requiredEmail"),
           requiredName: t("modal.errors.requiredName"),
           invalidEmail: t("modal.errors.invalidEmail"),

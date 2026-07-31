@@ -19,18 +19,15 @@ export const viewport: Viewport = {
 const themeScript = `
 /* Theme resolution runs in <head> before the body can paint, so the correct
    palette is in place on the very first paint — no flash of the wrong theme.
-   Order: explicit user choice (localStorage) → light.
-   The OS preference is deliberately not consulted: the page opens light for
-   everyone until they use the visible control. Restore the commented line
-   below to follow the visitor's system setting again. */
+   Order: explicit user choice (localStorage) → light. The system preference is
+   consulted only when the visitor has explicitly chosen Device. */
 (function () {
   var t = null;
   try { t = window.localStorage.getItem('rmt-theme'); } catch (e) {}
-  if (t !== 'light' && t !== 'dark') {
-    t = 'light';
-    /* t = (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light'; */
-  }
-  document.documentElement.setAttribute('data-theme', t);
+  if (t !== 'light' && t !== 'dark' && t !== 'system') { t = 'light'; }
+  var resolved = t === 'system' && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : t === 'dark' ? 'dark' : 'light';
+  document.documentElement.setAttribute('data-theme', resolved);
+  document.documentElement.setAttribute('data-theme-preference', t);
   /* the route map's nodes only start hidden when there is JS to reveal them */
   document.documentElement.className += ' has-js';
 }());`;
