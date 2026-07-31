@@ -71,7 +71,7 @@
       "submit": "Send inquiry",
       "sending": "Sending…",
       "success": "Thank you — your inquiry has been sent.",
-      "failure": "Something went wrong. Please try again or email hello@remobiletech.com directly.",
+      "failure": "Something went wrong. Please try again or email hallo@remobiletech.com directly.",
       "errors": {
         "requiredEmail": "Please enter your business email address.",
         "requiredName": "Please enter your full name.",
@@ -142,7 +142,7 @@
     "tax": "09 443/5145",
     "director": "Hassib Atta Mian",
     "purpose": "Wholesale and retail trade in mobile phones and electronic devices",
-    "email": "hello@remobiletech.com",
+    "email": "hallo@remobiletech.com",
     "phone": "+43 660 2717591",
     "authority": "Magistratisches Bezirksamt des 1. Bezirkes, Vienna",
     "disclaimerHeading": "Disclaimer",
@@ -162,7 +162,7 @@
     "lastUpdated": "Last updated: July 2025",
     "intro": "This privacy policy explains how Remobile Tech GmbH collects, uses, and protects personal data on remobiletech.com. We are committed to GDPR compliance and to handling your data with care.",
     "s1Heading": "1. Controller",
-    "s1Body": "The data controller responsible for this website is Remobile Tech GmbH. Contact: hello@remobiletech.com. Full legal details are available in the imprint.",
+    "s1Body": "The data controller responsible for this website is Remobile Tech GmbH. Contact: hallo@remobiletech.com. Full legal details are available in the imprint.",
     "s2Heading": "2. Data we collect",
     "s2Body": "We collect personal data only when you actively provide it. When you submit a wholesale inquiry, we collect: your full name, your company name (optional), your email address, and the content of your message. We do not collect data through analytics, tracking scripts, or passive browsing.",
     "s3Heading": "3. Legal basis",
@@ -170,7 +170,7 @@
     "s4Heading": "4. Third-party services",
     "s4Body": "We use Resend (Resend Inc., 185 Alewife Brook Pkwy, Suite 210, Cambridge, MA 02138, USA) to deliver inquiry emails. When you submit a form, your name and email address are processed by Resend’s infrastructure. Resend provides appropriate safeguards for transatlantic data transfers. For details, see resend.com/privacy.",
     "s5Heading": "5. Your rights",
-    "s5Body": "Under the GDPR you have the right to request access to, correction of, or erasure of your personal data; to request restriction of processing; to data portability; and to object to processing. To exercise these rights, write to hello@remobiletech.com. You also have the right to lodge a complaint with the Austrian data protection authority: Datenschutzbehörde, Barichgasse 40-42, 1030 Vienna — dsb@dsb.gv.at — www.dsb.gv.at.",
+    "s5Body": "Under the GDPR you have the right to request access to, correction of, or erasure of your personal data; to request restriction of processing; to data portability; and to object to processing. To exercise these rights, write to hallo@remobiletech.com. You also have the right to lodge a complaint with the Austrian data protection authority: Datenschutzbehörde, Barichgasse 40-42, 1030 Vienna — dsb@dsb.gv.at — www.dsb.gv.at.",
     "s6Heading": "6. Retention",
     "s6Body": "Inquiry data is retained for a maximum of three years from receipt. Data is deleted sooner if no business relationship materialises, or upon a valid erasure request.",
     "s7Heading": "7. Cookies",
@@ -178,6 +178,6 @@
     "s8Heading": "8. Changes to this policy",
     "s8Body": "We may update this policy from time to time to reflect changes in our practices or applicable law. The current version is always available at remobiletech.com/privacy. Material changes will be indicated by updating the ‘last updated’ date above.",
     "s9Heading": "9. Contact",
-    "s9Body": "For data protection enquiries, write to hello@remobiletech.com."
+    "s9Body": "For data protection enquiries, write to hallo@remobiletech.com."
   }
 }

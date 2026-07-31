@@ -37,7 +37,7 @@ export default async function ContactPage({ params }: Props) {
         <div className="container contact-grid">
           <article className="contact-card">
             <p className="contact-card__label">{t("emailLabel")}</p>
-            <a className="contact-card__link" href="mailto:hello@remobiletech.com">hello@remobiletech.com</a>
+            <a className="contact-card__link" href="mailto:hallo@remobiletech.com">hallo@remobiletech.com</a>
           </article>
           <article className="contact-card">
             <p className="contact-card__label">{t("phoneLabel")}</p>
@@ -48,7 +48,7 @@ export default async function ContactPage({ params }: Props) {
           <article className="contact-card contact-card--press">
             <p className="contact-card__label">{t("pressTitle")}</p>
             <p>{t("pressBody")}</p>
-            <a className="textlink" href="mailto:hello@remobiletech.com">hello@remobiletech.com</a>
+            <a className="textlink" href="mailto:hallo@remobiletech.com">hallo@remobiletech.com</a>
           </article>
         </div>
       </section>

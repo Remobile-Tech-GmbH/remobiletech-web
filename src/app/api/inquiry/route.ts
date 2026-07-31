@@ -29,7 +29,7 @@ export async function POST(request: Request) {
   }
 
   const { name, company, email, message } = parsed.data;
-  const to = process.env.INQUIRY_TO ?? "hello@remobiletech.com";
+  const to = process.env.INQUIRY_TO ?? "hallo@remobiletech.com";
   const from = process.env.INQUIRY_FROM ?? "website@remobiletech.com";
   const emailPayload = {
     from,
@@ -52,7 +52,7 @@ export async function POST(request: Request) {
       return json({ ok: true });
     }
     console.error("[inquiry] RESEND_API_KEY is not configured in production");
-    return json({ error: "Email is temporarily unavailable. Please email hello@remobiletech.com directly." }, 503);
+    return json({ error: "Email is temporarily unavailable. Please email hallo@remobiletech.com directly." }, 503);
   }
 
   try {
@@ -67,11 +67,11 @@ export async function POST(request: Request) {
 
     if (!response.ok) {
       console.error("[inquiry] Resend rejected the request:", response.status, await response.text());
-      return json({ error: "We could not send your inquiry. Please try again or email hello@remobiletech.com." }, 502);
+      return json({ error: "We could not send your inquiry. Please try again or email hallo@remobiletech.com." }, 502);
     }
     return json({ ok: true });
   } catch (error) {
     console.error("[inquiry] Resend request failed:", error);
-    return json({ error: "We could not send your inquiry. Please try again or email hello@remobiletech.com." }, 502);
+    return json({ error: "We could not send your inquiry. Please try again or email hallo@remobiletech.com." }, 502);
   }
 }
