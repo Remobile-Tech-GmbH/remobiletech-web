@@ -1,7 +1,76 @@
 {
   "Home": {
-    "eyebrow": "Remobile Tech",
-    "title": "A new website is taking shape.",
-    "description": "Our full English-language site is coming soon."
+    "meta": {
+      "title": "Remobile Tech GmbH — the holding company behind Remobile.eu and HandySwap.com",
+      "description": "Remobile Tech GmbH owns and operates Remobile.eu and HandySwap.com — and supplies refurbished and new mobile phones wholesale to distributors across Europe."
+    },
+    "a11y": {
+      "skip": "Skip to content",
+      "homeLabel": "Remobile Tech GmbH — home",
+      "primaryNav": "Primary",
+      "language": "Language",
+      "menu": "Menu",
+      "switchDark": "Switch to dark theme",
+      "switchLight": "Switch to light theme",
+      "portfolioMarkets": "Portfolio and markets",
+      "mapLabel": "Route diagram: Remobile Tech GmbH connects to Remobile.eu and HandySwap.com, which together serve Germany, Austria, the Netherlands and Belgium."
+    },
+    "nav": {
+      "home": "Home",
+      "about": "About",
+      "wholesale": "Wholesale",
+      "englishCode": "EN",
+      "germanCode": "DE",
+      "germanUnavailable": "Deutsch — not yet available"
+    },
+    "hero": {
+      "title": "The holding company behind Europe’s <soft>mobile circular economy.</soft>",
+      "lede": "Remobile Tech GmbH owns and operates Remobile.eu and HandySwap.com — and supplies refurbished and new mobile phones wholesale to distributors across Europe.",
+      "wholesaleCta": "Wholesale inquiry",
+      "brandsCta": "Our brands",
+      "scroll": "Scroll"
+    },
+    "portfolio": {
+      "eyebrow": "Our portfolio",
+      "remobileDescription": "Refurbished devices e-commerce.",
+      "handySwapDescription": "New devices e-commerce, with trade-in / phone swap."
+    },
+    "markets": {
+      "eyebrow": "Markets"
+    },
+    "about": {
+      "eyebrow": "About Remobile Tech GmbH",
+      "title": "Headquartered in Vienna. Operating globally.",
+      "lede": "Incorporated in Austria, our holding company connects European demand with global supply. Sustainability, traceability, and institutional-grade documentation are built into every transaction.",
+      "link": "About the company"
+    },
+    "wholesale": {
+      "eyebrow": "Wholesale",
+      "title": "Wholesale supply for trade partners.",
+      "body": "Inquiries from distributors and trade buyers are answered directly by Remobile Tech GmbH.",
+      "cta": "Wholesale inquiry",
+      "marketsLabel": "Markets",
+      "marketsList": "Germany · Austria · Netherlands · Belgium"
+    },
+    "modal": {
+      "title": "Wholesale inquiry",
+      "close": "Close",
+      "name": "Full name",
+      "email": "Your email",
+      "company": "Company",
+      "message": "Message",
+      "submit": "Send inquiry",
+      "success": "Thank you — your inquiry has been sent.",
+      "errors": {
+        "requiredEmail": "Please enter your email address.",
+        "requiredName": "Please enter your full name.",
+        "invalidEmail": "Please enter a valid email address."
+      }
+    },
+    "footer": {
+      "copyright": "© Remobile Tech GmbH, Vienna",
+      "imprint": "Imprint",
+      "privacy": "Privacy"
+    }
   }
 }

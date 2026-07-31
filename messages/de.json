@@ -1,7 +1,76 @@
 {
   "Home": {
-    "eyebrow": "Remobile Tech",
-    "title": "Eine neue Website entsteht.",
-    "description": "Unsere vollständige deutschsprachige Website folgt in Kürze."
+    "meta": {
+      "title": "Remobile Tech GmbH — die Holdinggesellschaft hinter Remobile.eu und HandySwap.com",
+      "description": "Die Remobile Tech GmbH besitzt und betreibt Remobile.eu und HandySwap.com — und beliefert Distributoren in ganz Europa mit generalüberholten und neuen Mobiltelefonen."
+    },
+    "a11y": {
+      "skip": "Zum Inhalt springen",
+      "homeLabel": "Remobile Tech GmbH — Startseite",
+      "primaryNav": "Hauptnavigation",
+      "language": "Sprache",
+      "menu": "Menü",
+      "switchDark": "Zum dunklen Design wechseln",
+      "switchLight": "Zum hellen Design wechseln",
+      "portfolioMarkets": "Portfolio und Märkte",
+      "mapLabel": "Routendiagramm: Die Remobile Tech GmbH verbindet Remobile.eu und HandySwap.com, die gemeinsam Deutschland, Österreich, die Niederlande und Belgien bedienen."
+    },
+    "nav": {
+      "home": "Startseite",
+      "about": "Über uns",
+      "wholesale": "Großhandel",
+      "englishCode": "EN",
+      "germanCode": "DE",
+      "germanUnavailable": "Deutsch — noch nicht verfügbar"
+    },
+    "hero": {
+      "title": "Die Holdinggesellschaft hinter Europas <soft>mobiler Kreislaufwirtschaft.</soft>",
+      "lede": "Die Remobile Tech GmbH besitzt und betreibt Remobile.eu und HandySwap.com — und beliefert Distributoren in ganz Europa mit generalüberholten und neuen Mobiltelefonen.",
+      "wholesaleCta": "Großhandelsanfrage",
+      "brandsCta": "Unsere Marken",
+      "scroll": "Scrollen"
+    },
+    "portfolio": {
+      "eyebrow": "Unser Portfolio",
+      "remobileDescription": "E-Commerce für generalüberholte Geräte.",
+      "handySwapDescription": "E-Commerce für Neugeräte mit Inzahlungnahme und Handytausch."
+    },
+    "markets": {
+      "eyebrow": "Märkte"
+    },
+    "about": {
+      "eyebrow": "Über die Remobile Tech GmbH",
+      "title": "Hauptsitz in Wien. Weltweit tätig.",
+      "lede": "Unsere in Österreich gegründete Holdinggesellschaft verbindet die europäische Nachfrage mit dem globalen Angebot. Nachhaltigkeit, Rückverfolgbarkeit und Dokumentation auf institutionellem Niveau sind fester Bestandteil jeder Transaktion.",
+      "link": "Über das Unternehmen"
+    },
+    "wholesale": {
+      "eyebrow": "Großhandel",
+      "title": "Großhandelsversorgung für Handelspartner.",
+      "body": "Anfragen von Distributoren und gewerblichen Käufern werden direkt von der Remobile Tech GmbH beantwortet.",
+      "cta": "Großhandelsanfrage",
+      "marketsLabel": "Märkte",
+      "marketsList": "Deutschland · Österreich · Niederlande · Belgien"
+    },
+    "modal": {
+      "title": "Großhandelsanfrage",
+      "close": "Schließen",
+      "name": "Vollständiger Name",
+      "email": "Ihre E-Mail-Adresse",
+      "company": "Unternehmen",
+      "message": "Nachricht",
+      "submit": "Anfrage senden",
+      "success": "Vielen Dank — Ihre Anfrage wurde gesendet.",
+      "errors": {
+        "requiredEmail": "Bitte geben Sie Ihre E-Mail-Adresse ein.",
+        "requiredName": "Bitte geben Sie Ihren vollständigen Namen ein.",
+        "invalidEmail": "Bitte geben Sie eine gültige E-Mail-Adresse ein."
+      }
+    },
+    "footer": {
+      "copyright": "© Remobile Tech GmbH, Wien",
+      "imprint": "Impressum",
+      "privacy": "Datenschutz"
+    }
   }
 }
