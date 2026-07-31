@@ -1,7 +1,8 @@
-import type { CSSProperties } from "react";
+import Link from "next/link";
 import { getTranslations } from "next-intl/server";
 import { SiteFooter } from "@/components/site/SiteFooter";
 import { SiteHeader } from "@/components/site/SiteHeader";
+import { AboutDeviceVisual } from "./AboutDeviceVisual";
 import { HomeBehaviors } from "./HomeBehaviors";
 
 function CountryFlag({ country }: { country: "de" | "at" | "nl" | "be" }) {
@@ -37,8 +38,6 @@ export async function HomePageContent({ locale }: { locale: string }) {
   return (
     <>
       
-      <a className="skip" href="#main">{t("a11y.skip")}</a>
-      
       {/* logo artwork: docs/branding/svg/*_remobile_tech.svg, width/height stripped,
            single definition tinted with currentColor (white on the hero, --ink elsewhere) */}
       <svg aria-hidden="true" focusable="false" style={{ position: "absolute", width: 0, height: 0, overflow: "hidden" }}>
@@ -48,7 +47,7 @@ export async function HomePageContent({ locale }: { locale: string }) {
         </symbol>
       </svg>
       
-      <SiteHeader locale={locale} active="home" usesInlineLogo />
+      <SiteHeader locale={locale} page="home" usesInlineLogo />
       
       <main id="main">
       
@@ -154,10 +153,10 @@ export async function HomePageContent({ locale }: { locale: string }) {
                     <p className="hero-eyebrow" data-hero-anim><span>03 /</span> {t("markets.eyebrow")}</p>
                     <h2 data-hero-anim>{t("markets.title")}</h2>
                     <ul className="hero-markets">
-                      <li className="hero-market" data-hero-anim><div className="hero-market__code"><b>DE</b><CountryFlag country="de" /></div><span>{t("markets.countries.germany")}</span></li>
-                      <li className="hero-market" data-hero-anim><div className="hero-market__code"><b>AT</b><CountryFlag country="at" /></div><span>{t("markets.countries.austria")}</span></li>
-                      <li className="hero-market" data-hero-anim><div className="hero-market__code"><b>NL</b><CountryFlag country="nl" /></div><span>{t("markets.countries.netherlands")}</span></li>
-                      <li className="hero-market" data-hero-anim><div className="hero-market__code"><b>BE</b><CountryFlag country="be" /></div><span>{t("markets.countries.belgium")}</span></li>
+                      <li className="hero-market" data-hero-anim><CountryFlag country="de" /><span>{t("markets.countries.germany")}</span></li>
+                      <li className="hero-market" data-hero-anim><CountryFlag country="at" /><span>{t("markets.countries.austria")}</span></li>
+                      <li className="hero-market" data-hero-anim><CountryFlag country="nl" /><span>{t("markets.countries.netherlands")}</span></li>
+                      <li className="hero-market" data-hero-anim><CountryFlag country="be" /><span>{t("markets.countries.belgium")}</span></li>
                     </ul>
                     <p className="hero-market-support" data-hero-anim><span>{t("markets.support")}</span><EuFlag /></p>
                   </div>
@@ -165,7 +164,7 @@ export async function HomePageContent({ locale }: { locale: string }) {
               </div>
 
               <figure className="hero-orbit" aria-hidden="true">
-                <svg className="orbit-viz" id="hero-orbit" viewBox="0 0 400 400" focusable="false">
+                <svg className="orbit-viz" id="hero-orbit" viewBox="0 0 400 400" aria-hidden="true" focusable="false">
                   <defs>
                     <radialGradient id="hero-orbit-glow" cx="50%" cy="50%" r="50%">
                       <stop offset="0" stopColor="#A9C6DC" stopOpacity=".30"/>
@@ -234,117 +233,10 @@ export async function HomePageContent({ locale }: { locale: string }) {
               {t("about.lede")}
             </p>
             <p className="about-actions">
-              <a className="textlink" href="#">{t("about.link")}<svg className="arw" width="15" height="10" viewBox="0 0 15 10" fill="none" aria-hidden="true"><path d="M9.6 1 13.5 5 9.6 9M13 5H1" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/></svg></a>
+              <Link className="textlink" href={`/${locale}/about`}>{t("about.link")}<svg className="arw" width="15" height="10" viewBox="0 0 15 10" fill="none" aria-hidden="true"><path d="M9.6 1 13.5 5 9.6 9M13 5H1" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/></svg></Link>
             </p>
           </div>
-      
-          <aside className="about-device-card reveal" style={{ "--i": 1 } as CSSProperties} aria-hidden="true">
-            {/* ==== ABOUT DEVICE MOTIF — start ====
-                 Elevations, not product shots: silhouette proportions carry the
-                 category and everything else is left as glass. The first form is
-                 marked `is-on` in the markup, so the stage is already a finished
-                 composition with no script and no observer involved.
-                 ================================================================= */}
-            <div className="devices about-devices" id="about-devices" aria-hidden="true">
-              <svg className="device-stage" viewBox="0 0 340 440" aria-hidden="true" focusable="false">
-                <defs>
-                  {/* the bodies carry enough fill to stand in front of the
-                       architecture: the gradient still falls away across the form,
-                       but it never runs out to nothing */}
-                  <linearGradient id="dev-glass" x1="0" y1="0" x2=".38" y2="1">
-                    <stop offset="0" stopColor="#D6ECFF" stopOpacity=".42"/>
-                    <stop offset=".55" stopColor="#D6ECFF" stopOpacity=".26"/>
-                    <stop offset="1" stopColor="#D6ECFF" stopOpacity=".20"/>
-                  </linearGradient>
-                  <linearGradient id="dev-screen" x1=".1" y1="0" x2=".6" y2="1">
-                    <stop offset="0" stopColor="#A9C6DC" stopOpacity=".28"/>
-                    <stop offset=".62" stopColor="#A9C6DC" stopOpacity=".18"/>
-                    <stop offset="1" stopColor="#A9C6DC" stopOpacity=".13"/>
-                  </linearGradient>
-                  <linearGradient id="dev-sheen" x1="0" y1="0" x2="1" y2="1">
-                    <stop offset=".30" stopColor="#FFFFFF" stopOpacity="0"/>
-                    <stop offset=".44" stopColor="#FFFFFF" stopOpacity=".11"/>
-                    <stop offset=".52" stopColor="#FFFFFF" stopOpacity="0"/>
-                  </linearGradient>
-                  <linearGradient id="dev-plane" x1="0" y1="0" x2=".2" y2="1">
-                    <stop offset="0" stopColor="#C5E2FA" stopOpacity=".085"/>
-                    <stop offset=".6" stopColor="#C5E2FA" stopOpacity=".012"/>
-                    <stop offset="1" stopColor="#C5E2FA" stopOpacity="0"/>
-                  </linearGradient>
-                  <radialGradient id="dev-halo" cx=".5" cy=".46" r=".5">
-                    <stop offset="0" stopColor="#9AC6E8" stopOpacity=".20"/>
-                    <stop offset=".55" stopColor="#9AC6E8" stopOpacity=".07"/>
-                    <stop offset="1" stopColor="#9AC6E8" stopOpacity="0"/>
-                  </radialGradient>
-                  {/* a stroke gradient needs user space: the floor line has no height */}
-                  <linearGradient id="dev-floor" gradientUnits="userSpaceOnUse" x1="26" y1="0" x2="314" y2="0">
-                    <stop offset="0" stopColor="#FFFFFF" stopOpacity="0"/>
-                    <stop offset=".5" stopColor="#FFFFFF" stopOpacity=".26"/>
-                    <stop offset="1" stopColor="#FFFFFF" stopOpacity="0"/>
-                  </linearGradient>
-                </defs>
-      
-                {/* the vitrine: one raked plane on the atrium's 17deg, a breath of
-                     skylight behind it, and the floor the devices are stood on */}
-                <ellipse cx="170" cy="238" rx="132" ry="168" fill="url(#dev-halo)"/>
-                <g className="device-plane"><rect x="112" y="-104" width="118" height="648" rx="2" transform="rotate(17 170 220)"/></g>
-                <path className="device-floor" d="M26 352H314"/>
-      
-                {/* 01 · phone */}
-                <g className="device-form device-form--1 is-on">
-                  <g className="device-drift">
-                    <rect className="device-body" x="112" y="114" width="116" height="238" rx="15"/>
-                    <rect className="device-screen" x="120" y="122" width="100" height="222" rx="9"/>
-                    <rect className="device-sheen" x="120" y="122" width="100" height="222" rx="9"/>
-                    <path className="device-hair" d="M155 133h30"/>
-                  </g>
-                </g>
-      
-                {/* 02 · tablet */}
-                <g className="device-form device-form--2">
-                  <g className="device-drift">
-                    <rect className="device-body" x="79" y="114" width="182" height="238" rx="12"/>
-                    <rect className="device-screen" x="89" y="124" width="162" height="212" rx="5"/>
-                    <rect className="device-sheen" x="89" y="124" width="162" height="212" rx="5"/>
-                    <path className="device-hair" d="M144 344h52"/>
-                  </g>
-                </g>
-      
-                {/* 03 · laptop */}
-                <g className="device-form device-form--3">
-                  <g className="device-drift">
-                    <rect className="device-body" x="70" y="210" width="200" height="126" rx="6"/>
-                    <rect className="device-screen" x="77" y="217" width="186" height="112" rx="3"/>
-                    <rect className="device-sheen" x="77" y="217" width="186" height="112" rx="3"/>
-                    <path className="device-body" d="M56 336h228l12 16H44Z"/>
-                    <path className="device-hair" d="M152 344h36"/>
-                  </g>
-                </g>
-      
-                {/* 04 · a fanned stack — the volume behind the trade, drawn once */}
-                <g className="device-form device-form--4">
-                  <g className="device-drift">
-                    {/* the two behind hold back so the centre one is read first */}
-                    <g opacity=".28" transform="rotate(-7 107 244)">
-                      <rect className="device-body" x="64" y="156" width="86" height="176" rx="11"/>
-                      <rect className="device-screen" x="71" y="163" width="72" height="162" rx="6"/>
-                    </g>
-                    <g opacity=".38" transform="rotate(7 233 238)">
-                      <rect className="device-body" x="190" y="150" width="86" height="176" rx="11"/>
-                      <rect className="device-screen" x="197" y="157" width="72" height="162" rx="6"/>
-                    </g>
-                    <g>
-                      <rect className="device-body" x="127" y="176" width="86" height="176" rx="11"/>
-                      <rect className="device-screen" x="134" y="183" width="72" height="162" rx="6"/>
-                      <rect className="device-sheen" x="134" y="183" width="72" height="162" rx="6"/>
-                      <path className="device-hair" d="M158 192h24"/>
-                    </g>
-                  </g>
-                </g>
-              </svg>
-            </div>
-            {/* ==== ABOUT DEVICE MOTIF — end ==== */}
-          </aside>
+          <AboutDeviceVisual animated />
         </div>
       </section>
       
@@ -424,7 +316,7 @@ export async function HomePageContent({ locale }: { locale: string }) {
       
           <div className="wmodal__done" id="wmodal-done" hidden tabIndex={-1}>
             <span className="tick" aria-hidden="true">
-              <svg width="15" height="12" viewBox="0 0 15 12" fill="none" focusable="false">
+              <svg width="15" height="12" viewBox="0 0 15 12" fill="none" aria-hidden="true" focusable="false">
                 <path d="M1.5 6.2 5.4 10 13.5 1.6" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
             </span>

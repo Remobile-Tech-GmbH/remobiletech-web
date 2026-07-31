@@ -65,7 +65,7 @@ export function InquiryForm({ labels }: { labels: InquiryFormLabels }) {
     return (
       <div className="inquiry-success" role="status">
         <span className="tick" aria-hidden="true">
-          <svg width="15" height="12" viewBox="0 0 15 12" fill="none" focusable="false"><path d="M1.5 6.2 5.4 10 13.5 1.6" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" /></svg>
+          <svg width="15" height="12" viewBox="0 0 15 12" fill="none" aria-hidden="true" focusable="false"><path d="M1.5 6.2 5.4 10 13.5 1.6" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" /></svg>
         </span>
         <p>{labels.success}</p>
       </div>

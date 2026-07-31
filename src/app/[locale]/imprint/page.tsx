@@ -4,6 +4,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { StaticPageShell } from "@/components/site/StaticPageShell";
 import { routing } from "@/i18n/routing";
+import { createPageMetadata } from "@/lib/seo";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -14,7 +15,7 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "Imprint.meta" });
-  return { title: t("title"), description: t("description") };
+  return createPageMetadata({ locale, path: "/imprint", title: t("title"), description: t("description") });
 }
 
 export default async function ImprintPage({ params }: Props) {
@@ -34,7 +35,7 @@ export default async function ImprintPage({ params }: Props) {
   ];
 
   return (
-    <StaticPageShell locale={locale}>
+    <StaticPageShell locale={locale} page="imprint">
       <section className="legal-page">
         <div className="container legal-wrap">
           <p className="eyebrow">{t("eyebrow")}</p>

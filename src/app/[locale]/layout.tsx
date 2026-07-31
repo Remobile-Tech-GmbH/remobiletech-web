@@ -8,6 +8,7 @@ import "@/styles/home.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://remobiletech.com"),
+  applicationName: "Remobile Tech GmbH",
 };
 
 export const viewport: Viewport = {
@@ -33,6 +34,22 @@ const themeScript = `
   document.documentElement.className += ' has-js';
 }());`;
 
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "Remobile Tech GmbH",
+  url: "https://remobiletech.com",
+  email: "hallo@remobiletech.com",
+  telephone: "+43 660 2717591",
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "Jordangasse 7/12",
+    postalCode: "1010",
+    addressLocality: "Vienna",
+    addressCountry: "AT",
+  },
+};
+
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
@@ -56,6 +73,10 @@ export default async function LocaleLayout({
     <html lang={locale} data-theme="light" suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+        />
       </head>
       <body>
         <NextIntlClientProvider messages={null}>

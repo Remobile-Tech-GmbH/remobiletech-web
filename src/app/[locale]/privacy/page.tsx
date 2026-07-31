@@ -4,6 +4,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { StaticPageShell } from "@/components/site/StaticPageShell";
 import { routing } from "@/i18n/routing";
+import { createPageMetadata } from "@/lib/seo";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -14,7 +15,7 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "Privacy.meta" });
-  return { title: t("title"), description: t("description") };
+  return createPageMetadata({ locale, path: "/privacy", title: t("title"), description: t("description") });
 }
 
 export default async function PrivacyPage({ params }: Props) {
@@ -24,7 +25,7 @@ export default async function PrivacyPage({ params }: Props) {
   const t = await getTranslations("Privacy");
 
   return (
-    <StaticPageShell locale={locale}>
+    <StaticPageShell locale={locale} page="privacy">
       <section className="legal-page">
         <div className="container legal-wrap legal-wrap--privacy">
           <p className="eyebrow">{t("eyebrow")}</p>

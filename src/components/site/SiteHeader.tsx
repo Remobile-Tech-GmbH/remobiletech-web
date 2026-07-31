@@ -3,7 +3,7 @@ import { getTranslations } from "next-intl/server";
 
 type SiteHeaderProps = {
   locale: string;
-  active?: "home" | "wholesale" | "contact";
+  page: "home" | "about" | "wholesale" | "contact" | "imprint" | "privacy";
   usesInlineLogo?: boolean;
 };
 
@@ -19,12 +19,13 @@ function BrandLogo({ usesInlineLogo = false }: { usesInlineLogo?: boolean }) {
   return <span className="logo logo--mask" role="img" aria-label="Remobile Tech GmbH" />;
 }
 
-export async function SiteHeader({ locale, active, usesInlineLogo }: SiteHeaderProps) {
+export async function SiteHeader({ locale, page, usesInlineLogo }: SiteHeaderProps) {
   const t = await getTranslations("Home");
   const homeHref = `/${locale}`;
+  const currentPath = page === "home" ? "" : `/${page}`;
 
   return (
-    <header className={`site-header${active === "home" ? "" : " is-solid"}`} id="site-header">
+    <header className={`site-header${page === "home" ? "" : " is-solid"}`} id="site-header">
       <div className="container header-inner">
         <Link className="brand" href={homeHref} aria-label={t("a11y.homeLabel")}>
           <BrandLogo usesInlineLogo={usesInlineLogo} />
@@ -33,14 +34,14 @@ export async function SiteHeader({ locale, active, usesInlineLogo }: SiteHeaderP
         <div className="header-controls">
           <nav className="nav" id="nav-menu" aria-label={t("a11y.primaryNav")}>
             <ul className="nav-links">
-              <li><Link href={homeHref} data-nav={active === "home" ? "top" : undefined} aria-current={active === "home" ? "true" : undefined}>{t("nav.home")}</Link></li>
-              <li><Link href={`${homeHref}/#about`} data-nav={active === "home" ? "about" : undefined}>{t("nav.about")}</Link></li>
-              <li><Link href={`${homeHref}/wholesale`} aria-current={active === "wholesale" ? "true" : undefined}>{t("nav.wholesale")}</Link></li>
-              <li><Link href={`${homeHref}/contact`} aria-current={active === "contact" ? "true" : undefined}>{t("nav.contact")}</Link></li>
+              <li><Link href={homeHref} data-nav={page === "home" ? "top" : undefined} aria-current={page === "home" ? "page" : undefined}>{t("nav.home")}</Link></li>
+              <li><Link href={`${homeHref}/about`} data-nav={page === "home" ? "about" : undefined} aria-current={page === "about" ? "page" : undefined}>{t("nav.about")}</Link></li>
+              <li><Link href={`${homeHref}/wholesale`} aria-current={page === "wholesale" ? "page" : undefined}>{t("nav.wholesale")}</Link></li>
+              <li><Link href={`${homeHref}/contact`} aria-current={page === "contact" ? "page" : undefined}>{t("nav.contact")}</Link></li>
             </ul>
             <div className="lang" role="group" aria-label={t("a11y.language")}>
-              <span className="on" aria-current="true"><b>{t("nav.englishCode")}</b></span>
-              <a href="#" aria-disabled="true" title={t("nav.germanUnavailable")}>{t("nav.germanCode")}</a>
+              <Link className={locale === "en" ? "on" : undefined} href={`/en${currentPath}`} hrefLang="en" aria-current={locale === "en" ? "page" : undefined}>{t("nav.englishCode")}</Link>
+              <Link className={locale === "de" ? "on" : undefined} href={`/de${currentPath}`} hrefLang="de" aria-current={locale === "de" ? "page" : undefined}>{t("nav.germanCode")}</Link>
             </div>
           </nav>
 

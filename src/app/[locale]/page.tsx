@@ -4,6 +4,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import { HomePageContent } from "@/components/home/HomePageContent";
+import { createPageMetadata } from "@/lib/seo";
 
 type HomePageProps = {
   params: Promise<{ locale: string }>;
@@ -15,10 +16,7 @@ export async function generateMetadata({
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "Home.meta" });
 
-  return {
-    title: t("title"),
-    description: t("description"),
-  };
+  return createPageMetadata({ locale, path: "", title: t("title"), description: t("description") });
 }
 
 export function generateStaticParams() {

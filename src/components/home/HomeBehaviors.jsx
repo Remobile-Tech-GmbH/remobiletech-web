@@ -543,7 +543,6 @@ export function HomeBehaviors({ messages }) {
     
       listen(nav, 'click', function (e) {
         var a = e.target.closest ? e.target.closest('a') : null;
-        if (a && a.getAttribute('aria-disabled') === 'true') { e.preventDefault(); return; }
         if (a && nav.classList.contains('is-open')) { setMenu(false); }
       });
     

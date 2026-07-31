@@ -1,11 +1,10 @@
 {
   "Home": {
     "meta": {
-      "title": "Remobile Tech GmbH — the holding company behind Remobile.eu and HandySwap.com",
-      "description": "Remobile Tech GmbH owns and operates Remobile.eu and HandySwap.com — and supplies refurbished and new mobile phones wholesale to distributors across Europe."
+      "title": "Refurbished Device Wholesale | Remobile Tech GmbH",
+      "description": "Remobile Tech GmbH connects European wholesale demand with global supply of refurbished smartphones, backed by traceability and complete documentation."
     },
     "a11y": {
-      "skip": "Skip to content",
       "homeLabel": "Remobile Tech GmbH — home",
       "primaryNav": "Primary",
       "language": "Language",
@@ -20,8 +19,7 @@
       "wholesale": "Wholesale",
       "contact": "Contact",
       "englishCode": "EN",
-      "germanCode": "DE",
-      "germanUnavailable": "Deutsch — not yet available"
+      "germanCode": "DE"
     },
     "hero": {
       "title": "The holding company behind Europe’s <soft>mobile circular economy.</soft>",
@@ -84,10 +82,20 @@
       "privacy": "Privacy"
     }
   },
+  "About": {
+    "meta": {
+      "title": "About Remobile Tech | Refurbished Device Wholesale",
+      "description": "Meet Remobile Tech GmbH, the Vienna-based holding company connecting European demand with global supply of refurbished devices for trusted B2B trade."
+    },
+    "eyebrow": "About Remobile Tech GmbH",
+    "title": "Headquartered in Vienna. Operating globally.",
+    "intro": "Incorporated in Austria, our holding company connects European demand with global supply. Sustainability, traceability, and institutional-grade documentation are built into every transaction.",
+    "body": "Remobile Tech GmbH owns and operates Remobile.eu and HandySwap.com. Through the group, we supply refurbished and new mobile phones wholesale to distributors across Europe."
+  },
   "Wholesale": {
     "meta": {
-      "title": "Wholesale refurbished smartphones | Remobile Tech GmbH",
-      "description": "Grade-A refurbished smartphone supply for wholesale partners across Europe, with full EU documentation and flexible first orders."
+      "title": "Refurbished Smartphone Wholesale | Remobile Tech",
+      "description": "Source Grade-A refurbished smartphones for wholesale across Europe, with complete EU documentation, flexible first orders, and responsive B2B support."
     },
     "eyebrow": "Wholesale supply",
     "title": "Grade-A refurbished smartphones, wholesale across Europe.",
@@ -103,8 +111,8 @@
   },
   "Contact": {
     "meta": {
-      "title": "Contact | Remobile Tech GmbH",
-      "description": "Contact Remobile Tech in Vienna by email, phone, or WhatsApp for business and press inquiries."
+      "title": "B2B Contact | Remobile Tech GmbH",
+      "description": "Contact Remobile Tech GmbH in Vienna for refurbished device wholesale, supply partnerships, business inquiries, press requests, and direct B2B support."
     },
     "eyebrow": "Contact",
     "title": "Let’s talk.",
@@ -123,7 +131,7 @@
   "Imprint": {
     "meta": {
       "title": "Imprint | Remobile Tech GmbH",
-      "description": "Legal notice and company information for Remobile Tech GmbH."
+      "description": "View the legal notice, registered company details, contact information, and regulatory disclosures for Vienna-based B2B wholesaler Remobile Tech GmbH."
     },
     "eyebrow": "Legal",
     "title": "Imprint",
@@ -155,7 +163,7 @@
   "Privacy": {
     "meta": {
       "title": "Privacy Policy | Remobile Tech GmbH",
-      "description": "How Remobile Tech handles personal data submitted through remobiletech.com."
+      "description": "Learn how Remobile Tech GmbH collects, uses, stores, and protects personal data submitted through B2B inquiries on remobiletech.com in line with GDPR."
     },
     "eyebrow": "Legal",
     "title": "Privacy Policy",

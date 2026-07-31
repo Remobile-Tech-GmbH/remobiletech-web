@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import { InquiryForm } from "@/components/inquiry/InquiryForm";
 import { StaticPageShell } from "@/components/site/StaticPageShell";
 import { routing } from "@/i18n/routing";
+import { createPageMetadata } from "@/lib/seo";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -15,7 +16,7 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "Wholesale.meta" });
-  return { title: t("title"), description: t("description") };
+  return createPageMetadata({ locale, path: "/wholesale", title: t("title"), description: t("description") });
 }
 
 export default async function WholesalePage({ params }: Props) {
@@ -26,7 +27,7 @@ export default async function WholesalePage({ params }: Props) {
   const form = await getTranslations("Home.modal");
 
   return (
-    <StaticPageShell locale={locale} active="wholesale">
+    <StaticPageShell locale={locale} page="wholesale">
       <section className="subpage-hero subpage-hero--wholesale">
         <div className="container subpage-hero__grid">
           <div>

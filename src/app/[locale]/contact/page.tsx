@@ -4,6 +4,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { StaticPageShell } from "@/components/site/StaticPageShell";
 import { routing } from "@/i18n/routing";
+import { createPageMetadata } from "@/lib/seo";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -14,7 +15,7 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "Contact.meta" });
-  return { title: t("title"), description: t("description") };
+  return createPageMetadata({ locale, path: "/contact", title: t("title"), description: t("description") });
 }
 
 export default async function ContactPage({ params }: Props) {
@@ -24,7 +25,7 @@ export default async function ContactPage({ params }: Props) {
   const t = await getTranslations("Contact");
 
   return (
-    <StaticPageShell locale={locale} active="contact">
+    <StaticPageShell locale={locale} page="contact">
       <section className="subpage-hero subpage-hero--compact">
         <div className="container narrow-copy">
           <p className="eyebrow">{t("eyebrow")}</p>

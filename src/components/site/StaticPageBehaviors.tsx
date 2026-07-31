@@ -43,8 +43,7 @@ export function StaticPageBehaviors({ switchDark, switchLight }: { switchDark: s
     listen(toggle, "click", () => setMenu(toggle.getAttribute("aria-expanded") !== "true"));
     listen(nav, "click", (event) => {
       const anchor = (event.target as Element | null)?.closest?.("a");
-      if (anchor?.getAttribute("aria-disabled") === "true") event.preventDefault();
-      else if (anchor) setMenu(false);
+      if (anchor) setMenu(false);
     });
     listen(document, "click", (event) => {
       const target = event.target as Node | null;
