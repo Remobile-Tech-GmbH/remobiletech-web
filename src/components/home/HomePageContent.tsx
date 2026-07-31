@@ -1,8 +1,10 @@
 import type { CSSProperties } from "react";
 import { getTranslations } from "next-intl/server";
+import { SiteFooter } from "@/components/site/SiteFooter";
+import { SiteHeader } from "@/components/site/SiteHeader";
 import { HomeBehaviors } from "./HomeBehaviors";
 
-export async function HomePageContent() {
+export async function HomePageContent({ locale }: { locale: string }) {
   const t = await getTranslations("Home");
   return (
     <>
@@ -18,46 +20,7 @@ export async function HomePageContent() {
         </symbol>
       </svg>
       
-      {/* ============================== HEADER ============================== */}
-      <header className="site-header" id="site-header">
-        <div className="container header-inner">
-          <a className="brand" href="#top" aria-label={t("a11y.homeLabel")}>
-            <svg className="logo" viewBox="0 0 1241 305" role="img" aria-label="Remobile Tech GmbH"><use href="#rmt-logo"></use></svg>
-          </a>
-      
-          <div className="header-controls">
-            <nav className="nav" id="nav-menu" aria-label={t("a11y.primaryNav")}>
-              <ul className="nav-links">
-                <li><a href="#top" data-nav="top" aria-current="true">{t("nav.home")}</a></li>
-                <li><a href="#about" data-nav="about">{t("nav.about")}</a></li>
-                <li><a href="#wholesale" data-nav="wholesale">{t("nav.wholesale")}</a></li>
-              </ul>
-              <div className="lang" role="group" aria-label={t("a11y.language")}>
-                <span className="on" aria-current="true"><b>{t("nav.englishCode")}</b></span>
-                <a href="#" aria-disabled="true" title={t("nav.germanUnavailable")}>{t("nav.germanCode")}</a>
-              </div>
-            </nav>
-      
-            <button className="theme-toggle" id="theme-toggle" type="button"
-                    aria-label={t("a11y.switchDark")} title={t("a11y.switchDark")}>
-              <svg className="tt-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7"
-                   strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false">
-                <path d="M20.4 14.6A8.6 8.6 0 0 1 9.4 3.6a8.6 8.6 0 1 0 11 11Z"/>
-              </svg>
-              <svg className="tt-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7"
-                   strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false">
-                <circle cx="12" cy="12" r="4.1"/>
-                <path d="M12 2.2v2.3M12 19.5v2.3M4.1 4.1l1.6 1.6M18.3 18.3l1.6 1.6M2.2 12h2.3M19.5 12h2.3M4.1 19.9l1.6-1.6M18.3 5.7l1.6-1.6"/>
-              </svg>
-            </button>
-      
-              <button className="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label={t("a11y.menu")}>
-              <span className="bars" aria-hidden="true"><i></i><i></i><i></i></span>
-            </button>
-          </div>
-          <div className="progress" id="progress" aria-hidden="true"></div>
-        </div>
-      </header>
+      <SiteHeader locale={locale} active="home" usesInlineLogo />
       
       <main id="main">
       
@@ -380,13 +343,7 @@ export async function HomePageContent() {
       
       </main>
       
-      {/* ==== WHOLESALE MODAL — start ====
-           Both "Wholesale inquiry" buttons open this. It is a design demo, so the
-           form is inert: it validates in the page and confirms in the page, and
-           there is no endpoint behind it. Closed <dialog> is display:none, so with
-           scripting off this is not in the page at all and the two buttons fall
-           back to their own hrefs.
-           ===================================================================== */}
+      {/* Both home-page CTAs open this shared inquiry flow. */}
       <dialog className="wmodal" id="wholesale-modal" aria-modal="true" aria-labelledby="wmodal-title">
         <form className="wmodal__panel" id="wholesale-form" noValidate autoComplete="on">
           <div className="wmodal__head">
@@ -400,29 +357,34 @@ export async function HomePageContent() {
       
           <div className="wmodal__body" id="wmodal-body">
             <div className="field" data-field>
-              <label htmlFor="wm-name">{t("modal.name")}</label>
+              <label htmlFor="wm-name">{t("modal.name")} <span aria-hidden="true">*</span></label>
               <input id="wm-name" name="name" type="text" autoComplete="name"
                      required aria-describedby="wm-name-err" />
               <p className="field__err" id="wm-name-err"></p>
-            </div>
-            <div className="field" data-field>
-              <label htmlFor="wm-email">{t("modal.email")}</label>
-              <input id="wm-email" name="email" type="email" autoComplete="email"
-                     required aria-describedby="wm-email-err" />
-              <p className="field__err" id="wm-email-err"></p>
             </div>
             <div className="field" data-field>
               <label htmlFor="wm-company">{t("modal.company")}</label>
               <input id="wm-company" name="company" type="text" autoComplete="organization" />
             </div>
             <div className="field" data-field>
+              <label htmlFor="wm-email">{t("modal.email")} <span aria-hidden="true">*</span></label>
+              <input id="wm-email" name="email" type="email" autoComplete="email"
+                     required aria-describedby="wm-email-err" />
+              <p className="field__err" id="wm-email-err"></p>
+            </div>
+            <div className="field" data-field>
               <label htmlFor="wm-message">{t("modal.message")}</label>
               <textarea id="wm-message" name="message" rows={4}></textarea>
             </div>
+            <div className="hp-field" aria-hidden="true">
+              <label htmlFor="wm-website">Website</label>
+              <input id="wm-website" name="website" type="text" tabIndex={-1} autoComplete="off" />
+            </div>
+            <p className="form-status form-status--error" id="wm-status" role="alert" hidden></p>
       
             <div className="wmodal__foot">
               <button className="btn btn--solid-ink" type="submit">
-                {t("modal.submit")}
+                <span data-wm-submit-label>{t("modal.submit")}</span>
                 <svg className="arw" width="15" height="10" viewBox="0 0 15 10" fill="none" aria-hidden="true"><path d="M9.6 1 13.5 5 9.6 9M13 5H1" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/></svg>
               </button>
             </div>
@@ -440,21 +402,7 @@ export async function HomePageContent() {
       </dialog>
       {/* ==== WHOLESALE MODAL — end ==== */}
       
-      {/* ============================== FOOTER ============================== */}
-      <footer className="site-footer">
-        <div className="container footer-grid">
-          <div className="footer-brand">
-            <svg className="logo" viewBox="0 0 1241 305" role="img" aria-label="Remobile Tech GmbH"><use href="#rmt-logo"></use></svg>
-          </div>
-          <p className="footer-legal">
-            <span>{t("footer.copyright")}</span>
-            <span className="sep" aria-hidden="true">·</span>
-            <a href="#imprint">{t("footer.imprint")}</a>
-            <span className="sep" aria-hidden="true">·</span>
-            <a href="#privacy">{t("footer.privacy")}</a>
-          </p>
-        </div>
-      </footer>
+      <SiteFooter locale={locale} usesInlineLogo />
       
       
       <HomeBehaviors
@@ -464,6 +412,9 @@ export async function HomePageContent() {
           requiredEmail: t("modal.errors.requiredEmail"),
           requiredName: t("modal.errors.requiredName"),
           invalidEmail: t("modal.errors.invalidEmail"),
+          failure: t("modal.failure"),
+          sending: t("modal.sending"),
+          submit: t("modal.submit"),
         }}
       />
     </>

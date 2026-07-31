@@ -367,13 +367,16 @@ export function HomeBehaviors({ messages }) {
     
          <dialog>.showModal() owns the top layer, the backdrop, the focus trap and
          Escape. What is left for us: the trigger, the focus hand-off and hand-back,
-         the scroll lock, the validation and the confirmation. Where showModal is
+         the scroll lock, the validation, the API request and the confirmation. Where showModal is
          missing the buttons simply keep their hrefs.
          ===================================================================== */
       var wmDlg  = document.getElementById('wholesale-modal');
       var wmForm = document.getElementById('wholesale-form');
       var wmBody = document.getElementById('wmodal-body');
       var wmDone = document.getElementById('wmodal-done');
+      var wmStatus = document.getElementById('wm-status');
+      var wmSubmit = wmForm ? wmForm.querySelector('button[type="submit"]') : null;
+      var wmSubmitLabel = wmForm ? wmForm.querySelector('[data-wm-submit-label]') : null;
       var wmOpener = null;
       var wmScrollY = 0;
       var WM_EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
@@ -416,6 +419,9 @@ export function HomeBehaviors({ messages }) {
           wmFields.forEach(function (f) { wmSetError(f, ''); });
           wmBody.hidden = false;
           wmDone.hidden = true;
+          if (wmStatus) { wmStatus.hidden = true; wmStatus.textContent = ''; }
+          if (wmSubmit) { wmSubmit.disabled = false; wmSubmit.removeAttribute('aria-busy'); }
+          if (wmSubmitLabel) { wmSubmitLabel.textContent = messages.submit; }
         }
     
         function wmOpen(trigger) {
@@ -460,16 +466,36 @@ export function HomeBehaviors({ messages }) {
           });
         });
     
-        listen(wmForm, 'submit', function (ev) {
-          ev.preventDefault();          /* demo-inert: nothing leaves the page */
+        listen(wmForm, 'submit', async function (ev) {
+          ev.preventDefault();
           var bad = null;
           wmFields.forEach(function (f) {
             if (!wmValidate(f) && !bad) { bad = f; }
           });
           if (bad) { if (bad.input) { bad.input.focus({ preventScroll: true }); } return; }
-          wmBody.hidden = true;
-          wmDone.hidden = false;
-          wmDone.focus({ preventScroll: true });
+          if (wmStatus) { wmStatus.hidden = true; wmStatus.textContent = ''; }
+          if (wmSubmit) { wmSubmit.disabled = true; wmSubmit.setAttribute('aria-busy', 'true'); }
+          if (wmSubmitLabel) { wmSubmitLabel.textContent = messages.sending; }
+
+          var formData = new FormData(wmForm);
+          var payload = {};
+          formData.forEach(function (value, key) { payload[key] = String(value); });
+
+          try {
+            var response = await fetch('/api/inquiry', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(payload)
+            });
+            if (!response.ok) { throw new Error('Inquiry request failed'); }
+            wmBody.hidden = true;
+            wmDone.hidden = false;
+            wmDone.focus({ preventScroll: true });
+          } catch (error) {
+            if (wmStatus) { wmStatus.textContent = messages.failure; wmStatus.hidden = false; }
+            if (wmSubmit) { wmSubmit.disabled = false; wmSubmit.removeAttribute('aria-busy'); }
+            if (wmSubmitLabel) { wmSubmitLabel.textContent = messages.submit; }
+          }
         });
     
         listen(wmDlg, 'close', function () {

@@ -18,6 +18,7 @@
       "home": "Home",
       "about": "About",
       "wholesale": "Wholesale",
+      "contact": "Contact",
       "englishCode": "EN",
       "germanCode": "DE",
       "germanUnavailable": "Deutsch — not yet available"
@@ -54,23 +55,25 @@
     },
     "wholesale": {
       "eyebrow": "Wholesale",
-      "title": "Wholesale supply for trade partners.",
-      "body": "Inquiries from distributors and trade buyers are answered directly by Remobile Tech GmbH.",
+      "title": "Wholesale supply for partners across Europe.",
+      "body": "Grade-A refurbished smartphones for wholesale partners across all of Europe, with dedicated focus on our four core markets.",
       "cta": "Wholesale inquiry",
-      "marketsLabel": "Markets",
+      "marketsLabel": "Focus markets",
       "marketsList": "Germany · Austria · Netherlands · Belgium"
     },
     "modal": {
       "title": "Wholesale inquiry",
       "close": "Close",
       "name": "Full name",
-      "email": "Your email",
       "company": "Company",
-      "message": "Message",
+      "email": "Business email",
+      "message": "Message (optional)",
       "submit": "Send inquiry",
+      "sending": "Sending…",
       "success": "Thank you — your inquiry has been sent.",
+      "failure": "Something went wrong. Please try again or email hello@remobiletech.com directly.",
       "errors": {
-        "requiredEmail": "Please enter your email address.",
+        "requiredEmail": "Please enter your business email address.",
         "requiredName": "Please enter your full name.",
         "invalidEmail": "Please enter a valid email address."
       }
@@ -80,5 +83,101 @@
       "imprint": "Imprint",
       "privacy": "Privacy"
     }
+  },
+  "Wholesale": {
+    "meta": {
+      "title": "Wholesale refurbished smartphones | Remobile Tech GmbH",
+      "description": "Grade-A refurbished smartphone supply for wholesale partners across Europe, with full EU documentation and flexible first orders."
+    },
+    "eyebrow": "Wholesale supply",
+    "title": "Grade-A refurbished smartphones, wholesale across Europe.",
+    "intro": "We supply certified refurbished smartphones to distributors, independent retailers, and chain operators across all of Europe, with Germany, Austria, the Netherlands, and Belgium as our focus markets.",
+    "bullet1": "iPhones & Android — all grades, all storage configurations",
+    "bullet2": "Full EU documentation — CE certs, VAT-invoiced, erasure certificates",
+    "bullet3": "Minimum order — on request, flexible for first orders",
+    "focusLabel": "Focus markets",
+    "focusMarkets": "Germany · Austria · Netherlands · Belgium",
+    "formEyebrow": "Inquiry",
+    "formTitle": "Start a wholesale conversation.",
+    "formBody": "Tell us what stock you need. Our team will review your requirements and respond directly."
+  },
+  "Contact": {
+    "meta": {
+      "title": "Contact | Remobile Tech GmbH",
+      "description": "Contact Remobile Tech in Vienna by email, phone, or WhatsApp for business and press inquiries."
+    },
+    "eyebrow": "Contact",
+    "title": "Let’s talk.",
+    "intro": "For wholesale, partnership, company, or media questions, contact our Vienna team directly.",
+    "emailLabel": "Email",
+    "phoneLabel": "Phone",
+    "whatsAppLabel": "Phone & WhatsApp",
+    "pressTitle": "Press inquiries",
+    "pressBody": "For press inquiries, interview requests, or media partnerships, please contact us at the same email address.",
+    "mediaEyebrow": "Inside the process",
+    "mediaTitle": "Process photography",
+    "mediaCaption1": "Device inspection — photography coming soon",
+    "mediaCaption2": "Quality grading — photography coming soon",
+    "mediaCaption3": "Order preparation — photography coming soon"
+  },
+  "Imprint": {
+    "meta": {
+      "title": "Imprint | Remobile Tech GmbH",
+      "description": "Legal notice and company information for Remobile Tech GmbH."
+    },
+    "eyebrow": "Legal",
+    "title": "Imprint",
+    "subheading": "Information pursuant to § 5 ECG and § 25 Mediengesetz",
+    "labelCompany": "Company",
+    "labelAddress": "Registered address",
+    "labelUid": "VAT identification number (UID)",
+    "labelTax": "Tax number (Steuernummer)",
+    "labelDirector": "Managing Director (Geschäftsführer)",
+    "labelPurpose": "Business purpose",
+    "labelContact": "Contact",
+    "labelAuthority": "Supervisory authority",
+    "company": "Remobile Tech GmbH",
+    "address": "Jordangasse 7/12, 1010 Vienna, Austria",
+    "uid": "ATU83392213",
+    "tax": "09 443/5145",
+    "director": "Hassib Atta Mian",
+    "purpose": "Wholesale and retail trade in mobile phones and electronic devices",
+    "email": "hello@remobiletech.com",
+    "phone": "+43 660 2717591",
+    "authority": "Magistratisches Bezirksamt des 1. Bezirkes, Vienna",
+    "disclaimerHeading": "Disclaimer",
+    "disclaimerBody": "The contents of this website have been compiled with the utmost care. However, we cannot guarantee the accuracy, completeness, or topicality of the content. As a service provider we are responsible for our own content on these pages pursuant to general law.",
+    "linksHeading": "Links to third-party websites",
+    "linksBody": "Our website contains links to external third-party websites. We have no influence over the contents of those websites and therefore cannot accept any liability for them. The respective provider or operator of the linked pages is always responsible for their content.",
+    "copyrightHeading": "Copyright",
+    "copyrightBody": "The content and works created by the site operators on these pages are subject to Austrian copyright law. Duplication, processing, distribution, or any form of commercialisation of such material beyond the scope of the copyright law requires the prior written consent of its respective author or creator."
+  },
+  "Privacy": {
+    "meta": {
+      "title": "Privacy Policy | Remobile Tech GmbH",
+      "description": "How Remobile Tech handles personal data submitted through remobiletech.com."
+    },
+    "eyebrow": "Legal",
+    "title": "Privacy Policy",
+    "lastUpdated": "Last updated: July 2025",
+    "intro": "This privacy policy explains how Remobile Tech GmbH collects, uses, and protects personal data on remobiletech.com. We are committed to GDPR compliance and to handling your data with care.",
+    "s1Heading": "1. Controller",
+    "s1Body": "The data controller responsible for this website is Remobile Tech GmbH. Contact: hello@remobiletech.com. Full legal details are available in the imprint.",
+    "s2Heading": "2. Data we collect",
+    "s2Body": "We collect personal data only when you actively provide it. When you submit a wholesale inquiry, we collect: your full name, your company name (optional), your email address, and the content of your message. We do not collect data through analytics, tracking scripts, or passive browsing.",
+    "s3Heading": "3. Legal basis",
+    "s3Body": "Processing is based on Art. 6(1)(b) GDPR — the processing is necessary for taking steps prior to entering into a contract at your request. If you do not submit an inquiry, no personal data is processed.",
+    "s4Heading": "4. Third-party services",
+    "s4Body": "We use Resend (Resend Inc., 185 Alewife Brook Pkwy, Suite 210, Cambridge, MA 02138, USA) to deliver inquiry emails. When you submit a form, your name and email address are processed by Resend’s infrastructure. Resend provides appropriate safeguards for transatlantic data transfers. For details, see resend.com/privacy.",
+    "s5Heading": "5. Your rights",
+    "s5Body": "Under the GDPR you have the right to request access to, correction of, or erasure of your personal data; to request restriction of processing; to data portability; and to object to processing. To exercise these rights, write to hello@remobiletech.com. You also have the right to lodge a complaint with the Austrian data protection authority: Datenschutzbehörde, Barichgasse 40-42, 1030 Vienna — dsb@dsb.gv.at — www.dsb.gv.at.",
+    "s6Heading": "6. Retention",
+    "s6Body": "Inquiry data is retained for a maximum of three years from receipt. Data is deleted sooner if no business relationship materialises, or upon a valid erasure request.",
+    "s7Heading": "7. Cookies",
+    "s7Body": "This website uses only technically necessary session cookies required for the site to function. We do not use analytics, advertising, or third-party tracking cookies. No cookie consent banner is displayed because no consent-requiring cookies are set.",
+    "s8Heading": "8. Changes to this policy",
+    "s8Body": "We may update this policy from time to time to reflect changes in our practices or applicable law. The current version is always available at remobiletech.com/privacy. Material changes will be indicated by updating the ‘last updated’ date above.",
+    "s9Heading": "9. Contact",
+    "s9Body": "For data protection enquiries, write to hello@remobiletech.com."
   }
 }

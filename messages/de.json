@@ -18,6 +18,7 @@
       "home": "Startseite",
       "about": "Über uns",
       "wholesale": "Großhandel",
+      "contact": "Kontakt",
       "englishCode": "EN",
       "germanCode": "DE",
       "germanUnavailable": "Deutsch — noch nicht verfügbar"
@@ -54,23 +55,25 @@
     },
     "wholesale": {
       "eyebrow": "Großhandel",
-      "title": "Großhandelsversorgung für Handelspartner.",
-      "body": "Anfragen von Distributoren und gewerblichen Käufern werden direkt von der Remobile Tech GmbH beantwortet.",
+      "title": "Großhandelsversorgung für Partner in ganz Europa.",
+      "body": "Generalüberholte Smartphones der Güteklasse A für Großhandelspartner in ganz Europa, mit besonderem Fokus auf unsere vier Kernmärkte.",
       "cta": "Großhandelsanfrage",
-      "marketsLabel": "Märkte",
+      "marketsLabel": "Fokusmärkte",
       "marketsList": "Deutschland · Österreich · Niederlande · Belgien"
     },
     "modal": {
       "title": "Großhandelsanfrage",
       "close": "Schließen",
       "name": "Vollständiger Name",
-      "email": "Ihre E-Mail-Adresse",
       "company": "Unternehmen",
-      "message": "Nachricht",
+      "email": "Geschäftliche E-Mail-Adresse",
+      "message": "Nachricht (optional)",
       "submit": "Anfrage senden",
+      "sending": "Wird gesendet…",
       "success": "Vielen Dank — Ihre Anfrage wurde gesendet.",
+      "failure": "Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut oder schreiben Sie direkt an hello@remobiletech.com.",
       "errors": {
-        "requiredEmail": "Bitte geben Sie Ihre E-Mail-Adresse ein.",
+        "requiredEmail": "Bitte geben Sie Ihre geschäftliche E-Mail-Adresse ein.",
         "requiredName": "Bitte geben Sie Ihren vollständigen Namen ein.",
         "invalidEmail": "Bitte geben Sie eine gültige E-Mail-Adresse ein."
       }
@@ -80,5 +83,101 @@
       "imprint": "Impressum",
       "privacy": "Datenschutz"
     }
+  },
+  "Wholesale": {
+    "meta": {
+      "title": "Generalüberholte Smartphones im Großhandel | Remobile Tech GmbH",
+      "description": "Generalüberholte Smartphones der Güteklasse A für Großhandelspartner in ganz Europa, mit vollständiger EU-Dokumentation und flexiblen Erstbestellungen."
+    },
+    "eyebrow": "Großhandelsversorgung",
+    "title": "Generalüberholte Smartphones der Güteklasse A — im Großhandel für ganz Europa.",
+    "intro": "Wir beliefern Distributoren, unabhängige Händler und Filialunternehmen in ganz Europa mit zertifizierten generalüberholten Smartphones. Deutschland, Österreich, die Niederlande und Belgien sind unsere Fokusmärkte.",
+    "bullet1": "iPhones & Android — alle Güteklassen, alle Speicherkonfigurationen",
+    "bullet2": "Vollständige EU-Dokumentation — CE-Zertifikate, MwSt.-Rechnung, Datenlöschzertifikate",
+    "bullet3": "Mindestbestellmenge — auf Anfrage, flexibel bei Erstbestellungen",
+    "focusLabel": "Fokusmärkte",
+    "focusMarkets": "Deutschland · Österreich · Niederlande · Belgien",
+    "formEyebrow": "Anfrage",
+    "formTitle": "Starten Sie ein Großhandelsgespräch.",
+    "formBody": "Teilen Sie uns mit, welchen Bestand Sie benötigen. Unser Team prüft Ihre Anforderungen und antwortet Ihnen direkt."
+  },
+  "Contact": {
+    "meta": {
+      "title": "Kontakt | Remobile Tech GmbH",
+      "description": "Kontaktieren Sie Remobile Tech in Wien per E-Mail, Telefon oder WhatsApp für geschäftliche Anliegen und Presseanfragen."
+    },
+    "eyebrow": "Kontakt",
+    "title": "Lassen Sie uns sprechen.",
+    "intro": "Bei Fragen zu Großhandel, Partnerschaften, Unternehmen oder Medien kontaktieren Sie unser Wiener Team bitte direkt.",
+    "emailLabel": "E-Mail",
+    "phoneLabel": "Telefon",
+    "whatsAppLabel": "Telefon & WhatsApp",
+    "pressTitle": "Presseanfragen",
+    "pressBody": "Für Presseanfragen, Interviewwünsche oder Medienpartnerschaften kontaktieren Sie uns bitte über dieselbe E-Mail-Adresse.",
+    "mediaEyebrow": "Einblick in den Prozess",
+    "mediaTitle": "Prozessfotografie",
+    "mediaCaption1": "Geräteprüfung — Fotos folgen in Kürze",
+    "mediaCaption2": "Qualitätsbewertung — Fotos folgen in Kürze",
+    "mediaCaption3": "Bestellvorbereitung — Fotos folgen in Kürze"
+  },
+  "Imprint": {
+    "meta": {
+      "title": "Impressum | Remobile Tech GmbH",
+      "description": "Impressum und Unternehmensangaben der Remobile Tech GmbH."
+    },
+    "eyebrow": "Rechtliches",
+    "title": "Impressum",
+    "subheading": "Offenlegung gemäß § 25 Mediengesetz und Informationspflicht gemäß § 5 E-Commerce-Gesetz",
+    "labelCompany": "Unternehmen",
+    "labelAddress": "Adresse",
+    "labelUid": "UID-Nummer",
+    "labelTax": "Steuernummer",
+    "labelDirector": "Geschäftsführer",
+    "labelPurpose": "Unternehmensgegenstand",
+    "labelContact": "Kontakt",
+    "labelAuthority": "Aufsichtsbehörde",
+    "company": "Remobile Tech GmbH",
+    "address": "Jordangasse 7/12, 1010 Wien, Österreich",
+    "uid": "ATU83392213",
+    "tax": "09 443/5145",
+    "director": "Hassib Atta Mian",
+    "purpose": "Großhandel und Einzelhandel mit Mobiltelefonen und elektronischen Geräten",
+    "email": "hello@remobiletech.com",
+    "phone": "+43 660 2717591",
+    "authority": "Magistratisches Bezirksamt des 1. Bezirkes, Wien",
+    "disclaimerHeading": "Haftungsausschluss",
+    "disclaimerBody": "Die Inhalte dieser Website wurden mit größtmöglicher Sorgfalt erstellt. Für die Richtigkeit, Vollständigkeit und Aktualität der Inhalte können wir jedoch keine Gewähr übernehmen. Als Diensteanbieter sind wir gemäß § 7 Abs. 1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich.",
+    "linksHeading": "Links zu externen Websites",
+    "linksBody": "Diese Website enthält Links zu externen Websites Dritter. Wir haben keinen Einfluss auf deren Inhalte und können daher keine Gewähr übernehmen. Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber verantwortlich.",
+    "copyrightHeading": "Urheberrecht",
+    "copyrightBody": "Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem österreichischen Urheberrecht. Die Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb der Grenzen des Urheberrechtes bedürfen der schriftlichen Zustimmung des jeweiligen Autors bzw. Erstellers."
+  },
+  "Privacy": {
+    "meta": {
+      "title": "Datenschutzerklärung | Remobile Tech GmbH",
+      "description": "Informationen zur Verarbeitung personenbezogener Daten auf remobiletech.com."
+    },
+    "eyebrow": "Rechtliches",
+    "title": "Datenschutzerklärung",
+    "lastUpdated": "Zuletzt aktualisiert: Juli 2025",
+    "intro": "Diese Datenschutzerklärung erläutert, wie die Remobile Tech GmbH personenbezogene Daten auf remobiletech.com erhebt, verwendet und schützt. Wir verpflichten uns zur DSGVO-Konformität und zum sorgfältigen Umgang mit Ihren Daten.",
+    "s1Heading": "1. Verantwortliche Stelle",
+    "s1Body": "Verantwortlich für diese Website ist die Remobile Tech GmbH. Kontakt: hello@remobiletech.com. Die vollständigen rechtlichen Angaben finden Sie im Impressum.",
+    "s2Heading": "2. Erhobene Daten",
+    "s2Body": "Wir erheben personenbezogene Daten nur, wenn Sie diese aktiv übermitteln. Bei der Einsendung einer Großhandelsanfrage verarbeiten wir: Ihren vollständigen Namen, Ihren Unternehmensnamen (optional), Ihre E-Mail-Adresse und den Inhalt Ihrer Nachricht. Wir erheben keine Daten über Analyse-Scripts, Tracking oder passives Surfen.",
+    "s3Heading": "3. Rechtsgrundlage",
+    "s3Body": "Die Verarbeitung erfolgt auf Grundlage von Art. 6 Abs. 1 lit. b DSGVO — die Verarbeitung ist zur Durchführung vorvertraglicher Maßnahmen erforderlich, die auf Ihre Anfrage hin erfolgen. Ohne Einsendung einer Anfrage werden keine personenbezogenen Daten verarbeitet.",
+    "s4Heading": "4. Drittanbieter",
+    "s4Body": "Wir nutzen Resend (Resend Inc., 185 Alewife Brook Pkwy, Suite 210, Cambridge, MA 02138, USA) zur E-Mail-Zustellung. Beim Absenden eines Formulars werden Ihr Name und Ihre E-Mail-Adresse über die Resend-Infrastruktur verarbeitet. Resend stellt geeignete Garantien für Datentransfers in die USA bereit. Weitere Informationen finden Sie unter resend.com/privacy.",
+    "s5Heading": "5. Ihre Rechte",
+    "s5Body": "Gemäß DSGVO haben Sie das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung, Datenübertragbarkeit und Widerspruch. Zur Ausübung dieser Rechte wenden Sie sich an hello@remobiletech.com. Zusätzlich haben Sie das Recht, eine Beschwerde bei der Datenschutzbehörde einzureichen: Datenschutzbehörde, Barichgasse 40–42, 1030 Wien — dsb@dsb.gv.at — www.dsb.gv.at.",
+    "s6Heading": "6. Speicherdauer",
+    "s6Body": "Anfragedaten werden für maximal drei Jahre ab Eingang gespeichert und früher gelöscht, wenn kein Geschäftsverhältnis zustande kommt oder Sie die Löschung beantragen.",
+    "s7Heading": "7. Cookies",
+    "s7Body": "Diese Website verwendet ausschließlich technisch notwendige Session-Cookies, die für den Betrieb der Website erforderlich sind. Wir verwenden keine Analyse-, Werbe- oder Drittanbieter-Tracking-Cookies. Es wird kein Cookie-Zustimmungsbanner angezeigt, da keine einwilligungspflichtigen Cookies gesetzt werden.",
+    "s8Heading": "8. Änderungen dieser Erklärung",
+    "s8Body": "Wir können diese Erklärung gelegentlich aktualisieren, um Änderungen unserer Praktiken oder des geltenden Rechts widerzuspiegeln. Die jeweils aktuelle Version ist stets unter remobiletech.com/privacy verfügbar. Wesentliche Änderungen werden durch Aktualisierung des oben genannten Datums kenntlich gemacht.",
+    "s9Heading": "9. Kontakt",
+    "s9Body": "Für Datenschutzanfragen schreiben Sie bitte an hello@remobiletech.com."
   }
 }

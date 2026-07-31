@@ -35,5 +35,5 @@ export default async function HomePage({
   }
 
   setRequestLocale(locale);
-  return <HomePageContent />;
+  return <HomePageContent locale={locale} />;
 }
