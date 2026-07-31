@@ -4,6 +4,34 @@ import { SiteFooter } from "@/components/site/SiteFooter";
 import { SiteHeader } from "@/components/site/SiteHeader";
 import { HomeBehaviors } from "./HomeBehaviors";
 
+function CountryFlag({ country }: { country: "de" | "at" | "nl" | "be" }) {
+  const stripes = {
+    de: <><rect width="30" height="6" fill="#000"/><rect y="6" width="30" height="6" fill="#DD0000"/><rect y="12" width="30" height="6" fill="#FFCE00"/></>,
+    at: <><rect width="30" height="6" fill="#C8102E"/><rect y="6" width="30" height="6" fill="#FFF"/><rect y="12" width="30" height="6" fill="#C8102E"/></>,
+    nl: <><rect width="30" height="6" fill="#AE1C28"/><rect y="6" width="30" height="6" fill="#FFF"/><rect y="12" width="30" height="6" fill="#21468B"/></>,
+    be: <><rect width="10" height="18" fill="#2D2926"/><rect x="10" width="10" height="18" fill="#FFCD00"/><rect x="20" width="10" height="18" fill="#C8102E"/></>,
+  };
+
+  return <svg className="country-flag" viewBox="0 0 30 18" aria-hidden="true" focusable="false">{stripes[country]}</svg>;
+}
+
+const euStars = [
+  [18, 5.5], [21.25, 6.37], [23.63, 8.75], [24.5, 12],
+  [23.63, 15.25], [21.25, 17.63], [18, 18.5], [14.75, 17.63],
+  [12.37, 15.25], [11.5, 12], [12.37, 8.75], [14.75, 6.37],
+];
+
+function EuFlag() {
+  return (
+    <svg className="eu-flag" viewBox="0 0 36 24" aria-hidden="true" focusable="false">
+      <rect width="36" height="24" fill="#003399"/>
+      {euStars.map(([x, y]) => (
+        <path key={`${x}-${y}`} d="M0-1.15.27-.37 1.09-.35.44.14.68.93 0 .46-.68.93-.44.14-1.09-.35-.27-.37Z" fill="#FFCC00" transform={`translate(${x} ${y})`}/>
+      ))}
+    </svg>
+  );
+}
+
 export async function HomePageContent({ locale }: { locale: string }) {
   const t = await getTranslations("Home");
   return (
@@ -69,7 +97,8 @@ export async function HomePageContent({ locale }: { locale: string }) {
                        handyswap keeps its brand blue #4488FC on both grounds */}
                   <div className="brand-card" data-hero-anim>
                     <div className="brand-plate">
-                      <svg className="bmark bmark--remobile" viewBox="0 0 295 79" fill="none" role="img" aria-label="Remobile.eu">
+                      <a className="brand-logo-link" href="https://remobile.eu" target="_blank" rel="noopener noreferrer" aria-label="Remobile.eu">
+                      <svg className="bmark bmark--remobile" viewBox="0 0 295 79" fill="none" aria-hidden="true" focusable="false">
                       <g clipPath="url(#rmt-re-clip)">
                       <path d="M59.6548 72.8682L39.0614 60.9682C34.7343 58.418 30.5227 55.7909 26.5434 52.9316V72.5976H21.3273V39.4089C21.3273 37.4771 21.5591 35.5453 21.9841 33.8066L4.86836 43.6591L2.2797 39.0612L23.3363 26.9293C36.8555 19.1856 41.6284 16.1137 55.0957 25.8475V6.22015H60.3502V39.4089C60.3502 48.9259 55.6504 53.7876 47.2525 57.684L45.4752 58.5726L62.2821 68.2705L59.6548 72.8682ZM40.8388 53.6659C48.682 53.6659 55.0957 47.2523 55.0957 39.4089C55.0957 31.527 48.682 25.152 40.8388 25.152C32.9954 25.152 26.5818 31.527 26.5818 39.4089C26.5818 47.2523 32.9954 53.6659 40.8388 53.6659ZM40.8388 78.8182C19.0864 78.8182 1.42948 61.1613 1.42948 39.4089C1.42948 17.6565 19.0864 -0.000343323 40.8388 -0.000343323C62.5912 -0.000343323 80.248 17.6565 80.248 39.4089C80.248 61.1613 62.5912 78.8182 40.8388 78.8182ZM40.8388 72.2498C58.998 72.2498 73.6798 57.5681 73.6798 39.4089C73.6798 21.2497 58.998 6.56788 40.8388 6.56788C22.6796 6.56788 7.99786 21.2497 7.99786 39.4089C7.99786 57.5681 22.6796 72.2498 40.8388 72.2498Z" fill="currentColor" fillOpacity="0.5"/>
                       <circle cx="40.8862" cy="39.4286" r="16.8922" stroke="currentColor" strokeWidth="5.61736"/>
@@ -90,14 +119,16 @@ export async function HomePageContent({ locale }: { locale: string }) {
                       </clipPath>
                       </defs>
                       </svg>
+                      </a>
                     </div>
-                    <h3>Remobile.eu</h3>
+                    <h3><a className="brand-name-link" href="https://remobile.eu" target="_blank" rel="noopener noreferrer">Remobile.eu</a></h3>
                   <p>{t("portfolio.remobileDescription")}</p>
                   </div>
       
                   <div className="brand-card" data-hero-anim>
                     <div className="brand-plate">
-                      <svg className="bmark bmark--handyswap" viewBox="0 0 155 47" fill="none" role="img" aria-label="HandySwap.com">
+                      <a className="brand-logo-link" href="https://handyswap.com" target="_blank" rel="noopener noreferrer" aria-label="HandySwap.com">
+                      <svg className="bmark bmark--handyswap" viewBox="0 0 155 47" fill="none" aria-hidden="true" focusable="false">
                       <path fillRule="evenodd" clipRule="evenodd" d="M21.9105 0C34.011 0.000143918 43.8209 10.0604 43.8209 22.47C43.8208 34.8795 34.0109 44.9398 21.9105 44.94C9.80988 44.94 0.000140343 34.8795 0 22.47C0 10.0603 9.8098 0 21.9105 0ZM24.8946 5.49701C24.1396 5.61536 22.8486 6.0509 21.0219 6.80377C19.1952 7.55668 17.1962 8.57509 15.026 9.86006C10.9537 12.2713 8.47815 14.6322 7.59923 16.9419C6.72044 19.2518 6.91262 21.5307 8.1771 23.7767C9.44141 26.0225 10.9293 27.2048 12.6395 27.3244C14.3499 27.4438 16.9593 26.684 20.4664 25.0457L21.0219 26.0325C17.405 28.174 14.4153 29.3049 12.0537 29.4249L17.8364 39.6967L18.9698 39.5186C19.7517 39.3842 21.0696 38.9332 22.9227 38.1645C24.7493 37.4117 26.7207 36.4086 28.8371 35.1555C32.5077 32.9821 34.8249 30.6238 35.7873 28.0817C36.7497 25.5397 36.552 23.0634 35.195 20.6529C33.8534 18.2701 32.1454 16.9811 30.0705 16.7853C27.9955 16.5896 25.4475 17.2032 22.4265 18.6267L21.871 17.6412C23.5322 16.6576 25.2385 15.8473 26.9889 15.2126C28.7275 14.6214 30.0799 14.296 31.0459 14.2353L26.0267 5.31882L24.8946 5.49701Z" fill="#4488FC"/>
                       <path d="M131.265 44.3574C130.168 44.3574 129.33 44.1451 128.75 43.7206V47H119.499V25.2222H127.291L127.602 27.5464C127.974 26.4214 128.802 25.6361 130.085 25.1903C130.623 24.9993 131.224 24.9038 131.886 24.9038C134.204 24.9038 135.943 25.8165 137.102 27.6419C138.261 29.4461 138.84 31.8234 138.84 34.7738C138.84 37.7243 138.178 40.0591 136.853 41.7784C135.549 43.4977 133.687 44.3574 131.265 44.3574ZM128.285 34.3918V37.0662C128.285 37.3422 128.357 37.5651 128.502 37.7349C128.668 37.9047 128.875 37.9896 129.123 37.9896C129.392 37.9896 129.609 37.9047 129.775 37.7349C129.961 37.5651 130.054 37.3422 130.054 37.0662V34.3918C130.054 34.1371 129.961 33.9248 129.775 33.755C129.609 33.564 129.402 33.4684 129.154 33.4684C128.906 33.4684 128.699 33.564 128.533 33.755C128.367 33.9248 128.285 34.1371 128.285 34.3918Z" fill="#4488FC"/>
                       <path d="M117.288 32.0039L117.133 35.92L117.909 35.8882V43.1156C117.536 43.434 116.895 43.7206 115.984 43.9753C115.073 44.23 114.214 44.3574 113.407 44.3574C112.6 44.3574 111.958 44.2831 111.482 44.1345C111.006 43.9859 110.654 43.8267 110.427 43.6569C110.199 43.4659 110.023 43.2536 109.899 43.0201C109.713 42.6805 109.62 42.394 109.62 42.1605C108.481 43.6251 106.67 44.3574 104.187 44.3574C100.771 44.3574 99.0639 42.8715 99.0639 39.8999C99.0639 38.1169 99.7262 36.854 101.051 36.1111C102.376 35.3469 104.694 34.8906 108.005 34.742C108.005 33.9991 107.208 33.6276 105.615 33.6276C104.538 33.6276 103.504 33.7656 102.51 34.0415C101.537 34.3175 100.834 34.5934 100.399 34.8694L99.7159 35.2833V26.9096C99.9022 26.761 100.182 26.5806 100.554 26.3684C100.927 26.1349 101.806 25.8377 103.193 25.4769C104.58 25.0948 106.101 24.9038 107.757 24.9038C111.068 24.9038 113.48 25.4769 114.991 26.6231C116.522 27.7693 117.288 29.5629 117.288 32.0039ZM108.502 37.0662V35.7927L106.732 36.3021V37.0662C106.732 37.3422 106.815 37.5651 106.981 37.7349C107.167 37.9047 107.384 37.9896 107.633 37.9896C107.902 37.9896 108.109 37.9047 108.254 37.7349C108.419 37.5651 108.502 37.3422 108.502 37.0662Z" fill="#4488FC"/>
@@ -109,8 +140,9 @@ export async function HomePageContent({ locale }: { locale: string }) {
                       <path d="M90.5775 11.6849L90.4222 15.6011L91.1984 15.5692V22.7967C90.8258 23.115 90.1842 23.4016 89.2735 23.6563C88.3628 23.911 87.5039 24.0384 86.6967 24.0384C85.8895 24.0384 85.2479 23.9641 84.7718 23.8155C84.2958 23.6669 83.9439 23.5077 83.7163 23.3379C83.4886 23.1469 83.3127 22.9346 83.1885 22.7011C83.0022 22.3615 82.9091 22.075 82.9091 21.8415C81.7707 23.3061 79.9597 24.0384 77.476 24.0384C74.0609 24.0384 72.3534 22.5526 72.3534 19.5809C72.3534 17.7979 73.0157 16.535 74.3403 15.7921C75.665 15.028 77.9831 14.5716 81.2947 14.423C81.2947 13.6801 80.4978 13.3087 78.9041 13.3087C77.8278 13.3087 76.793 13.4466 75.7995 13.7226C74.8267 13.9985 74.123 14.2744 73.6884 14.5504L73.0053 14.9643V6.59065C73.1916 6.44207 73.471 6.26165 73.8436 6.04939C74.2161 5.8159 75.0958 5.51874 76.4825 5.1579C77.8692 4.77583 79.3905 4.5848 81.0463 4.5848C84.3579 4.5848 86.7691 5.1579 88.28 6.3041C89.8117 7.4503 90.5775 9.24389 90.5775 11.6849ZM81.7914 16.7473V15.4737L80.0218 15.9831V16.7473C80.0218 17.0232 80.1046 17.2461 80.2701 17.4159C80.4564 17.5857 80.6737 17.6706 80.9221 17.6706C81.1912 17.6706 81.3981 17.5857 81.543 17.4159C81.7086 17.2461 81.7914 17.0232 81.7914 16.7473Z" fill="#4488FC"/>
                       <path d="M61.7771 23.72V13.6271C61.7771 13.3723 61.6839 13.1601 61.4977 12.9903C61.3321 12.7992 61.1251 12.7037 60.8767 12.7037C60.6284 12.7037 60.4214 12.7992 60.2558 12.9903C60.0902 13.1601 60.0075 13.3723 60.0075 13.6271V23.72H51.2214V0H60.4731V4.01171L60.1627 6.74985C60.2455 6.47392 60.3904 6.19798 60.5973 5.92204C60.8043 5.6461 61.2493 5.35955 61.9323 5.06239C62.6153 4.744 63.4536 4.58481 64.447 4.58481C66.4754 4.58481 67.9967 5.15791 69.0108 6.30411C70.0457 7.45031 70.5631 9.11655 70.5631 11.3028V23.72H61.7771Z" fill="#4488FC"/>
                       </svg>
+                      </a>
                     </div>
-                    <h3>HandySwap.com</h3>
+                    <h3><a className="brand-name-link" href="https://handyswap.com" target="_blank" rel="noopener noreferrer">HandySwap.com</a></h3>
                   <p>{t("portfolio.handySwapDescription")}</p>
                   </div>
                 </div>
@@ -122,12 +154,12 @@ export async function HomePageContent({ locale }: { locale: string }) {
                     <p className="hero-eyebrow" data-hero-anim><span>03 /</span> {t("markets.eyebrow")}</p>
                     <h2 data-hero-anim>{t("markets.title")}</h2>
                     <ul className="hero-markets">
-                      <li className="hero-market" data-hero-anim><b>DE</b><span>{t("markets.countries.germany")}</span></li>
-                      <li className="hero-market" data-hero-anim><b>AT</b><span>{t("markets.countries.austria")}</span></li>
-                      <li className="hero-market" data-hero-anim><b>NL</b><span>{t("markets.countries.netherlands")}</span></li>
-                      <li className="hero-market" data-hero-anim><b>BE</b><span>{t("markets.countries.belgium")}</span></li>
+                      <li className="hero-market" data-hero-anim><div className="hero-market__code"><b>DE</b><CountryFlag country="de" /></div><span>{t("markets.countries.germany")}</span></li>
+                      <li className="hero-market" data-hero-anim><div className="hero-market__code"><b>AT</b><CountryFlag country="at" /></div><span>{t("markets.countries.austria")}</span></li>
+                      <li className="hero-market" data-hero-anim><div className="hero-market__code"><b>NL</b><CountryFlag country="nl" /></div><span>{t("markets.countries.netherlands")}</span></li>
+                      <li className="hero-market" data-hero-anim><div className="hero-market__code"><b>BE</b><CountryFlag country="be" /></div><span>{t("markets.countries.belgium")}</span></li>
                     </ul>
-                    <p className="hero-market-support" data-hero-anim>{t("markets.support")}</p>
+                    <p className="hero-market-support" data-hero-anim><span>{t("markets.support")}</span><EuFlag /></p>
                   </div>
                 </article>
               </div>

@@ -44,7 +44,7 @@ export async function SiteHeader({ locale, active, usesInlineLogo }: SiteHeaderP
             </div>
           </nav>
 
-          <button className="theme-toggle" id="theme-toggle" type="button" aria-label={t("a11y.switchDark")} title={t("a11y.switchDark")}>
+          <button className="theme-toggle" id="theme-toggle" type="button" aria-label={t("a11y.switchDark")} aria-pressed={false} title={t("a11y.switchDark")}>
             <svg className="tt-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false">
               <path d="M20.4 14.6A8.6 8.6 0 0 1 9.4 3.6a8.6 8.6 0 1 0 11 11Z" />
             </svg>

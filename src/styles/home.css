@@ -332,11 +332,6 @@ h3{font-size:1.3125rem;letter-spacing:-.012em;line-height:1.25}
 [data-theme="dark"] .tt-sun{opacity:1;transform:none}
 [data-theme="dark"] .tt-moon{opacity:0;transform:rotate(80deg) scale(.5)}
 
-/* Parked while the theme decision is open — the control is hidden, both themes
-   still work (the page follows the OS setting and any stored preference).
-   Delete this one rule to bring the control back. */
-.theme-toggle{display:none}
-
 .nav-toggle{
   display:none;width:44px;height:44px;margin-right:-10px;
   align-items:center;justify-content:center;cursor:pointer;border-radius:var(--r-sm);
@@ -513,6 +508,14 @@ h3{font-size:1.3125rem;letter-spacing:-.012em;line-height:1.25}
   opacity:.6;
 }
 .bmark{position:relative;z-index:1;height:clamp(34px,3.4vw,46px);width:auto;flex:none}
+.brand-logo-link{position:relative;z-index:1;display:inline-flex;color:inherit}
+.brand-name-link{color:inherit;text-decoration:none}
+.brand-logo-link:hover,.brand-logo-link:active,.brand-name-link:hover,.brand-name-link:active{
+  color:inherit;text-decoration:none;
+}
+.brand-logo-link:focus-visible,.brand-name-link:focus-visible{
+  outline:1px solid #9FCBEA;outline-offset:4px;border-radius:2px;
+}
 /* remobile-eu.svg ships monochrome, so it takes the theme's ink;
    handyswap.svg keeps its brand blue on both grounds */
 .bmark--remobile{color:var(--ink)}
@@ -547,11 +550,22 @@ h3{font-size:1.3125rem;letter-spacing:-.012em;line-height:1.25}
   display:block;color:#fff;font-size:clamp(1.65rem,4.8vw,2.15rem);
   line-height:1;font-weight:600;letter-spacing:-.025em;
 }
+.hero-market__code{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.country-flag,.eu-flag{
+  flex:none;overflow:hidden;border:1px solid rgba(214,236,255,.32);border-radius:3px;
+  box-shadow:0 1px 4px rgba(0,0,0,.18);
+}
+.country-flag{width:30px;height:18px}
+.eu-flag{width:33px;height:22px}
 .hero-market span{
   display:block;margin-top:10px;color:var(--on-dark-muted);
   font-family:var(--mono);font-size:.8125rem;font-weight:600;letter-spacing:.045em;text-transform:uppercase;
 }
-.hero-market-support{margin-top:24px;color:var(--blue-200);font-size:1rem;max-width:56ch}
+.hero-market-support{
+  margin-top:24px;color:var(--blue-200);font-size:1.0625rem;max-width:56ch;
+  display:flex;align-items:center;gap:10px;
+}
+.hero-market-support > span{min-width:0}
 
 .hero-orbit{width:min(100%,330px);margin:34px auto 0;position:relative;z-index:2}
 .orbit-viz{width:100%;height:auto;overflow:visible}
@@ -576,7 +590,7 @@ h3{font-size:1.3125rem;letter-spacing:-.012em;line-height:1.25}
   .hero-markets{grid-template-columns:repeat(4,minmax(0,1fr))}
 }
 @media (min-width:1000px) and (min-height:640px){
-  .hero-story.is-live{height:340vh}
+  .hero-story.is-live{height:400vh}
   .hero-story.is-live .hero-story__sticky{
     position:sticky;top:0;height:100vh;height:100svh;min-height:0;
     display:flex;align-items:center;overflow:clip;
@@ -613,7 +627,7 @@ h3{font-size:1.3125rem;letter-spacing:-.012em;line-height:1.25}
   .hero-story.is-live .hero-market{padding:13px 11px 15px}
   .hero-story.is-live .hero-market b{font-size:clamp(1.5rem,2.7vw,2rem)}
   .hero-story.is-live .hero-market span{letter-spacing:.01em;margin-top:8px}
-  .hero-story.is-live .hero-market-support{margin-top:20px;font-size:.94rem}
+  .hero-story.is-live .hero-market-support{margin-top:20px;font-size:1.02rem}
   .hero-story.is-live [data-hero-anim]{will-change:transform,opacity}
   .hero-story.is-live .hero-orbit{width:100%;max-width:min(100%,54vh);margin:0 0 0 auto}
   .hero-story.is-live .hero-story__glow{
@@ -1007,6 +1021,18 @@ html.wm-locked{overflow-y:hidden;scrollbar-gutter:stable}
   border:1px solid #1E4A70;
 }
 [data-theme="dark"] .brand-plate{box-shadow:inset 0 1px 0 rgba(160,205,240,.10)}
+[data-theme="dark"] .country-flag,[data-theme="dark"] .eu-flag{border-color:rgba(214,236,255,.48)}
+[data-theme="dark"] .supply-card{background:rgba(180,220,255,.09);border-color:rgba(214,236,255,.24)}
+[data-theme="dark"] .inquiry-form,
+[data-theme="dark"] .inquiry-success,
+[data-theme="dark"] .contact-card,
+[data-theme="dark"] .legal-table{
+  box-shadow:inset 0 1px 0 rgba(160,205,240,.07),var(--shadow-md);
+}
+[data-theme="dark"] .inquiry-form .field.is-bad input,
+[data-theme="dark"] .wmodal .field.is-bad input,
+[data-theme="dark"] .wmodal .field.is-bad textarea{background:rgba(255,156,146,.055)}
+[data-theme="dark"] .media-placeholder > div span{box-shadow:0 0 0 1px var(--line-soft)}
 [data-theme="dark"] .site-header.is-solid .lang{opacity:.9}
 [data-theme="dark"] .nav-links a{opacity:.9}
 

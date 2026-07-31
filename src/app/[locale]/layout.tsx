@@ -15,12 +15,12 @@ export const viewport: Viewport = {
 };
 
 const themeScript = `
-/* Theme resolution runs before the stylesheet is parsed, so the correct palette
-   is in place on the very first paint — no flash of the wrong theme.
+/* Theme resolution runs in <head> before the body can paint, so the correct
+   palette is in place on the very first paint — no flash of the wrong theme.
    Order: explicit user choice (localStorage) → light.
-   The OS preference is deliberately not consulted while the theme control is
-   parked: the page opens light for everyone. Restore the commented line below
-   to follow the visitor's system setting again. */
+   The OS preference is deliberately not consulted: the page opens light for
+   everyone until they use the visible control. Restore the commented line
+   below to follow the visitor's system setting again. */
 (function () {
   var t = null;
   try { t = window.localStorage.getItem('rmt-theme'); } catch (e) {}

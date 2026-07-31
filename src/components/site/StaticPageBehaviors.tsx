@@ -26,6 +26,19 @@ export function StaticPageBehaviors({ switchDark, switchLight }: { switchDark: s
       const value = max > 0 ? Math.min(1, Math.max(0, window.scrollY / max)) : 0;
       progress?.style.setProperty("--sp", value.toFixed(4));
     };
+    const applyTheme = (theme: "light" | "dark", persist: boolean) => {
+      root.setAttribute("data-theme", theme);
+      document.querySelector('meta[name="theme-color"]')?.setAttribute("content", theme === "dark" ? "#05192A" : "#022F50");
+      if (themeButton) {
+        const label = theme === "dark" ? switchLight : switchDark;
+        themeButton.setAttribute("aria-label", label);
+        themeButton.setAttribute("aria-pressed", theme === "dark" ? "true" : "false");
+        themeButton.setAttribute("title", label);
+      }
+      if (persist) {
+        try { window.localStorage.setItem("rmt-theme", theme); } catch {}
+      }
+    };
 
     listen(toggle, "click", () => setMenu(toggle.getAttribute("aria-expanded") !== "true"));
     listen(nav, "click", (event) => {
@@ -46,13 +59,11 @@ export function StaticPageBehaviors({ switchDark, switchLight }: { switchDark: s
     if (themeButton) {
       listen(themeButton, "click", () => {
         const theme = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
-        root.setAttribute("data-theme", theme);
-        themeButton.setAttribute("aria-label", theme === "dark" ? switchLight : switchDark);
-        themeButton.setAttribute("title", theme === "dark" ? switchLight : switchDark);
-        try { window.localStorage.setItem("rmt-theme", theme); } catch {}
+        applyTheme(theme, true);
       });
     }
 
+    applyTheme(root.getAttribute("data-theme") === "dark" ? "dark" : "light", false);
     updateProgress();
     return () => cleanups.forEach((cleanup) => cleanup());
   }, [switchDark, switchLight]);

@@ -61,6 +61,7 @@ export function HomeBehaviors({ messages }) {
         if (themeBtn) {
           var label = theme === 'dark' ? messages.switchLight : messages.switchDark;
           themeBtn.setAttribute('aria-label', label);
+          themeBtn.setAttribute('aria-pressed', theme === 'dark' ? 'true' : 'false');
           themeBtn.setAttribute('title', label);
         }
         if (persist) {
@@ -76,8 +77,8 @@ export function HomeBehaviors({ messages }) {
         });
       }
     
-      /* Following the OS is parked with the toggle — an appearance change at dusk
-         must not repaint the page under the visitor. Uncomment to restore it. */
+      /* Following the OS remains deliberately parked — an appearance change at
+         dusk must not repaint the page under the visitor. Uncomment to restore it. */
       /*
       function onSchemeChange(e) {
         if (!storedTheme()) { applyTheme(e.matches ? 'dark' : 'light', false); }
@@ -150,12 +151,16 @@ export function HomeBehaviors({ messages }) {
       var orbitSpokesB = Array.prototype.slice.call(orbit.querySelectorAll('#hero-orbit-group-b .orbit-spoke'));
       var CIRC_A = 2 * Math.PI * 96;
       var CIRC_B = 2 * Math.PI * 158;
+      /* 340vh supplied 240vh of scroll after subtracting the sticky viewport;
+         400vh supplies 300vh. Scale old thresholds by 240 / 300 so stages one
+         and two keep their absolute runway, leaving the added 60vh to stage 3. */
+      var STORY_SCALE = 0.8;
 
       var STAGES = Array.prototype.slice.call(story.querySelectorAll('.hero-stage')).map(function (el, i) {
         var windows = [
-          { inA: [-0.10, -0.02], out: [0.26, 0.38] },
-          { inA: [ 0.30,  0.42], out: [0.60, 0.72] },
-          { inA: [ 0.64,  0.76], out: [1.40, 1.50] }
+          { inA: [-0.08, -0.016], out: [0.208, 0.304] },
+          { inA: [ 0.24,  0.336], out: [0.48, 0.576] },
+          { inA: [ 0.512, 0.608], out: [1.40, 1.50] }
         ][i];
         return {
           el: el,
@@ -223,6 +228,7 @@ export function HomeBehaviors({ messages }) {
 
       function renderStory() {
         var p = current;
+        var orbitP = clamp(p / STORY_SCALE, 0, 1);
 
         for (var i = 0; i < STAGES.length; i++) {
           var stage = STAGES[i];
@@ -242,7 +248,7 @@ export function HomeBehaviors({ messages }) {
           }
         }
 
-        var active = p < 0.34 ? 0 : (p < 0.68 ? 1 : 2);
+        var active = p < 0.272 ? 0 : (p < 0.544 ? 1 : 2);
         railTicks.forEach(function (tick, i) { tick.classList.toggle('on', i === active); });
 
         if (cue) { cue.style.opacity = (1 - sstep(0.005, 0.06, p)).toFixed(3); }
@@ -252,10 +258,10 @@ export function HomeBehaviors({ messages }) {
             ((p - 0.5) * 7).toFixed(2) + '%,0) scale(' + (1 + p * 0.18).toFixed(3) + ')';
         }
 
-        var brands = sstep(0.24, 0.48, p);
-        var markets = sstep(0.58, 0.84, p);
+        var brands = sstep(0.192, 0.384, p);
+        var markets = sstep(0.464, 0.672, p);
 
-        orbitRotor.setAttribute('transform', 'rotate(' + (-12 + p * 30).toFixed(2) + ' 200 200)');
+        orbitRotor.setAttribute('transform', 'rotate(' + (-12 + orbitP * 30).toFixed(2) + ' 200 200)');
         orbitCore.setAttribute('r', (14 + 5 * (1 - brands)).toFixed(2));
 
         orbitArcA.style.strokeDasharray = CIRC_A;
@@ -266,13 +272,13 @@ export function HomeBehaviors({ messages }) {
         orbitArcB.style.strokeOpacity = (.76 * markets).toFixed(3);
 
         for (var a = 0; a < orbitNodesA.length; a++) {
-          var pa = sstep(0.28 + a * 0.06, 0.50 + a * 0.06, p);
+          var pa = sstep(0.224 + a * 0.048, 0.40 + a * 0.048, p);
           orbitNodesA[a].setAttribute('r', (10 * (pa + 0.26 * Math.sin(pa * Math.PI))).toFixed(2));
           orbitNodesA[a].style.opacity = pa.toFixed(3);
           if (orbitSpokesA[a]) { orbitSpokesA[a].style.opacity = (pa * .9).toFixed(3); }
         }
         for (var b = 0; b < orbitNodesB.length; b++) {
-          var pb = sstep(0.62 + b * 0.045, 0.84 + b * 0.045, p);
+          var pb = sstep(0.496 + b * 0.036, 0.672 + b * 0.036, p);
           orbitNodesB[b].setAttribute('r', (7 * (pb + 0.26 * Math.sin(pb * Math.PI))).toFixed(2));
           orbitNodesB[b].style.opacity = pb.toFixed(3);
           if (orbitSpokesB[b]) { orbitSpokesB[b].style.opacity = (pb * .8).toFixed(3); }
@@ -339,7 +345,7 @@ export function HomeBehaviors({ messages }) {
         if (!running) { running = true; requestAnimationFrame(tickLoop); }
       }
 
-      var STAGE_FOCUS = [0, 0.36, 0.70];
+      var STAGE_FOCUS = [0, 0.288, 0.56];
 
       function stageScrollTop(idx) {
         var span = story.offsetHeight - sticky.offsetHeight;
