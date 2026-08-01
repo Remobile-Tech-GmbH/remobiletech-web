@@ -556,9 +556,12 @@ export function HomeBehaviors({ messages }) {
       }
     
       /* ---------- mobile menu ------------------------------------------- */
+      /* The open menu is a full-screen panel below the header, so the page
+         behind it must not scroll. Same lock the wholesale modal uses. */
       function setMenu(open) {
         nav.classList.toggle('is-open', open);
         toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+        root.classList.toggle('nav-locked', open);
         if (open) { header.classList.add('is-solid'); } else { update(); }
       }
     
@@ -646,6 +649,7 @@ export function HomeBehaviors({ messages }) {
       if (typeof io !== 'undefined' && io) { io.disconnect(); }
       if (wmDlg && wmDlg.open) { wmDlg.close(); }
       root.classList.remove('wm-locked');
+      root.classList.remove('nav-locked');
       clearStoryStyles();
       story.classList.remove('is-live');
       if (hero) { hero.style.removeProperty('--p'); }

@@ -20,9 +20,12 @@ export function StaticPageBehaviors() {
       target.addEventListener(type, listener);
       cleanups.push(() => target.removeEventListener(type, listener));
     };
+    /* The open menu is a full-screen panel below the header, so the page behind
+       it must not scroll. Same lock the wholesale modal uses. */
     const setMenu = (open: boolean) => {
       nav.classList.toggle("is-open", open);
       toggle.setAttribute("aria-expanded", open ? "true" : "false");
+      root.classList.toggle("nav-locked", open);
     };
     const updateProgress = () => {
       const max = document.documentElement.scrollHeight - window.innerHeight;
@@ -98,7 +101,10 @@ export function StaticPageBehaviors() {
 
     applyTheme(storedTheme(), false);
     updateProgress();
-    return () => cleanups.forEach((cleanup) => cleanup());
+    return () => {
+      cleanups.forEach((cleanup) => cleanup());
+      root.classList.remove("nav-locked");
+    };
   }, []);
 
   return null;
