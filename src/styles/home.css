@@ -1185,6 +1185,32 @@ html.consent-locked{overflow-y:hidden;scrollbar-gutter:stable}
   .legal-sections{margin-top:44px}
 }
 
+/* ---- hero story: small-viewport flow --------------------------------
+   The complement of the pinned story's gate (min-width:1000px and
+   min-height:640px). The stages stay ordinary stacked content, but they
+   borrow the desktop story's motion language: staggered arrivals per
+   stage, the opening stage receding into the atrium as it is scrolled
+   away, and the glass planes drifting harder per screen of scroll.
+   `--p` is written by HomeBehaviors on scroll whenever the pin is off. */
+@media (max-width:999.98px),(max-height:639.98px){
+  .hero-orbit{display:none}
+  .hero-stage [data-hero-anim]{
+    opacity:0;transform:translate3d(0,26px,0);
+    transition:opacity .74s var(--ease),transform .74s var(--ease);
+    transition-delay:calc(var(--hd,0) * 95ms);
+  }
+  .hero-stage.is-seen [data-hero-anim]{opacity:1;transform:none}
+  .hero-stage:first-child .hero-stage__body{
+    transform:translate3d(0,calc(var(--p) * 300px),0);
+    opacity:calc(1 - var(--p) * 3);
+  }
+  .plane--1{--rate:-104px}
+  .plane--2{--rate:-190px}
+  .plane--3{--rate:-290px}
+  .plane--4{--rate:78px}
+  .plane--5{--rate:-136px}
+}
+
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   *,*::before,*::after{
@@ -1192,6 +1218,8 @@ html.consent-locked{overflow-y:hidden;scrollbar-gutter:stable}
     transition-duration:.001ms !important;
   }
   .reveal{opacity:1;transform:none}
+  .hero-stage [data-hero-anim]{opacity:1 !important;transform:none !important}
+  .hero-stage:first-child .hero-stage__body{transform:none !important;opacity:1 !important}
   .plane,.mullions,.shaft{transform:none !important;opacity:1 !important}
   .veil{opacity:0 !important}
   .hero-foot,.scroll-cue{opacity:1 !important}

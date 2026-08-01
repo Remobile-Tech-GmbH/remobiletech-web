@@ -529,19 +529,30 @@ export function HomeBehaviors({ messages }) {
       /* ==== WHOLESALE MODAL — end ==== */
     
       /* ---------- dignified reveals ------------------------------------- */
+      /* Hero stages join the reveal observer for the small-viewport flow:
+         `is-seen` staggers each stage's [data-hero-anim] items in (CSS gated
+         to the complement of the pin's media query, so the live desktop
+         story is untouched). `--hd` is the item's stagger index. */
       var targets = Array.prototype.slice.call(document.querySelectorAll('.reveal'));
+      var flowStages = STAGES.map(function (stage) { return stage.el; });
+      STAGES.forEach(function (stage) {
+        stage.items.forEach(function (item, j) { item.style.setProperty('--hd', j); });
+      });
+      function markSeen(el) {
+        el.classList.add(el.hasAttribute('data-hero-stage') ? 'is-seen' : 'is-in');
+      }
       if (!('IntersectionObserver' in window) || reduce.matches) {
-        targets.forEach(function (el) { el.classList.add('is-in'); });
+        targets.concat(flowStages).forEach(markSeen);
       } else {
         var io = new IntersectionObserver(function (entries) {
           entries.forEach(function (entry) {
             if (entry.isIntersecting) {
-              entry.target.classList.add('is-in');
+              markSeen(entry.target);
               io.unobserve(entry.target);
             }
           });
         }, { root: null, rootMargin: '0px 0px -10% 0px', threshold: 0.08 });
-        targets.forEach(function (el) { io.observe(el); });
+        targets.concat(flowStages).forEach(function (el) { io.observe(el); });
       }
     
       /* ---------- mobile menu ------------------------------------------- */
