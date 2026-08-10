@@ -3,6 +3,7 @@ import { hasLocale } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { AboutDeviceVisual } from "@/components/home/AboutDeviceVisual";
+import { ProcessReel } from "@/components/media/ProcessReel";
 import { StaticPageShell } from "@/components/site/StaticPageShell";
 import { routing } from "@/i18n/routing";
 import { createPageMetadata } from "@/lib/seo";
@@ -43,14 +44,7 @@ export default async function AboutPage({ params }: Props) {
         <div className="container">
           <p className="eyebrow">{t("mediaEyebrow")}</p>
           <h2>{t("mediaTitle")}</h2>
-          <div className="media-strip">
-            {(["mediaCaption1", "mediaCaption2", "mediaCaption3"] as const).map((key, index) => (
-              <figure className="media-placeholder" key={key}>
-                <div aria-hidden="true"><span>{String(index + 1).padStart(2, "0")}</span></div>
-                <figcaption>{t(key)}</figcaption>
-              </figure>
-            ))}
-          </div>
+          <ProcessReel caption={t("mediaCaption")} playLabel={t("mediaPlay")} pauseLabel={t("mediaPause")} />
         </div>
       </section>
     </StaticPageShell>
