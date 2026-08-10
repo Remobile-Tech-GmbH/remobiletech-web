@@ -35,7 +35,7 @@ export async function SiteHeader({ locale, page, usesInlineLogo }: SiteHeaderPro
           <nav className="nav" id="nav-menu" aria-label={t("a11y.primaryNav")}>
             <ul className="nav-links">
               <li><Link href={homeHref} data-nav={page === "home" ? "top" : undefined} aria-current={page === "home" ? "page" : undefined}>{t("nav.home")}</Link></li>
-              <li><Link href={`${homeHref}/about`} data-nav={page === "home" ? "about" : undefined} aria-current={page === "about" ? "page" : undefined}>{t("nav.about")}</Link></li>
+              <li><Link href={`${homeHref}/about`} aria-current={page === "about" ? "page" : undefined}>{t("nav.about")}</Link></li>
               <li><Link href={`${homeHref}/wholesale`} aria-current={page === "wholesale" ? "page" : undefined}>{t("nav.wholesale")}</Link></li>
               <li><Link href={`${homeHref}/contact`} aria-current={page === "contact" ? "page" : undefined}>{t("nav.contact")}</Link></li>
             </ul>
