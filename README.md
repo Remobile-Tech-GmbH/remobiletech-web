@@ -1,7 +1,7 @@
 # remobiletech.com
 
-Corporate website for **Remobile Tech GmbH** (Vienna, Austria), a mobile-device wholesaler
-serving distributors, retailers, and business partners across Europe.
+Corporate website for **Remobile Tech GmbH** (Vienna, Austria), a mobile-device retailer and
+wholesaler serving B2C and B2B customers across Europe.
 
 Bilingual (English / German), statically rendered, with a wholesale inquiry form that delivers
 by email.

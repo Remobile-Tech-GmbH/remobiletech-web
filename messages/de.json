@@ -1,8 +1,8 @@
 {
   "Home": {
     "meta": {
-      "title": "Refurbished-Großhandel | Remobile Tech GmbH",
-      "description": "Remobile Tech GmbH führt europäische B2B-Nachfrage und globales Angebot an Refurbished-Smartphones zusammen – nachvollziehbar und vollständig dokumentiert."
+      "title": "Mobilgeräte für B2C & B2B | Remobile Tech GmbH",
+      "description": "Die Remobile Tech GmbH bedient B2C- und B2B-Kunden in ganz Europa mit neuen und refurbished Mobilgeräten über E-Commerce und Großhandel."
     },
     "a11y": {
       "homeLabel": "Remobile Tech GmbH — Startseite",
@@ -24,14 +24,14 @@
       "germanCode": "DE"
     },
     "hero": {
-      "title": "Refurbished- und Neugeräte für <soft>Geschäftskunden in ganz Europa.</soft>",
-      "lede": "Die Remobile Tech GmbH beliefert Distributoren, Händler und Geschäftspartner in ganz Europa im Großhandel mit Mobilgeräten.",
-      "wholesaleCta": "Großhandel anfragen",
-      "brandsCta": "Marken entdecken",
+      "title": "Neue und refurbished Mobilgeräte für <soft>Privat- und Geschäftskunden in ganz Europa.</soft>",
+      "lede": "Die Remobile Tech GmbH bedient B2C- und B2B-Märkte über E-Commerce für Endkunden und den Großhandel.",
+      "wholesaleCta": "B2B-Großhandel",
+      "brandsCta": "B2C-Shops",
       "scroll": "Weiter scrollen"
     },
     "portfolio": {
-      "eyebrow": "Marken",
+      "eyebrow": "B2C · Onlinehandel",
       "title": "Remobile.eu und HandySwap.com.",
       "remobileDescription": "Onlinehandel mit Refurbished-Geräten.",
       "handySwapDescription": "Onlinehandel mit Neugeräten sowie Ankauf und Smartphone-Tausch."
@@ -50,11 +50,11 @@
     "about": {
       "eyebrow": "Über die Remobile Tech GmbH",
       "title": "Sitz in Wien. Europaweit tätig.",
-      "lede": "Mit Sitz in Wien verbindet die Remobile Tech GmbH europäische Nachfrage mit einem globalen Angebot. Nachhaltigkeit, Rückverfolgbarkeit und lückenlose Dokumentation sind feste Bestandteile jeder Transaktion.",
+      "lede": "Mit Sitz in Wien bedient die Remobile Tech GmbH Privat- und Geschäftskunden in ganz Europa. Nachhaltigkeit, Rückverfolgbarkeit und lückenlose Dokumentation sind feste Bestandteile jeder Transaktion.",
       "link": "Über das Unternehmen"
     },
     "wholesale": {
-      "eyebrow": "Großhandel",
+      "eyebrow": "B2B · Großhandel",
       "title": "Refurbished-Smartphones für Partner in ganz Europa.",
       "body": "Grade-A-Refurbished-Smartphones für Großhandelspartner in ganz Europa – mit besonderem Fokus auf unsere vier Kernmärkte.",
       "cta": "Großhandel anfragen",
@@ -87,13 +87,13 @@
   },
   "About": {
     "meta": {
-      "title": "Über Remobile Tech | Refurbished-Großhandel",
-      "description": "Lernen Sie die Remobile Tech GmbH kennen: ein Wiener Großhandelsunternehmen für Mobilgeräte, das europäische Nachfrage mit einem globalen Angebot verbindet."
+      "title": "Über Remobile Tech | Mobilgeräte für B2C & B2B",
+      "description": "Lernen Sie die Remobile Tech GmbH kennen: ein Wiener Mobilgeräteunternehmen für B2C- und B2B-Märkte mit E-Commerce und Großhandel."
     },
     "eyebrow": "Über die Remobile Tech GmbH",
     "title": "Sitz in Wien. Europaweit tätig.",
-    "intro": "Mit Sitz in Wien verbindet die Remobile Tech GmbH europäische Nachfrage mit einem globalen Angebot. Nachhaltigkeit, Rückverfolgbarkeit und lückenlose Dokumentation sind feste Bestandteile jeder Transaktion.",
-    "body": "Wir beliefern Distributoren in ganz Europa im Großhandel mit Refurbished- und neuen Mobiltelefonen. Remobile.eu steht für Onlinehandel mit Refurbished-Geräten. HandySwap.com steht für Onlinehandel mit Neugeräten sowie Ankauf und Smartphone-Tausch.",
+    "intro": "Mit Sitz in Wien bedient die Remobile Tech GmbH Privat- und Geschäftskunden in ganz Europa. Nachhaltigkeit, Rückverfolgbarkeit und lückenlose Dokumentation sind feste Bestandteile jeder Transaktion.",
+    "body": "Wir bedienen B2C- und B2B-Kunden in ganz Europa. Remobile.eu steht für Onlinehandel mit Refurbished-Geräten. HandySwap.com steht für Onlinehandel mit Neugeräten sowie Ankauf und Smartphone-Tausch. Geschäftskunden beliefern wir europaweit im Großhandel mit Refurbished- und neuen Mobiltelefonen.",
     "mediaEyebrow": "Der Aufarbeitungsprozess",
     "mediaTitle": "Verlässliche Lieferprozesse für den europäischen Markt.",
     "mediaCaption": "Prüfung, Reparatur auf Komponentenebene und Grading, bevor Geräte an europäische Käufer versendet werden.",
@@ -139,7 +139,7 @@
   "Imprint": {
     "meta": {
       "title": "Impressum | Remobile Tech GmbH",
-      "description": "Rechtliche Hinweise, Firmendaten, Kontaktangaben und regulatorische Informationen zum Wiener B2B-Großhändler Remobile Tech GmbH finden Sie im Impressum."
+      "description": "Rechtliche Hinweise, Firmendaten, Kontaktangaben und regulatorische Informationen zum Wiener Einzel- und Großhändler für Mobilgeräte Remobile Tech GmbH finden Sie im Impressum."
     },
     "eyebrow": "Rechtliches",
     "title": "Impressum",
