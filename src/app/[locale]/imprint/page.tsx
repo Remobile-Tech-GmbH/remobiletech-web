@@ -27,7 +27,6 @@ export default async function ImprintPage({ params }: Props) {
     [t("labelCompany"), t("company")],
     [t("labelAddress"), t("address")],
     [t("labelUid"), t("uid")],
-    [t("labelTax"), t("tax")],
     [t("labelDirector"), t("director")],
     [t("labelPurpose"), t("purpose")],
     [t("labelContact"), `${t("email")} · ${t("phone")}`],

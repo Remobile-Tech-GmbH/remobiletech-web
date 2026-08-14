@@ -1,7 +1,7 @@
 # remobiletech.com
 
-Corporate website for **Remobile Tech GmbH** (Vienna, Austria) — the holding company behind
-**Remobile.eu** and **HandySwap**.
+Corporate website for **Remobile Tech GmbH** (Vienna, Austria), a mobile-device wholesaler
+serving distributors, retailers, and business partners across Europe.
 
 Bilingual (English / German), statically rendered, with a wholesale inquiry form that delivers
 by email.
@@ -60,7 +60,7 @@ src/
 ├── app/
 │   ├── [locale]/           the pages — one folder per route
 │   │   ├── page.tsx           homepage
-│   │   ├── about/             about the group
+│   │   ├── about/             about the company
 │   │   ├── wholesale/         wholesale offering
 │   │   ├── contact/           contact + inquiry form
 │   │   ├── imprint/           Impressum (legally required in AT/DE)

@@ -24,15 +24,15 @@
       "germanCode": "DE"
     },
     "hero": {
-      "title": "The holding company behind Europe’s <soft>mobile circular economy.</soft>",
-      "lede": "Remobile Tech GmbH owns and operates Remobile.eu and HandySwap.com — and supplies refurbished and new mobile phones wholesale to distributors across Europe.",
+      "title": "Refurbished and new mobile devices for <soft>businesses across Europe.</soft>",
+      "lede": "Remobile Tech GmbH supplies mobile devices wholesale to distributors, retailers, and business partners across Europe.",
       "wholesaleCta": "Wholesale inquiry",
-      "brandsCta": "Our brands",
+      "brandsCta": "Explore brands",
       "scroll": "Scroll"
     },
     "portfolio": {
-      "eyebrow": "Our portfolio",
-      "title": "Two brands.",
+      "eyebrow": "Brands",
+      "title": "Remobile.eu and HandySwap.com.",
       "remobileDescription": "Refurbished devices e-commerce.",
       "handySwapDescription": "New devices e-commerce, with trade-in / phone swap."
     },
@@ -49,8 +49,8 @@
     },
     "about": {
       "eyebrow": "About Remobile Tech GmbH",
-      "title": "Headquartered in Vienna. Operating globally.",
-      "lede": "Incorporated in Austria, our holding company connects European demand with global supply. Sustainability, traceability, and institutional-grade documentation are built into every transaction.",
+      "title": "Based in Vienna. Supplying Europe.",
+      "lede": "Based in Vienna, Remobile Tech GmbH connects European demand with global supply. Sustainability, traceability, and complete documentation are built into every transaction.",
       "link": "About the company"
     },
     "wholesale": {
@@ -88,15 +88,15 @@
   "About": {
     "meta": {
       "title": "About Remobile Tech | Refurbished Device Wholesale",
-      "description": "Meet Remobile Tech GmbH, the Vienna-based holding company connecting European demand with global supply of refurbished devices for trusted B2B trade."
+      "description": "Meet Remobile Tech GmbH, a Vienna-based mobile-device wholesaler connecting European demand with global supply."
     },
     "eyebrow": "About Remobile Tech GmbH",
-    "title": "Headquartered in Vienna. Operating globally.",
-    "intro": "Incorporated in Austria, our holding company connects European demand with global supply. Sustainability, traceability, and institutional-grade documentation are built into every transaction.",
-    "body": "Remobile Tech GmbH owns and operates Remobile.eu and HandySwap.com. Through the group, we supply refurbished and new mobile phones wholesale to distributors across Europe.",
-    "mediaEyebrow": "Behind the operation",
+    "title": "Based in Vienna. Supplying Europe.",
+    "intro": "Based in Vienna, Remobile Tech GmbH connects European demand with global supply. Sustainability, traceability, and complete documentation are built into every transaction.",
+    "body": "We supply refurbished and new mobile phones wholesale to distributors across Europe. Remobile.eu focuses on refurbished-device e-commerce. HandySwap.com focuses on new-device e-commerce, trade-in, and phone swap.",
+    "mediaEyebrow": "The refurbishing process",
     "mediaTitle": "Built for dependable European supply.",
-    "mediaCaption": "Inside refurbishing: inspection, component-level repair, and grading before devices ship to European buyers.",
+    "mediaCaption": "Inspection, component-level repair, and grading before devices ship to European buyers.",
     "mediaPlay": "Play the video",
     "mediaPause": "Pause the video"
   },
@@ -130,9 +130,9 @@
     "whatsAppLabel": "Phone & WhatsApp",
     "pressTitle": "Press inquiries",
     "pressBody": "For press inquiries, interview requests, or media partnerships, please contact us at the same email address.",
-    "mediaEyebrow": "Inside the process",
+    "mediaEyebrow": "The refurbishing process",
     "mediaTitle": "How devices are refurbished.",
-    "mediaCaption": "Component-level repair and grading at our refurbishing bench.",
+    "mediaCaption": "Component-level repair and grading during device refurbishment.",
     "mediaPlay": "Play the video",
     "mediaPause": "Pause the video"
   },
@@ -147,7 +147,6 @@
     "labelCompany": "Company",
     "labelAddress": "Registered address",
     "labelUid": "VAT identification number (UID)",
-    "labelTax": "Tax number (Steuernummer)",
     "labelDirector": "Managing Director (Geschäftsführer)",
     "labelPurpose": "Business purpose",
     "labelContact": "Contact",
@@ -155,7 +154,6 @@
     "company": "Remobile Tech GmbH",
     "address": "Jordangasse 7/12, 1010 Vienna, Austria",
     "uid": "ATU83392213",
-    "tax": "09 443/5145",
     "director": "Hassib Atta Mian",
     "purpose": "Wholesale and retail trade in mobile phones and electronic devices",
     "email": "hallo@remobiletech.com",

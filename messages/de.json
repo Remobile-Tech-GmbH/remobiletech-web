@@ -24,15 +24,15 @@
       "germanCode": "DE"
     },
     "hero": {
-      "title": "Die Holding hinter Europas <soft>mobiler Kreislaufwirtschaft.</soft>",
-      "lede": "Remobile Tech GmbH betreibt Remobile.eu und HandySwap.com und beliefert Distributoren in ganz Europa im Großhandel mit Refurbished- und neuen Mobiltelefonen.",
+      "title": "Refurbished- und Neugeräte für <soft>Geschäftskunden in ganz Europa.</soft>",
+      "lede": "Die Remobile Tech GmbH beliefert Distributoren, Händler und Geschäftspartner in ganz Europa im Großhandel mit Mobilgeräten.",
       "wholesaleCta": "Großhandel anfragen",
-      "brandsCta": "Unsere Marken",
+      "brandsCta": "Marken entdecken",
       "scroll": "Weiter scrollen"
     },
     "portfolio": {
-      "eyebrow": "Unser Portfolio",
-      "title": "Zwei Marken.",
+      "eyebrow": "Marken",
+      "title": "Remobile.eu und HandySwap.com.",
       "remobileDescription": "Onlinehandel mit Refurbished-Geräten.",
       "handySwapDescription": "Onlinehandel mit Neugeräten sowie Ankauf und Smartphone-Tausch."
     },
@@ -49,8 +49,8 @@
     },
     "about": {
       "eyebrow": "Über die Remobile Tech GmbH",
-      "title": "Hauptsitz in Wien. Weltweit tätig.",
-      "lede": "Als österreichische Holding verbindet Remobile Tech GmbH europäische Nachfrage mit einem globalen Angebot. Nachhaltigkeit, Rückverfolgbarkeit und lückenlose Dokumentation sind feste Bestandteile jeder Transaktion.",
+      "title": "Sitz in Wien. Europaweit tätig.",
+      "lede": "Mit Sitz in Wien verbindet die Remobile Tech GmbH europäische Nachfrage mit einem globalen Angebot. Nachhaltigkeit, Rückverfolgbarkeit und lückenlose Dokumentation sind feste Bestandteile jeder Transaktion.",
       "link": "Über das Unternehmen"
     },
     "wholesale": {
@@ -88,15 +88,15 @@
   "About": {
     "meta": {
       "title": "Über Remobile Tech | Refurbished-Großhandel",
-      "description": "Lernen Sie Remobile Tech GmbH kennen: Die Wiener Holding verbindet europäische Nachfrage mit einem globalen Angebot an Refurbished-Geräten für den B2B-Handel."
+      "description": "Lernen Sie die Remobile Tech GmbH kennen: ein Wiener Großhandelsunternehmen für Mobilgeräte, das europäische Nachfrage mit einem globalen Angebot verbindet."
     },
     "eyebrow": "Über die Remobile Tech GmbH",
-    "title": "Hauptsitz in Wien. Weltweit tätig.",
-    "intro": "Als österreichische Holding verbindet Remobile Tech GmbH europäische Nachfrage mit einem globalen Angebot. Nachhaltigkeit, Rückverfolgbarkeit und lückenlose Dokumentation sind feste Bestandteile jeder Transaktion.",
-    "body": "Remobile Tech GmbH betreibt Remobile.eu und HandySwap.com. Darüber hinaus beliefern wir Distributoren in ganz Europa im Großhandel mit Refurbished- und neuen Mobiltelefonen.",
-    "mediaEyebrow": "Einblicke in unser Unternehmen",
+    "title": "Sitz in Wien. Europaweit tätig.",
+    "intro": "Mit Sitz in Wien verbindet die Remobile Tech GmbH europäische Nachfrage mit einem globalen Angebot. Nachhaltigkeit, Rückverfolgbarkeit und lückenlose Dokumentation sind feste Bestandteile jeder Transaktion.",
+    "body": "Wir beliefern Distributoren in ganz Europa im Großhandel mit Refurbished- und neuen Mobiltelefonen. Remobile.eu steht für Onlinehandel mit Refurbished-Geräten. HandySwap.com steht für Onlinehandel mit Neugeräten sowie Ankauf und Smartphone-Tausch.",
+    "mediaEyebrow": "Der Aufarbeitungsprozess",
     "mediaTitle": "Verlässliche Lieferprozesse für den europäischen Markt.",
-    "mediaCaption": "Einblick in die Aufarbeitung: Prüfung, Reparatur auf Komponentenebene und Grading, bevor die Geräte zu europäischen Käufern gehen.",
+    "mediaCaption": "Prüfung, Reparatur auf Komponentenebene und Grading, bevor Geräte an europäische Käufer versendet werden.",
     "mediaPlay": "Video abspielen",
     "mediaPause": "Video pausieren"
   },
@@ -130,9 +130,9 @@
     "whatsAppLabel": "Telefon & WhatsApp",
     "pressTitle": "Presseanfragen",
     "pressBody": "Für Presseanfragen, Interviewwünsche oder Medienpartnerschaften schreiben Sie uns bitte an dieselbe E-Mail-Adresse.",
-    "mediaEyebrow": "Blick hinter die Kulissen",
+    "mediaEyebrow": "Der Aufarbeitungsprozess",
     "mediaTitle": "So werden Geräte aufgearbeitet.",
-    "mediaCaption": "Reparatur auf Komponentenebene und Grading an unserem Aufarbeitungsplatz.",
+    "mediaCaption": "Reparatur auf Komponentenebene und Grading während der Geräteaufarbeitung.",
     "mediaPlay": "Video abspielen",
     "mediaPause": "Video pausieren"
   },
@@ -147,7 +147,6 @@
     "labelCompany": "Unternehmen",
     "labelAddress": "Unternehmenssitz",
     "labelUid": "UID-Nummer",
-    "labelTax": "Steuernummer",
     "labelDirector": "Geschäftsführer",
     "labelPurpose": "Unternehmensgegenstand",
     "labelContact": "Kontakt",
@@ -155,7 +154,6 @@
     "company": "Remobile Tech GmbH",
     "address": "Jordangasse 7/12, 1010 Wien, Österreich",
     "uid": "ATU83392213",
-    "tax": "09 443/5145",
     "director": "Hassib Atta Mian",
     "purpose": "Groß- und Einzelhandel mit Mobiltelefonen und elektronischen Geräten",
     "email": "hallo@remobiletech.com",
