@@ -451,7 +451,7 @@ h3{font-size:1.3125rem;letter-spacing:-.012em;line-height:1.25}
 }
 .hero-actions{margin-top:38px;display:flex;flex-wrap:wrap;gap:14px}
 
-.brand-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(20px,2.4vw,30px)}
+.brand-grid{display:grid;grid-template-columns:1fr;gap:clamp(20px,2.4vw,30px)}
 .brand-card{
   position:relative;background:var(--surface);border:1px solid var(--line);
   border-radius:var(--r-md);padding:clamp(26px,2.8vw,38px);
@@ -492,8 +492,7 @@ h3{font-size:1.3125rem;letter-spacing:-.012em;line-height:1.25}
 .brand-logo-link:focus-visible,.brand-name-link:focus-visible{
   outline:1px solid #9FCBEA;outline-offset:4px;border-radius:2px;
 }
-/* remobile-eu.svg ships monochrome, so it takes the theme's ink;
-   handyswap.svg keeps its brand blue on both grounds */
+/* remobile-eu.svg ships monochrome, so it takes the theme's ink */
 .bmark--remobile{color:var(--ink)}
 
 .brand-card h3{margin-top:10px;font-size:clamp(1.3rem,1.1rem + .6vw,1.6rem)}

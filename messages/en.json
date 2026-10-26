@@ -27,14 +27,13 @@
       "title": "New and refurbished mobile devices for <soft>consumers and businesses across Europe.</soft>",
       "lede": "Remobile Tech GmbH serves both B2C and B2B markets through consumer e-commerce and wholesale supply.",
       "wholesaleCta": "B2B wholesale",
-      "brandsCta": "B2C stores",
+      "brandsCta": "B2C store",
       "scroll": "Scroll"
     },
     "portfolio": {
       "eyebrow": "B2C · Consumer retail",
-      "title": "Remobile.eu and HandySwap.com.",
-      "remobileDescription": "Refurbished devices e-commerce.",
-      "handySwapDescription": "New devices e-commerce, with trade-in / phone swap."
+      "title": "Remobile.eu.",
+      "remobileDescription": "Refurbished devices e-commerce."
     },
     "markets": {
       "eyebrow": "Markets",
@@ -93,7 +92,7 @@
     "eyebrow": "About Remobile Tech GmbH",
     "title": "Based in Vienna. Supplying Europe.",
     "intro": "Based in Vienna, Remobile Tech GmbH serves both consumer and business markets across Europe. Sustainability, traceability, and complete documentation are built into every transaction.",
-    "body": "We serve both B2C and B2B customers across Europe. Remobile.eu focuses on refurbished-device e-commerce. HandySwap.com focuses on new-device e-commerce, trade-in, and phone swap. For business customers, we supply refurbished and new mobile phones wholesale to distributors across Europe.",
+    "body": "We serve both B2C and B2B customers across Europe. Remobile.eu focuses on refurbished-device e-commerce. For business customers, we supply refurbished and new mobile phones wholesale to distributors across Europe.",
     "mediaEyebrow": "The refurbishing process",
     "mediaTitle": "Built for dependable European supply.",
     "mediaCaption": "Inspection, component-level repair, and grading before devices ship to European buyers.",
